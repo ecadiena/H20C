@@ -5,6 +5,12 @@ import BaseCollection from '../base/BaseCollection';
 
 export const sessionType = ['event', 'course'];
 export const difficultyType = ['basic', 'intermediate', 'advanced'];
+export const tagType = ['technology', 'security', 'internet'];
+export const selectFormSetup = (arr, type) => {
+  type.forEach(item => {
+    arr.push({ value: item, label: item });
+  });
+};
 export const sessionPublications = {
   sessions: 'sessions',
 };
@@ -26,8 +32,9 @@ class SessionCollection extends BaseCollection {
       },
       tags: Array,
       'tags.$': String,
-      dateStart: { type: Date, optional: true },
-      dateEnd: { type: Date, optional: true },
+      date: { type: Date, optional: true },
+      startTime: { type: String, optional: true },
+      endTime: { type: String, optional: true },
       location: { type: String, optional: true },
       createdBy: String,
     }));
@@ -36,15 +43,16 @@ class SessionCollection extends BaseCollection {
   /**
    * Defines a new Session item.
    */
-  define({ title, summary, type, difficulty, tags, dateStart, dateEnd, location, createdBy }) {
+  define({ title, summary, type, difficulty, tags, date, startTime, endTime, location, createdBy }) {
     const docID = this._collection.insert({
       title,
       summary,
       type,
       difficulty,
       tags,
-      dateStart,
-      dateEnd,
+      date,
+      startTime,
+      endTime,
       location,
       createdBy,
     });
@@ -54,7 +62,7 @@ class SessionCollection extends BaseCollection {
   /**
    * Updates the given document.
    */
-  update(docID, { title, summary, type, difficulty, tags, dateStart, dateEnd, location, createdBy }) {
+  update(docID, { title, summary, type, difficulty, tags, date, startTime, endTime, location, createdBy }) {
     const updateData = {};
     if (title) {
       updateData.title = title;
@@ -71,11 +79,14 @@ class SessionCollection extends BaseCollection {
     if (tags.length > 0) {
       updateData.tags = tags;
     }
-    if (dateStart) {
-      updateData.dateStart = dateStart;
+    if (date) {
+      updateData.date = date;
     }
-    if (dateEnd) {
-      updateData.dateEnd = dateEnd;
+    if (startTime) {
+      updateData.startTime = startTime;
+    }
+    if (endTime) {
+      updateData.endTime = endTime;
     }
     if (location) {
       updateData.location = location;
@@ -137,11 +148,12 @@ class SessionCollection extends BaseCollection {
     const type = doc.type;
     const tags = doc.tags;
     const difficulty = doc.difficulty;
-    const dateStart = doc.dateStart;
-    const dateEnd = doc.dateEnd;
+    const date = doc.date;
+    const startTime = doc.startTime;
+    const endTime = doc.endTime;
     const location = doc.location;
     const createdBy = doc.createdBy;
-    return { title, summary, type, tags, difficulty, dateStart, dateEnd, location, createdBy };
+    return { title, summary, type, tags, difficulty, date, startTime, endTime, location, createdBy };
   }
 }
 

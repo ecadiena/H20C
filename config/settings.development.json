@@ -10,6 +10,11 @@
     { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
   ],
+
+  "defaultSubmittedQuizzes": [
+    { "owner": "admin@foo.com", "lessonID": "abc", "numCorrect": 10, "answers": [{ "question": "How are you?", "correct": true }, { "question": "Is 1 + 1 = 21?", "correct": false }] }
+  ],
+
   "public": {
     "development": true
   }

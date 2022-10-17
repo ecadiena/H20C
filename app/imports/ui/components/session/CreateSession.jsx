@@ -8,6 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import swal from 'sweetalert';
 import { Sessions, sessionType, difficultyType, tagType, selectFormSetup } from '../../../api/session/SessionCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
+import { PAGE_IDS } from '../../utilities/PageIDs';
 
 const CreateSession = () => {
   const [session, setSession] = useState({ title: '', summary: '', typeAdapt: '', difficultyAdapt: '', tagsAdapt: [], location: '', date: new Date(), startTimeAdapt: '', endTimeAdapt: '' });
@@ -47,7 +48,7 @@ const CreateSession = () => {
   };
 
   return (
-    <Container className="py-3">
+    <Container id={PAGE_IDS.ADD_STUFF} className="py-3">
       <Row className="justify-content-center">
         <Form>
           <Form.Group>

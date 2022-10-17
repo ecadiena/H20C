@@ -17,6 +17,14 @@ class BaseProfileCollection extends BaseCollection {
       lastName: String,
       role: String,
       userID: SimpleSchema.RegEx.Id,
+      age: Number,
+      zipcode: Number,
+      ethnicity: String,
+      education: {
+        type: String,
+        allowedValues: ['Grade K - 6', 'Grade 7 - 8', 'High School', 'Some College', 'College'],
+      },
+      totalPoints: { type: Number, defaultValue: 0 },
     })));
   }
 

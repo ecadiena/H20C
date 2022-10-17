@@ -3,28 +3,34 @@ import { Stuffs } from '../../api/stuff/StuffCollection';
 import { Sessions } from '../../api/session/SessionCollection';
 import { Lessons } from '../../api/lesson/LessonCollection';
 import { UserLessons } from '../../api/user/UserLessonCollection';
+import { SubmittedQuizzes } from '../../api/submittedQuiz/SubmittedQuizCollection';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
-function addData(data) {
+const addData = (data) => {
   console.log(`  Adding: ${data.name} (${data.owner})`);
   Stuffs.define(data);
-}
+};
 
-function addSession(data) {
+const addSubmittedQuizzes = (data) => {
+  console.log(`  Adding Quiz for lesson: ${data.lessonID} (${data.owner})`);
+  SubmittedQuizzes.define(data);
+};
+
+const addSession = (data) => {
   console.log(`  Adding: ${data.title} (${data.type})`);
   Sessions.define(data);
-}
+};
 
-function addLesson(data) {
+const addLesson = (data) => {
   console.log(`  Adding: ${data.title} (${data.owner})`);
   Lessons.define(data);
-}
+};
 
-function addUserLesson(data) {
+const addUserLesson = (data) => {
   console.log(`  Adding: ${data.userID} with SessionID of (${data.sessionID})`);
   UserLessons.define(data);
-}
+};
 
 // Initialize the StuffsCollection if empty.
 if (Stuffs.count() === 0) {
@@ -55,5 +61,12 @@ if (UserLessons.count() === 0) {
   if (Meteor.settings.defaultUserLesson) {
     console.log('Creating default User Lesson.');
     Meteor.settings.defaultUserLesson.map(data => addUserLesson(data));
+  }
+}
+
+if (SubmittedQuizzes.count() === 0) {
+  if (Meteor.settings.defaultSubmittedQuizzes) {
+    console.log('Creating default Submitted Quizzes.');
+    Meteor.settings.defaultSubmittedQuizzes.map(data => addSubmittedQuizzes(data));
   }
 }

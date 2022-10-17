@@ -1,8 +1,7 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP"
-    },
-    { "email": "john@foo.com", "password": "changeme", "role": "USER" , "firstName": "John", "lastName": "Doe" }
+    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP", "age": 18, "zipcode": 96817, "ethnicity": "American", "education": "College" },
+    { "email": "john@foo.com", "password": "changeme", "role": "USER" , "firstName": "John", "lastName": "Doe", "age": 18, "zipcode": 96817, "ethnicity": "American", "education": "College" }
   ],
 
   "defaultData": [
@@ -33,6 +32,11 @@
   "defaultUserLesson": [
     { "registeredUser": "NA", "sessionID": "NA", "lessonID": "NA" }
   ],
+
+  "defaultSubmittedQuizzes": [
+    { "owner": "admin@foo.com", "lessonID": "abc", "numCorrect": 10, "answers": [{ "question": "How are you?", "correct": true }, { "question": "Is 1 + 1 = 21?", "correct": false }] }
+  ],
+
   "public": {
     "development": true
   }

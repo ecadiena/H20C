@@ -31,7 +31,7 @@
   ],
 
   "defaultUserLesson": [
-    { "userID": "NA", "sessionID": "NA", "lessonID": "NA" }
+    { "registeredUser": "NA", "sessionID": "NA", "lessonID": "NA" }
   ],
   "public": {
     "development": true

@@ -13,15 +13,15 @@ export const userLessonPublications = {
 class UserLessonCollection extends BaseCollection {
   constructor() {
     super('UserLessons', new SimpleSchema({
-      userID: String,
-      sessionID: String,
-      lessonID: String,
+      registeredUser: String,
+      sessionID: { type: String, optional: true },
+      lessonID: { type: String, optional: true },
     }));
   }
 
-  define({ userID, sessionID, lessonID }) {
+  define({ registeredUser, sessionID, lessonID }) {
     const docID = this._collection.insert({
-      userID,
+      registeredUser,
       sessionID,
       lessonID,
     });
@@ -31,10 +31,10 @@ class UserLessonCollection extends BaseCollection {
   /**
    * Updates the given document.
    */
-  update(docID, { userID, sessionID, lessonID }) {
+  update(docID, { registeredUser, sessionID, lessonID }) {
     const updateData = {};
-    if (userID) {
-      updateData.userID = userID;
+    if (registeredUser) {
+      updateData.registeredUser = registeredUser;
     }
     if (sessionID) {
       updateData.sessionID = sessionID;
@@ -69,7 +69,7 @@ class UserLessonCollection extends BaseCollection {
       Meteor.publish(userLessonPublications.userLesson, function publish() {
         if (this.userId) {
           const username = Meteor.users.findOne(this.userId).username;
-          return instance._collection.find({ userID: username });
+          return instance._collection.find({ registeredUser: username });
         }
         return this.ready();
       });
@@ -122,10 +122,10 @@ class UserLessonCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const userID = doc.userID;
+    const registeredUser = doc.registeredUser;
     const sessionID = doc.sessionID;
     const lessonID = doc.lessonID;
-    return { userID, sessionID, lessonID };
+    return { registeredUser, sessionID, lessonID };
   }
 }
 

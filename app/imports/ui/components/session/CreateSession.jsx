@@ -10,7 +10,7 @@ import { Sessions, sessionType, difficultyType, tagType, selectFormSetup } from 
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 
 const CreateSession = () => {
-  const [session, setSession] = useState({ title: '', summary: '', type: '', difficulty: '', tagsAdapt: [], location: '', date: new Date(), startTimeAdapt: '', endTimeAdapt: '' });
+  const [session, setSession] = useState({ title: '', summary: '', typeAdapt: '', difficultyAdapt: '', tagsAdapt: [], location: '', date: new Date(), startTimeAdapt: '', endTimeAdapt: '' });
   const typeOptions = [];
   const difficultyOptions = [];
   const tagsOptions = [];
@@ -22,18 +22,20 @@ const CreateSession = () => {
 
   const updateSession = (event, property) => {
     setSession(prevSession => ({ ...prevSession, [property]: event }));
-    if (property === 'type') {
+    if (property === 'typeAdapt') {
       setEventDropdown(event.value === 'event');
     }
   };
 
   // On submit, insert the data.
   const submit = () => {
-    const { title, summary, type, difficulty, tagsAdapt, location, date, startTimeAdapt, endTimeAdapt } = session;
+    const { title, summary, typeAdapt, difficultyAdapt, tagsAdapt, location, date, startTimeAdapt, endTimeAdapt } = session;
     const startTime = moment(startTimeAdapt).format('hh:mm a');
     const endTime = moment(endTimeAdapt).format('hh:mm a');
     const tags = tagsAdapt.map(tag => tag.value);
     const owner = Meteor.user().username;
+    const type = typeAdapt.value;
+    const difficulty = difficultyAdapt.value;
     const collectionName = Sessions.getCollectionName();
     const definitionData = { title, summary, type, difficulty, date, startTime, endTime, tags, location, owner };
     defineMethod.callPromise({ collectionName, definitionData })
@@ -58,11 +60,11 @@ const CreateSession = () => {
           </Form.Group>
           <Form.Group>
             <Form.Label>Type: </Form.Label>
-            <Select options={typeOptions} onChange={(e) => updateSession(e, 'type')} />
+            <Select options={typeOptions} onChange={(e) => updateSession(e, 'typeAdapt')} />
           </Form.Group>
           <Form.Group>
             <Form.Label>Difficulty: </Form.Label>
-            <Select options={difficultyOptions} onChange={(e) => updateSession(e, 'difficulty')} />
+            <Select options={difficultyOptions} onChange={(e) => updateSession(e, 'difficultyAdapt')} />
           </Form.Group>
           <Form.Group>
             <Form.Label>Tags: </Form.Label>

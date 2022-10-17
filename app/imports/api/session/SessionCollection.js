@@ -36,14 +36,14 @@ class SessionCollection extends BaseCollection {
       startTime: { type: String, optional: true },
       endTime: { type: String, optional: true },
       location: { type: String, optional: true },
-      createdBy: String,
+      owner: String,
     }));
   }
 
   /**
    * Defines a new Session item.
    */
-  define({ title, summary, type, difficulty, tags, date, startTime, endTime, location, createdBy }) {
+  define({ title, summary, type, difficulty, tags, date, startTime, endTime, location, owner }) {
     const docID = this._collection.insert({
       title,
       summary,
@@ -54,7 +54,7 @@ class SessionCollection extends BaseCollection {
       startTime,
       endTime,
       location,
-      createdBy,
+      owner,
     });
     return docID;
   }
@@ -62,7 +62,7 @@ class SessionCollection extends BaseCollection {
   /**
    * Updates the given document.
    */
-  update(docID, { title, summary, type, difficulty, tags, date, startTime, endTime, location, createdBy }) {
+  update(docID, { title, summary, type, difficulty, tags, date, startTime, endTime, location, owner }) {
     const updateData = {};
     if (title) {
       updateData.title = title;
@@ -91,8 +91,8 @@ class SessionCollection extends BaseCollection {
     if (location) {
       updateData.location = location;
     }
-    if (createdBy) {
-      updateData.createdBy = createdBy;
+    if (owner) {
+      updateData.owner = owner;
     }
 
     this._collection.update(docID, { $set: updateData });
@@ -152,8 +152,8 @@ class SessionCollection extends BaseCollection {
     const startTime = doc.startTime;
     const endTime = doc.endTime;
     const location = doc.location;
-    const createdBy = doc.createdBy;
-    return { title, summary, type, tags, difficulty, date, startTime, endTime, location, createdBy };
+    const owner = doc.owner;
+    return { title, summary, type, tags, difficulty, date, startTime, endTime, location, owner };
   }
 }
 

@@ -7,19 +7,23 @@ export const lessonPublications = {
   lessons: 'lessons',
 };
 
-export const lessonTextType = {
-  header: String,
-  body: Array,
-  '.body$': String,
-};
+const lessonTextType = new SimpleSchema(
+  {
+    header: String,
+    body: Array,
+    'body.$': String,
+  },
+);
 
-export const quizType = {
-  question: String,
-  options: Array,
-  'options.$': String,
-  correct: Number,
-  feedback: String,
-};
+const quizType = new SimpleSchema(
+  {
+    question: String,
+    options: Array,
+    'options.$': String,
+    correct: Number,
+    feedback: String,
+  },
+);
 
 class LessonCollection extends BaseCollection {
   constructor() {
@@ -32,14 +36,14 @@ class LessonCollection extends BaseCollection {
       'lessonText.$': lessonTextType,
       quiz: { type: Array, optional: true },
       'quiz.$': quizType,
-      createdBy: String,
+      owner: String,
     }));
   }
 
   /**
    * Defines a new Lesson item.
    */
-  define({ sessionID, title, summary, videoLink, lessonText, quiz, createdBy }) {
+  define({ sessionID, title, summary, videoLink, lessonText, quiz, owner }) {
     const docID = this._collection.insert({
       sessionID,
       title,
@@ -47,7 +51,7 @@ class LessonCollection extends BaseCollection {
       videoLink,
       lessonText,
       quiz,
-      createdBy,
+      owner,
     });
     return docID;
   }
@@ -55,7 +59,7 @@ class LessonCollection extends BaseCollection {
   /**
    * Updates the given document.
    */
-  update(docID, { sessionID, title, summary, videoLink, lessonText, quiz, createdBy }) {
+  update(docID, { sessionID, title, summary, videoLink, lessonText, quiz, owner }) {
     const updateData = {};
     if (sessionID) {
       updateData.sessionID = sessionID;
@@ -75,8 +79,8 @@ class LessonCollection extends BaseCollection {
     if (quiz.length > 0) {
       updateData.quiz = quiz;
     }
-    if (createdBy) {
-      updateData.createdBy = createdBy;
+    if (owner) {
+      updateData.owner = owner;
     }
 
     this._collection.update(docID, { $set: updateData });
@@ -133,8 +137,8 @@ class LessonCollection extends BaseCollection {
     const videoLink = doc.videoLink;
     const lessonText = doc.lessonText;
     const quiz = doc.quiz;
-    const createdBy = doc.createdBy;
-    return { sessionID, title, summary, videoLink, lessonText, quiz, createdBy };
+    const owner = doc.owner;
+    return { sessionID, title, summary, videoLink, lessonText, quiz, owner };
   }
 }
 

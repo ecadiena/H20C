@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Button, Container, Form, Row, Col } from 'react-bootstrap';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
@@ -29,9 +30,9 @@ const CreateSession = () => {
   const submit = () => {
     const { title, summary, type, difficulty, tagsAdapt, location, date, startTime, endTime } = session;
     const tags = tagsAdapt.map(tag => tag.value);
-    const createdBy = new Date();
+    const owner = Meteor.user().username;
     const collectionName = Sessions.getCollectionName();
-    const definitionData = { title, summary, type, difficulty, date, startTime, endTime, tags, location, createdBy };
+    const definitionData = { title, summary, type, difficulty, date, startTime, endTime, tags, location, owner };
     defineMethod.callPromise({ collectionName, definitionData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => {

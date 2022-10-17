@@ -13,8 +13,21 @@
   ],
 
   "defaultSession": [
-    { "title": "HTTP vs. HTTPS", "summary": "Difference between HTTP and HTTPS", "type": "event", "difficulty":  "basic", "tags":  ["technology", "security"], "createdBy":  "2022/10/15"},
-    { "title": "SSH", "summary": "What is SSH", "type": "event", "difficulty":  "basic", "tags":  ["technology", "security"], "createdBy":  "2022/10/15"}
+    { "title": "HTTP vs. HTTPS", "summary": "Difference between HTTP and HTTPS", "type": "event", "difficulty":  "basic", "tags":  ["technology", "security"], "owner":  "DPPfvScMnvhwCoaj9"},
+    { "title": "SSH", "summary": "What is SSH", "type": "event", "difficulty":  "basic", "tags":  ["technology", "security"], "owner":  "DPPfvScMnvhwCoaj9"}
+  ],
+
+  "defaultLesson": [
+    { "sessionID":  "NA TEST", "title":  "What is HTTP", "summary":  "History of HTTP", "videoLink": "https://www.youtube.com/watch?v=iYM2zFP3Zn0&ab_channel=TraversyMedia", "lessonText":  [{ "header": "History",
+      "body": ["bla bla", "sla sla"]
+    }, { "header": "HTTP",
+      "body": ["hyper text transfer protocol"]
+    }], "quiz":  [{ "question": "What is HTTP?",
+      "options": ["hyper text transfer protocol", "cow", "pig", "bat"],
+      "correct": 1, "feedback": "naw"
+    }],
+      "owner": "DPPfvScMnvhwCoaj9"
+    }
   ],
   "public": {
     "development": true

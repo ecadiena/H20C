@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/StuffCollection';
 import { Sessions } from '../../api/session/SessionCollection';
 import { Lessons } from '../../api/lesson/LessonCollection';
+import { UserLessons } from '../../api/user/UserLessonCollection';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
@@ -18,6 +19,11 @@ function addSession(data) {
 function addLesson(data) {
   console.log(`  Adding: ${data.title} (${data.owner})`);
   Lessons.define(data);
+}
+
+function addUserLesson(data) {
+  console.log(`  Adding: ${data.userID} with SessionID of (${data.sessionID})`);
+  UserLessons.define(data);
 }
 
 // Initialize the StuffsCollection if empty.
@@ -41,5 +47,13 @@ if (Lessons.count() === 0) {
   if (Meteor.settings.defaultLesson) {
     console.log('Creating default Lesson.');
     Meteor.settings.defaultLesson.map(data => addLesson(data));
+  }
+}
+
+// Initialize the UserLessonsCollection if empty.
+if (UserLessons.count() === 0) {
+  if (Meteor.settings.defaultUserLesson) {
+    console.log('Creating default User Lesson.');
+    Meteor.settings.defaultUserLesson.map(data => addUserLesson(data));
   }
 }

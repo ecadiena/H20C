@@ -29,6 +29,10 @@
       "owner": "DPPfvScMnvhwCoaj9"
     }
   ],
+
+  "defaultUserLesson": [
+    { "userID": "NA", "sessionID": "NA", "lessonID": "NA" }
+  ],
   "public": {
     "development": true
   }

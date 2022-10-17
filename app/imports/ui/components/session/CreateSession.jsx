@@ -3,13 +3,14 @@ import { Meteor } from 'meteor/meteor';
 import { Button, Container, Form, Row, Col } from 'react-bootstrap';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
+import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import swal from 'sweetalert';
 import { Sessions, sessionType, difficultyType, tagType, selectFormSetup } from '../../../api/session/SessionCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 
 const CreateSession = () => {
-  const [session, setSession] = useState({ title: '', summary: '', type: '', difficulty: '', tagsAdapt: [], location: '', date: new Date(), startTime: '', endTime: '' });
+  const [session, setSession] = useState({ title: '', summary: '', type: '', difficulty: '', tagsAdapt: [], location: '', date: new Date(), startTimeAdapt: '', endTimeAdapt: '' });
   const typeOptions = [];
   const difficultyOptions = [];
   const tagsOptions = [];
@@ -28,7 +29,9 @@ const CreateSession = () => {
 
   // On submit, insert the data.
   const submit = () => {
-    const { title, summary, type, difficulty, tagsAdapt, location, date, startTime, endTime } = session;
+    const { title, summary, type, difficulty, tagsAdapt, location, date, startTimeAdapt, endTimeAdapt } = session;
+    const startTime = moment(startTimeAdapt).format('hh:mm a');
+    const endTime = moment(endTimeAdapt).format('hh:mm a');
     const tags = tagsAdapt.map(tag => tag.value);
     const owner = Meteor.user().username;
     const collectionName = Sessions.getCollectionName();
@@ -81,8 +84,8 @@ const CreateSession = () => {
                   <Col>
                     <p>Start Time</p>
                     <DatePicker
-                      selected={session.startTime}
-                      onChange={(e) => updateSession(e, 'startTime')}
+                      selected={session.startTimeAdapt}
+                      onChange={(e) => updateSession(e, 'startTimeAdapt')}
                       showTimeSelect
                       showTimeSelectOnly
                       timeFormat="HH:mm"
@@ -94,8 +97,8 @@ const CreateSession = () => {
                   <Col>
                     <p>End Time</p>
                     <DatePicker
-                      selected={session.endTime}
-                      onChange={(e) => updateSession(e, 'endTime')}
+                      selected={session.endTimeAdapt}
+                      onChange={(e) => updateSession(e, 'endTimeAdapt')}
                       showTimeSelect
                       showTimeSelectOnly
                       timeFormat="HH:mm"

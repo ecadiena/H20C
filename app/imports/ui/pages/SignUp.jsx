@@ -5,7 +5,7 @@ import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import {AutoForm, ErrorsField, NumField, SelectField, SubmitField, TextField} from 'uniforms-bootstrap5';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
@@ -23,6 +23,14 @@ const SignUp = () => {
     lastName: String,
     email: String,
     password: String,
+    age: Number,
+    zipcode: Number,
+    ethnicity: String,
+    education: {
+      type: String,
+      allowedValues: ['Grade K - 6', 'Grade 7 - 8', 'High School', 'Some College', 'College'],
+    },
+    totalPoints: { type: Number, defaultValue: 0 },
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
@@ -66,6 +74,10 @@ const SignUp = () => {
                 <TextField id={COMPONENT_IDS.SIGN_UP_FORM_LAST_NAME} name="lastName" placeholder="Last name" />
                 <TextField id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL} name="email" placeholder="E-mail address" />
                 <TextField id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD} name="password" placeholder="Password" type="password" />
+                <NumField id={COMPONENT_IDS.SIGN_UP_FORM_AGE} name="age" placeholder="Age" min="0" />
+                <NumField id={COMPONENT_IDS.SIGN_UP_FORM_ZIPCODE} name="zipcode" placeholder="Zipcode" min="0" />
+                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_ETHNICITY} name="ethnicity" placeholder="Ethnicity" />
+                <SelectField id={COMPONENT_IDS.SIGN_UP_FORM_EDUCATION} name="education" placeholder="Highest or Current Education Level" />
                 <ErrorsField />
                 <SubmitField id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT} />
               </Card.Body>

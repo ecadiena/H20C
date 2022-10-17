@@ -19,7 +19,7 @@ class BaseProfileCollection extends BaseCollection {
       userID: SimpleSchema.RegEx.Id,
       age: { type: Number, defaultValue: 0 },
       zipcode: { type: Number, defaultValue: 0 },
-      ethnicity: { type: Number, defaultValue: 'None' },
+      ethnicity: { type: String, defaultValue: 'None' },
       education: {
         type: String,
         allowedValues: ['Grade K - 6', 'Grade 7 - 8', 'High School', 'Some College', 'College'],

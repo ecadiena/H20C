@@ -1,103 +1,75 @@
-import React, { useState } from 'react';
-import { Navigate } from 'react-router';
-import { Link } from 'react-router-dom';
-import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
-import { Meteor } from 'meteor/meteor';
-import SimpleSchema from 'simpl-schema';
-import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import React from 'react';
+import { Col, Container, Row, Button, Form } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import { COMPONENT_IDS } from '../utilities/ComponentIDs';
-import { UserProfiles } from '../../api/user/UserProfileCollection';
-import { defineMethod } from '../../api/base/BaseCollection.methods';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
  */
-const SignUp = () => {
-  const [error, setError] = useState('');
-  const [redirectToReferer, setRedirectToRef] = useState(false);
-
-  const schema = new SimpleSchema({
-    firstName: String,
-    lastName: String,
-    email: String,
-    password: String,
-    age: Number,
-    zipcode: Number,
-    ethnicity: String,
-    education: {
-      type: String,
-      allowedValues: ['Grade K - 6', 'Grade 7 - 8', 'High School', 'Some College', 'College'],
-    },
-    totalPoints: { type: Number, defaultValue: 0 },
-  });
-  const bridge = new SimpleSchema2Bridge(schema);
-
-  /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
-  const submit = (doc) => {
-    const collectionName = UserProfiles.getCollectionName();
-    const definitionData = doc;
-    // create the new UserProfile
-    defineMethod.callPromise({ collectionName, definitionData })
-      .then(() => {
-        // log the new user in.
-        const { email, password } = doc;
-        Meteor.loginWithPassword(email, password, (err) => {
-          if (err) {
-            setError(err.reason);
-          } else {
-            setError('');
-            setRedirectToRef(true);
-          }
-        });
-      })
-      .catch((err) => setError(err.reason));
-  };
-
-  /* Display the signup form. Redirect to add page after successful registration and login. */
-  // if correct authentication, redirect to from: page instead of signup screen
-  if (redirectToReferer) {
-    return <Navigate to="/add" />;
-  }
-  return (
-    <Container id={PAGE_IDS.SIGN_UP} className="py-3">
-      <Row className="justify-content-center">
-        <Col xs={5}>
-          <Col className="text-center">
-            <h2>Register your account</h2>
-          </Col>
-          <AutoForm schema={bridge} onSubmit={data => submit(data)}>
-            <Card>
-              <Card.Body>
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME} name="firstName" placeholder="First name" />
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_LAST_NAME} name="lastName" placeholder="Last name" />
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL} name="email" placeholder="E-mail address" />
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD} name="password" placeholder="Password" type="password" />
-                <NumField id={COMPONENT_IDS.SIGN_UP_FORM_AGE} name="age" placeholder="Age" min="0" />
-                <NumField id={COMPONENT_IDS.SIGN_UP_FORM_ZIPCODE} name="zipcode" placeholder="Zipcode" min="0" />
-                <TextField id={COMPONENT_IDS.SIGN_UP_FORM_ETHNICITY} name="ethnicity" placeholder="Ethnicity" />
-                <SelectField id={COMPONENT_IDS.SIGN_UP_FORM_EDUCATION} name="education" placeholder="Highest or Current Education Level" />
-                <ErrorsField />
-                <SubmitField id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT} />
-              </Card.Body>
-            </Card>
-          </AutoForm>
-          <Alert variant="secondary">
-            Already have an account? Login <Link to="/signin">here</Link>
-          </Alert>
-          {error === '' ? (
-            ''
-          ) : (
-            <Alert variant="danger">
-              <Alert.Heading>Registration was not successful</Alert.Heading>
-              {error}
-            </Alert>
-          )}
+const SignUp = () => (
+  <Container id={PAGE_IDS.SIGN_UP}>
+    <Row className="justify-content-center">
+      <Col className="divider" style={{ marginTop: 20, marginBottom: 20 }}>
+        <Col className="text-center">
+          <h2>Sign Up</h2>
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
+          <h6>Don't have an account? Sign up here.</h6>
         </Col>
-      </Row>
-    </Container>
-  );
-};
+        <Form>
+          <Row>
+            <Col>
+              <Form.Group style={{ marginLeft: 10 }}>
+                Email address
+                <Form.Control type="email" placeholder="Enter your email" style={{ marginBottom: 5 }} />
+                Password
+                <Form.Control type="password" placeholder="Create a password" style={{ marginBottom: 5 }} />
+              </Form.Group>
+              <Row>
+                <Col style={{ marginLeft: 10 }}>
+                  <Form.Group>
+                    First Name
+                    <Form.Control type="first-name" placeholder="Enter your first name" />
+                  </Form.Group>
+                </Col>
+                <Col style={{ marginLeft: 10 }}>
+                  <Form.Group>
+                    Last Name
+                    <Form.Control type="first-name" placeholder="Enter your last name" />
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Col>
+            <Col style={{ marginRight: 10 }}>
+              <Form.Group>
+                Age
+                <Form.Control type="age" placeholder="Enter your age" style={{ marginBottom: 5 }} />
+              </Form.Group>
+              <Form.Group>
+                Zipcode
+                <Form.Control type="zipcode" placeholder="Enter your zipcode" style={{ marginBottom: 5 }} />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Ethnicity</Form.Label>
+                <Form.Control type="ethnicity" placeholder="Enter your zipcode" style={{ marginBottom: 5 }} />
+              </Form.Group>
+              <Form.Group style={{ marginBottom: 30 }}>
+                Education Level
+                <Form.Select>
+                  <option>Grade K - 6</option>
+                  <option>Grade 7 - 8</option>
+                  <option>High School</option>
+                  <option>Some College</option>
+                  <option>College</option>
+                </Form.Select>
+              </Form.Group>
+            </Col>
+          </Row>
+          <Button variant="primary" type="submit" style={{ position: 'absolute', bottom: 20 }}>
+            Sign Up
+          </Button>
+        </Form>
+      </Col>
+    </Row>
+  </Container>
+);
 
 export default SignUp;

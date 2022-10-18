@@ -48,10 +48,18 @@ const SignUp = () => (
                 <Form.Control type="zipcode" placeholder="Enter your zipcode" style={{ marginBottom: 5 }} />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Ethnicity</Form.Label>
-                <Form.Control type="ethnicity" placeholder="Enter your zipcode" style={{ marginBottom: 5 }} />
+                Ethnicity
+                <Form.Select>
+                  <option>American Indian or Alaska Native</option>
+                  <option>Asian</option>
+                  <option>Black or African American</option>
+                  <option>Hispanic or Latino</option>
+                  <option>Native Hawaiian or Other Pacific Islander</option>
+                  <option>White</option>
+                  <option>Other</option>
+                </Form.Select>
               </Form.Group>
-              <Form.Group style={{ marginBottom: 30 }}>
+              <Form.Group style={{ marginTop: 5, marginBottom: 30 }}>
                 Education Level
                 <Form.Select>
                   <option>Grade K - 6</option>

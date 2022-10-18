@@ -17,7 +17,7 @@ const SignIn = () => (
         <Form>
           <Row style={{ marginLeft: 10 }}>
             <Form.Group>
-              E-mail Address
+              Email Address
               <Form.Control type="email" placeholder="Enter your email" style={{ marginBottom: 5 }} />
             </Form.Group>
           </Row>

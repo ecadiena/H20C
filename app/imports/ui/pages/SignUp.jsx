@@ -63,7 +63,7 @@ const SignUp = () => (
               </Form.Group>
             </Col>
           </Row>
-          <Button variant="primary" type="submit" style={{ position: 'absolute', bottom: 20 }}>
+          <Button variant="primary" type="submit" style={{ position: 'absolute', bottom: 20, marginLeft: 10 }}>
             Sign Up
           </Button>
         </Form>

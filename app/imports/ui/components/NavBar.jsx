@@ -2,10 +2,10 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
-import { Roles } from 'meteor/alanning:roles';
-import { Container, Navbar, Nav, NavDropdown, Image } from 'react-bootstrap';
+// import { Roles } from 'meteor/alanning:roles';
+import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { BoxArrowRight } from 'react-bootstrap-icons';
-import { ROLE } from '../../api/role/Role';
+// import { ROLE } from '../../api/role/Role';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const NavBar = () => {
@@ -14,7 +14,7 @@ const NavBar = () => {
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
   const menuStyle = { paddingTop: '20px', paddingBottom: '20px', marginBottom: '40px', borderBottom: '0.1px solid #D6D8DA' };
-  const itemStyle = { paddingLeft: '30px', paddingRight: '30px', color: '#1762A7', fontWeight: 'bold'};
+  const itemStyle = { paddingLeft: '30px', paddingRight: '30px', color: '#1762A7', fontWeight: 'bold' };
   return (
     <Navbar style={menuStyle}>
       <Container>
@@ -30,17 +30,17 @@ const NavBar = () => {
           </Navbar.Brand>
           <Nav className="ms-auto justify-content-end">
             {currentUser === '' ? ([
-              <Navbar.Text style={{ paddingLeft: '30px', paddingRight: '30px', color: '#FFFFFF', cursor: 'default'}}>Blank</Navbar.Text>,
-              <Navbar.Text style={{ paddingLeft: '30px', paddingRight: '30px', color: '#FFFFFF', cursor: 'default'}}>Blank</Navbar.Text>,
+              <Navbar.Text style={{ paddingLeft: '30px', paddingRight: '30px', color: '#FFFFFF', cursor: 'default' }}>Blank</Navbar.Text>,
+              <Navbar.Text style={{ paddingLeft: '30px', paddingRight: '30px', color: '#FFFFFF', cursor: 'default' }}>Blank</Navbar.Text>,
               <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_SIGN_IN_UP} as={NavLink} to="/sign-in-up" key="sign-in-up">
                 Login
-              </Nav.Link>
+              </Nav.Link>,
             ]) : ([
-                  <Navbar.Text style={{ paddingLeft: '30px', paddingRight: '30px', color: '#FFFFFF', cursor: 'default'}}>Blank</Navbar.Text>,
-                  <Navbar.Text style={{ paddingLeft: '30px', paddingRight: '30px', color: '#FFFFFF', cursor: 'default'}}>Blank</Navbar.Text>,
-                  <NavDropdown style={itemStyle} id={COMPONENT_IDS.NAVBAR_CURRENT_USER} title={currentUser}>
-                    <NavDropdown.Item style={itemStyle} id={COMPONENT_IDS.NAVBAR_SIGN_OUT} as={NavLink} to="/signout"><BoxArrowRight /> Sign out</NavDropdown.Item>
-                  </NavDropdown>
+              <Navbar.Text style={{ paddingLeft: '30px', paddingRight: '30px', color: '#FFFFFF', cursor: 'default' }}>Blank</Navbar.Text>,
+              <Navbar.Text style={{ paddingLeft: '30px', paddingRight: '30px', color: '#FFFFFF', cursor: 'default' }}>Blank</Navbar.Text>,
+              <NavDropdown style={itemStyle} id={COMPONENT_IDS.NAVBAR_CURRENT_USER} title={currentUser}>
+                <NavDropdown.Item style={itemStyle} id={COMPONENT_IDS.NAVBAR_SIGN_OUT} as={NavLink} to="/signout"><BoxArrowRight /> Sign out</NavDropdown.Item>
+              </NavDropdown>,
             ])}
           </Nav>
         </Navbar.Collapse>

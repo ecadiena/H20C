@@ -4,7 +4,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
 import { Container, Navbar, Nav, NavDropdown, Image } from 'react-bootstrap';
-import { BoxArrowRight, CloudDownload, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
+import { BoxArrowRight } from 'react-bootstrap-icons';
 import { ROLE } from '../../api/role/Role';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
@@ -31,8 +31,10 @@ const NavBar = () => {
           <Nav className="ms-auto justify-content-end">
             {currentUser === '' ? ([
               <Navbar.Text style={{ paddingLeft: '30px', paddingRight: '30px', color: '#FFFFFF', cursor: 'default'}}>Blank</Navbar.Text>,
-              <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LOGIN} as={NavLink} to="/login" key="login">Login</Nav.Link>,
-              <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_SIGN_UP} as={NavLink} to="/signup" key="signup">Sign Up</Nav.Link>
+              <Navbar.Text style={{ paddingLeft: '30px', paddingRight: '30px', color: '#FFFFFF', cursor: 'default'}}>Blank</Navbar.Text>,
+              <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_SIGN_IN_UP} as={NavLink} to="/sign-in-up" key="sign-in-up">
+                Login
+              </Nav.Link>
             ]) : ([
                   <Navbar.Text style={{ paddingLeft: '30px', paddingRight: '30px', color: '#FFFFFF', cursor: 'default'}}>Blank</Navbar.Text>,
                   <Navbar.Text style={{ paddingLeft: '30px', paddingRight: '30px', color: '#FFFFFF', cursor: 'default'}}>Blank</Navbar.Text>,

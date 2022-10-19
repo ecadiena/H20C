@@ -64,7 +64,7 @@ const SignInUp = () => (
                             <Form.Control type="first-name" placeholder="Enter your first name" />
                           </Form.Group>
                         </Col>
-                        <Col style={{ marginLeft: 10 }}>
+                        <Col>
                           <Form.Group>
                             Last Name
                             <Form.Control type="first-name" placeholder="Enter your last name" />

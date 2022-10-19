@@ -21,8 +21,12 @@ body {
 
 /* Define custom styles */
 .gray-background {
-  background-color: var(--bs-gray-200);
+  background-color: #F5F5F5;
   color: var(--bs-dark);
   padding-top: 10px;
   padding-bottom: 20px;
+}
+
+.nav-link {
+  color: #1762A7 !important;
 }

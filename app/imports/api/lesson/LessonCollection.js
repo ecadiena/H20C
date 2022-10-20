@@ -7,9 +7,15 @@ export const lessonPublications = {
   lessons: 'lessons',
 };
 
-export const selectFormSetup = (arr, type) => {
+export const selectSessionSetup = (arr, type) => {
   type.forEach(item => {
     arr.push({ value: item._id, label: item.title });
+  });
+};
+
+export const selectOptionSetup = (arr, type) => {
+  type.forEach(item => {
+    arr.push({ value: item, label: item });
   });
 };
 
@@ -26,7 +32,7 @@ const quizType = new SimpleSchema(
     question: String,
     options: Array,
     'options.$': String,
-    correct: Number,
+    correct: String,
     feedback: String,
   },
 );

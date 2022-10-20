@@ -21,8 +21,24 @@ body {
 
 /* Define custom styles */
 .gray-background {
-  background-color: var(--bs-gray-200);
+  background-color: #F5F5F5;
   color: var(--bs-dark);
   padding-top: 10px;
   padding-bottom: 20px;
+}
+
+.divider {
+  border-left: 0.0625rem solid #c1c0c0;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.nav-link {
+  color: #1762A7 !important;
 }

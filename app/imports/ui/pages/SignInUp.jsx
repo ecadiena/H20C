@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form, Button, Modal } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import { PAGE_IDS } from '../utilities/PageIDs';
@@ -14,6 +14,7 @@ import { defineMethod } from '../../api/base/BaseCollection.methods';
  */
 const SignInUp = () => {
   const [redirect, setRedirect] = useState(false);
+  const [input2FA, setInput2FA] = useState(false);
 
   const signIn = (e) => {
     e.preventDefault();
@@ -34,7 +35,26 @@ const SignInUp = () => {
     }
     Meteor.loginWithPassword(email, password, (err) => {
       if (err) {
-        swal('Login Unsuccessful', err.reason, 'error');
+        if (err.error === 'no-2fa-code') {
+          setInput2FA(true);
+        } else {
+          swal('Login Unsuccessful', err.reason, 'error');
+        }
+      } else {
+        setRedirect(true);
+      }
+    });
+  };
+
+  const signInWith2FA = (e) => {
+    e.preventDefault();
+    const email = document.getElementById(COMPONENT_IDS.SIGN_IN_FORM_EMAIL).value;
+    const password = document.getElementById(COMPONENT_IDS.SIGN_IN_FORM_PASSWORD).value;
+    const code = document.getElementById(COMPONENT_IDS.SIGN_IN_FORM_2FA).value;
+
+    Meteor.loginWithPasswordAnd2faCode(email, password, code, (err) => {
+      if (err) {
+        swal('Login Unsuccessful', '2FA Code Mismatch', 'error');
       } else {
         setRedirect(true);
       }
@@ -217,6 +237,16 @@ const SignInUp = () => {
           </Col>
         </Row>
       </Card>
+
+      <Modal show={input2FA} onHide={() => setInput2FA(false)} centered>
+        <Modal.Body>
+          Input 2FA Code
+          <Form>
+            <Form.Control id={COMPONENT_IDS.SIGN_IN_FORM_2FA} placeholder="2FA Code" />
+            <Button variant="primary" type="submit" onClick={(event) => signInWith2FA(event)}>Submit</Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
     </Container>
   );
 };

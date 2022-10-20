@@ -46,3 +46,9 @@ body {
 .nav-link {
   color: #1762A7 !important;
 }
+
+.card-profile {
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+}

@@ -49,26 +49,27 @@ const CreateSession = () => {
 
   return (
     <Container id={PAGE_IDS.ADD_STUFF} className="py-3">
+      <h2>Create Session</h2>
       <Row className="justify-content-center">
         <Form>
           <Form.Group>
-            <Form.Label>Title: </Form.Label>
+            <Form.Label>Title: *</Form.Label>
             <Form.Control type="title" placeholder="" onChange={(e) => updateSession(e.target.value, 'title')} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Summary: </Form.Label>
+            <Form.Label>Summary: *</Form.Label>
             <Form.Control type="summary" placeholder="" onChange={(e) => updateSession(e.target.value, 'summary')} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Type: </Form.Label>
+            <Form.Label>Type: *</Form.Label>
             <Select options={typeOptions} onChange={(e) => updateSession(e, 'typeAdapt')} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Difficulty: </Form.Label>
+            <Form.Label>Difficulty: *</Form.Label>
             <Select options={difficultyOptions} onChange={(e) => updateSession(e, 'difficultyAdapt')} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Tags: </Form.Label>
+            <Form.Label>Tags: *</Form.Label>
             <Select options={tagsOptions} isMulti closeMenuOnSelect={false} onChange={(e) => updateSession(e, 'tagsAdapt')} />
           </Form.Group>
           { eventDropdown ? (

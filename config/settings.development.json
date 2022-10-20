@@ -23,7 +23,7 @@
       "body": ["hyper text transfer protocol"]
     }], "quiz":  [{ "question": "What is HTTP?",
       "options": ["hyper text transfer protocol", "cow", "pig", "bat"],
-      "correct": 1, "feedback": "naw"
+      "correct": "A", "feedback": "naw"
     }],
       "owner": "DPPfvScMnvhwCoaj9"
     }

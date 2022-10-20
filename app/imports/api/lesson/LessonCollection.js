@@ -7,6 +7,12 @@ export const lessonPublications = {
   lessons: 'lessons',
 };
 
+export const selectFormSetup = (arr, type) => {
+  type.forEach(item => {
+    arr.push({ value: item._id, label: item.title });
+  });
+};
+
 const lessonTextType = new SimpleSchema(
   {
     header: String,

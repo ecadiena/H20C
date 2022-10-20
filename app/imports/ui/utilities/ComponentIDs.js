@@ -29,4 +29,5 @@ export const COMPONENT_IDS = {
   SIGN_UP_FORM_ETHNICITY: 'sign-up-form-ethnicity',
   SIGN_UP_FORM_EDUCATION: 'sign-up-form-education',
   SIGN_UP_FORM_SUBMIT: 'sign-up-form-submit',
+
 };

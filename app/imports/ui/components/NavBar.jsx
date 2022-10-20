@@ -2,10 +2,10 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
-import { Roles } from 'meteor/alanning:roles';
+// import { Roles } from 'meteor/alanning:roles';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { BoxArrowRight, CloudDownload, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
-import { ROLE } from '../../api/role/Role';
+import { BoxArrowRight, Person } from 'react-bootstrap-icons';
+// import { ROLE } from '../../api/role/Role';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const NavBar = () => {
@@ -13,46 +13,32 @@ const NavBar = () => {
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
-  const menuStyle = { marginBottom: '10px' };
+  const menuStyle = { paddingTop: '20px', paddingBottom: '20px', marginBottom: '40px', borderBottom: '0.1px solid #D6D8DA' };
+  const itemStyle = { paddingLeft: '30px', paddingRight: '30px', color: '#1762A7', fontWeight: 'bold' };
   return (
-    <Navbar bg="light" expand="lg" style={menuStyle}>
+    <Navbar style={menuStyle}>
       <Container>
-        <Navbar.Brand id={COMPONENT_IDS.NAVBAR_LANDING_PAGE} as={NavLink} to="/"><h1>meteor-application-template-production</h1></Navbar.Brand>
         <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
-          <Nav className="me-auto justify-content-start">
-            {currentUser ? ([
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_ADD_STUFF} as={NavLink} to="/add" key="add">Add Stuff</Nav.Link>,
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/list" key="list">List Stuff</Nav.Link>,
-            ]) : ''}
-            {Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
-              [<Nav.Link id={COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN} as={NavLink} to="/admin" key="admin">Admin</Nav.Link>,
-                <NavDropdown id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN} title="Manage" key="manage-dropdown">
-                  <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE} key="manage-database" as={NavLink} to="/manage-database"><CloudDownload /> Database</NavDropdown.Item>
-                </NavDropdown>]
-            ) : ''}
+          <Nav className="justify-content-start">
+            <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_ADD_STUFF} as={NavLink} to="/add" key="add">Classes</Nav.Link>
+            <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/list" key="list">About</Nav.Link>
+            <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/list" key="list">Resources</Nav.Link>
           </Nav>
-          <Nav className="justify-content-end">
-            {currentUser === '' ? (
-              <NavDropdown id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN} title="Login">
-                <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_IN} as={NavLink} to="/signin"><PersonFill />Sign in</NavDropdown.Item>
-                <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_UP} as={NavLink} to="/signup"><PersonPlusFill />Sign up</NavDropdown.Item>
-              </NavDropdown>
-            ) : (
-              <NavDropdown id={COMPONENT_IDS.NAVBAR_CURRENT_USER} title={currentUser}>
-                <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_SIGN_OUT} as={NavLink} to="/signout"><BoxArrowRight /> Sign out</NavDropdown.Item>
-              </NavDropdown>
-            )}
-            {currentUser === '' ? (
-              <Nav.Link id={COMPONENT_IDS.NAVBAR_SIGN_IN_UP} as={NavLink} to="/sign-in-up" key="sign-in-up">
-                Sign In / Sign Up
-              </Nav.Link>
-            ) : (
-              <NavDropdown id={COMPONENT_IDS.NAVBAR_CURRENT_USER} title={currentUser}>
-                <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_PROFILE} as={NavLink} to="/profile-page"><PersonFill /> My Profile</NavDropdown.Item>
-                <NavDropdown.Item id={COMPONENT_IDS.NAVBAR_SIGN_OUT} as={NavLink} to="/signout"><BoxArrowRight /> Sign out</NavDropdown.Item>
-              </NavDropdown>
-            )}
+          <Navbar.Brand className="ms-auto justify-content-center" id={COMPONENT_IDS.NAVBAR_LANDING_PAGE} as={NavLink} to="/">
+            <img src="/images/uh-logo.png" alt="University of Hawaii Logo" />
+          </Navbar.Brand>
+          <Nav className="ms-auto justify-content-end">
+            {currentUser === '' ? ([
+              <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_SIGN_IN_UP} as={NavLink} to="/sign-in-up" key="sign-in-up">
+                Sign in / Sign up
+              </Nav.Link>,
+            ]) : ([
+              <NavDropdown style={itemStyle} id={COMPONENT_IDS.NAVBAR_CURRENT_USER} title={currentUser}>
+                <NavDropdown.Item style={itemStyle} id={COMPONENT_IDS.NAVBAR_ACCOUNT} as={NavLink} to="/profile-page"><Person /> My Profile</NavDropdown.Item>
+                <NavDropdown.Item style={itemStyle} id={COMPONENT_IDS.NAVBAR_SIGN_OUT} as={NavLink} to="/signout"><BoxArrowRight /> Sign out</NavDropdown.Item>
+              </NavDropdown>,
+            ])}
           </Nav>
         </Navbar.Collapse>
       </Container>

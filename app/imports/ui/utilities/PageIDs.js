@@ -11,5 +11,6 @@ export const PAGE_IDS = {
   NOT_FOUND: 'not-found',
   SIGN_IN: 'sign-in',
   SIGN_OUT: 'sign-out',
+  SIGN_IN_UP: 'sign-in-up',
   SIGN_UP: 'sign-up',
 };

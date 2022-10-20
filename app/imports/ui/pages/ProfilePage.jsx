@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import Account from './Account';
 
 /* A simple static component to render some text for the landing page. */
 const ProfilePage = () => (
@@ -8,8 +9,13 @@ const ProfilePage = () => (
     <Card className="center">
       <div style={{ marginTop: 50, marginBottom: 50 }}>
         <Row style={{ textAlign: 'center', marginBottom: 20 }}>
-          <h2>John Foo</h2>
-          <h5>john@foo.com</h5>
+          <Col>
+            <h2>John Foo</h2>
+            <h5>john@foo.com</h5>
+          </Col>
+          <Col xs={3}>
+            <Account />
+          </Col>
         </Row>
         <Row className="column-vertical-center">
           <Col style={{ textAlign: 'center' }}>
@@ -28,12 +34,14 @@ const ProfilePage = () => (
               </Col>
             </Row>
             <Row style={{ marginBottom: 10 }}>
-              <h6>Ethnicity</h6>
-              <h7>Asian, Pacific Islander</h7>
-            </Row>
-            <Row style={{ marginBottom: 10 }}>
-              <h6>Education Level</h6>
-              <h7>College</h7>
+              <Col>
+                <h6>Ethnicity</h6>
+                <h7>Asian, Pacific Islander</h7>
+              </Col>
+              <Col>
+                <h6>Education Level</h6>
+                <h7>College</h7>
+              </Col>
             </Row>
           </Col>
         </Row>

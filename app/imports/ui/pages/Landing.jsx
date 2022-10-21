@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col, Image, Row, Button } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import { NavLink } from 'react-router-dom';
 
 /* A simple static component to render some text for the landing page. */
 const Landing = () => {
@@ -49,7 +50,7 @@ const Landing = () => {
             <p style={largeTextStyle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
           </Row>
-          <Button className="px-5 py-3" style={buttonStyle}>Learn more</Button>
+          <Button className="px-5 py-3" style={buttonStyle} as={NavLink} to="/about">Learn more</Button>
         </Col>
         <Col md={5} className="align-self-center p-5"><Image fluid src="images/broadband-icon.png" /></Col>
       </Row>

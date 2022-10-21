@@ -13,22 +13,22 @@ const NavBar = () => {
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
-  const menuStyle = { paddingTop: '10px', paddingBottom: '10px', marginBottom: '10px', borderBottom: '0.1px solid #D6D8DA' };
+  const menuStyle = { paddingTop: '10px', paddingBottom: '10px', marginBottom: '10px', borderBottom: '0.1px solid #D6D8DA', position: 'relative' };
   const itemStyle = { paddingRight: '40px', color: '#1762A7', fontWeight: 'bold', fontSize: '14px' };
   const rightItemStyle = { color: '#1762A7', fontWeight: 'bold', fontSize: '14px' };
   return (
-    <Navbar style={menuStyle} expand="md">
+    <Navbar style={menuStyle} expand="lg" id={COMPONENT_IDS.NAVBAR_LANDING_PAGE}>
       <Container>
-        <Navbar.Toggle aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
+        <Navbar.Brand as={NavLink} to="/" style={{ minWidth: '270px', width: '22vw', position: 'absolute', top: 0, left: '50%', marginLeft: '-170px' }}>
+          <img className="img-fluid" src="/images/uh-logo.png" alt="University of Hawaii Logo" />
+        </Navbar.Brand>
+        <Navbar.Toggle className="ms-auto justify-content-end" aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="justify-content-start">
             <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_ADD_STUFF} as={NavLink} to="/add" key="add">Classes</Nav.Link>
             <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/list" key="list">About</Nav.Link>
             <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/list" key="list">Resources</Nav.Link>
           </Nav>
-          <Navbar.Brand className="ms-auto justify-content-center" id={COMPONENT_IDS.NAVBAR_LANDING_PAGE} as={NavLink} to="/" style={{ width: '20%' }}>
-            <img className="img-fluid" src="/images/uh-logo.png" alt="University of Hawaii Logo" />
-          </Navbar.Brand>
           <Nav className="ms-auto justify-content-end">
             {currentUser === '' ? ([
               <Nav.Link style={rightItemStyle} id={COMPONENT_IDS.NAVBAR_SIGN_IN_UP} as={NavLink} to="/sign-in-up" key="sign-in-up">

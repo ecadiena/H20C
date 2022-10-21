@@ -13,10 +13,10 @@ const Landing = () => {
   return (
     <div id={PAGE_IDS.LANDING}>
       <Row fluid className="justify-content-center mx-0 p-5">
-        <Col md={4}>
+        <Col md={3}>
           <Image roundedCircle fluid src="/images/hawaii-seal.png" />
         </Col>
-        <Col md={4} className="align-self-center">
+        <Col md={6} className="align-self-center">
           <h1 style={headingStyle}>Broadband for Hawaiʻi</h1>
           <h2 className="pb-3" style={subheadingStyle}>Connecting everyone, everywhere, <text style={{ textDecoration: 'underline', textDecorationThickness: '2px', textUnderlineOffset: '5px' }}>all the time</text>.</h2>
           <Button className="px-5 py-3" style={buttonStyle}>Get started</Button>

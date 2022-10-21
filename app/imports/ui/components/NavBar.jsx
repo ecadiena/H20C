@@ -13,9 +13,9 @@ const NavBar = () => {
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
-  const menuStyle = { paddingTop: '10px', paddingBottom: '10px', marginBottom: '40px', borderBottom: '0.1px solid #D6D8DA' };
-  const itemStyle = { paddingRight: '40px', color: '#1762A7', fontWeight: 'bold' };
-  const rightItemStyle = { color: '#1762A7', fontWeight: 'bold' };
+  const menuStyle = { paddingTop: '10px', paddingBottom: '10px', marginBottom: '10px', borderBottom: '0.1px solid #D6D8DA' };
+  const itemStyle = { paddingRight: '40px', color: '#1762A7', fontWeight: 'bold', fontSize: '14px' };
+  const rightItemStyle = { color: '#1762A7', fontWeight: 'bold', fontSize: '14px' };
   return (
     <Navbar style={menuStyle} expand="md">
       <Container>

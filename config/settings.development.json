@@ -1,8 +1,8 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP", "age": 18, "zipcode": 96817, "ethnicity": "American", "education": "College",
+    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP", "age": 18, "zipcode": 96817, "ethnicity": "White", "education": "College",
       "totalPoints": 300, "gender": "Other", "joined": "2022-9-05 04:34:39.601Z" },
-    { "email": "john@foo.com", "password": "changeme", "role": "USER" , "firstName": "John", "lastName": "Doe", "age": 18, "zipcode": 96817, "ethnicity": "American", "education": "High School",
+    { "email": "john@foo.com", "password": "changeme", "role": "USER" , "firstName": "John", "lastName": "Doe", "age": 18, "zipcode": 96817, "ethnicity": "White", "education": "High School",
       "totalPoints": 300, "gender": "Other", "joined": "2022-9-05 04:34:39.601Z"
     },
     { "email": "bob@foo.com", "password": "changeme", "role": "USER" , "firstName": "Bob", "lastName": "Doe", "age": 34, "zipcode": 96818, "ethnicity": "American Indian or Alaska Native", "education": "College", "totalPoints": 200, "gender": "Male", "joined": "2022-8-01 07:00:39.601Z" },

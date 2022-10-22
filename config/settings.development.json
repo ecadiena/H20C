@@ -1,11 +1,21 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP", "age": 18, "zipcode": 96817, "ethnicity": "American", "education": "College" },
-    { "email": "john@foo.com", "password": "changeme", "role": "USER" , "firstName": "John", "lastName": "Doe", "age": 18, "zipcode": 96817, "ethnicity": "American", "education": "College" }
+    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP", "age": 18, "zipcode": 96817, "ethnicity": "American", "education": "College",
+      "totalPoints": 300, "gender": "Other", "joined": "2022-9-05 04:34:39.601Z" },
+    { "email": "john@foo.com", "password": "changeme", "role": "USER" , "firstName": "John", "lastName": "Doe", "age": 18, "zipcode": 96817, "ethnicity": "American", "education": "High School",
+      "totalPoints": 300, "gender": "Other", "joined": "2022-9-05 04:34:39.601Z"
+    },
+    { "email": "bob@foo.com", "password": "changeme", "role": "USER" , "firstName": "Bob", "lastName": "Doe", "age": 34, "zipcode": 96818, "ethnicity": "American Indian or Alaska Native", "education": "College", "totalPoints": 200, "gender": "Male", "joined": "2022-8-01 07:00:39.601Z" },
+    { "email": "tom@foo.com", "password": "changeme", "role": "USER" , "firstName": "Tom", "lastName": "Doe", "age": 25, "zipcode": 96816, "ethnicity": "Hispanic or Latino", "education": "College", "totalPoints": 200, "gender": "Male", "joined": "2022-10-20 07:34:39.601Z" },
+    { "email": "mom@foo.com", "password": "changeme", "role": "USER" , "firstName": "Mom", "lastName": "Doe", "age": 15, "zipcode": 96815, "ethnicity": "Asian", "education": "High School", "totalPoints": 100, "gender": "Female", "joined": "2022-8-15 07:34:39.601Z" },
+    { "email": "ron@foo.com", "password": "changeme", "role": "USER" , "firstName": "Ron", "lastName": "Doe", "age": 22, "zipcode": 96817, "ethnicity": "White", "education": "College", "totalPoints": 250, "gender": "Male", "joined": "2022-7-10 07:34:39.601Z" },
+    { "email": "gon@foo.com", "password": "changeme", "role": "USER" , "firstName": "Gon", "lastName": "Doe", "age": 55, "zipcode": 96818, "ethnicity": "Native Hawaiian or Other Pacific Islander", "education": "Some College", "totalPoints": 5, "gender": "Other", "joined": "2022-10-22 07:34:39.601Z" },
+    { "email": "jes@foo.com", "password": "changeme", "role": "USER" , "firstName": "Jes", "lastName": "Doe", "age": 9, "zipcode": 96818, "ethnicity": "Other", "education": "Grade K - 6", "totalPoints": 150, "gender": "Female", "joined": "2022-9-02 07:34:39.601Z" },
+    { "email": "holly@foo.com", "password": "changeme", "role": "USER" , "firstName": "Holly", "lastName": "Doe", "age": 12, "zipcode": 96818, "ethnicity": "Asian", "education": "Grade 7 - 8", "totalPoints": 100, "gender": "Female", "joined": "2022-10-22 07:34:39.601Z" }
   ],
 
   "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
+    { "name": "Baskets", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
     { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
     { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }

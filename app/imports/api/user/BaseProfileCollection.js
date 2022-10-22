@@ -17,6 +17,15 @@ class BaseProfileCollection extends BaseCollection {
       lastName: String,
       role: String,
       userID: SimpleSchema.RegEx.Id,
+      gender: {
+        type: String,
+        allowedValues: ['Male', 'Female', 'Other'],
+        defaultValue: 'Other',
+      },
+      joined: {
+        type: Date,
+        defaultValue: new Date(),
+      },
       age: { type: Number, defaultValue: 0 },
       zipcode: { type: Number, defaultValue: 0 },
       ethnicity: { type: String, defaultValue: 'None' },

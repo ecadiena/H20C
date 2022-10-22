@@ -40,7 +40,7 @@
   ],
 
   "defaultUserLesson": [
-    { "registeredUser": "NA", "sessionID": "NA", "lessonID": "NA" }
+    { "registeredUser": "NA", "sessionID": "NA", "lessonID": "NA", "joined": "2022-10-22 07:34:39.601Z" }
   ],
 
   "defaultSubmittedQuizzes": [

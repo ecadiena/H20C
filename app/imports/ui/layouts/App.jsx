@@ -18,7 +18,6 @@ import NotAuthorized from '../pages/NotAuthorized';
 import { ROLE } from '../../api/role/Role';
 import SignInUp from '../pages/SignInUp';
 import ProfilePage from '../pages/ProfilePage';
-import Account from '../pages/Account';
 import AnalyticsDashBoard from '../pages/AnalyticsDashboard';
 import AccountList from '../pages/AccountList';
 

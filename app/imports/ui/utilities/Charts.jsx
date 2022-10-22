@@ -1,5 +1,6 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { _ } from 'meteor/underscore';
+import moment from 'moment';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -39,4 +40,19 @@ export const staticGenerator = (users, type, title) => {
   const values = _.values(usersType);
   const result = [keys, title, values];
   return result;
+};
+
+export const userAccGenerator = (users) => {
+  const currentDate = new Date();
+  // month is base 0
+  const currentMonth = moment(currentDate).month() + 1;
+  const lastMonth = currentMonth === 12 ? 1 : moment(currentDate).month();
+  const currentMonthData = _.filter(users, (user) => moment(user.joined).month() + 1 === currentMonth);
+  const lastMonthData = _.filter(users, (user) => moment(user.joined).month() + 1 === lastMonth);
+  const currentTotalUsers = currentMonthData.length;
+  const lastTotalUsers = lastMonthData.length;
+  const monthlyGrowth = currentTotalUsers > lastTotalUsers;
+  const monthlyGrowthRate = monthlyGrowth ? (((currentTotalUsers - lastTotalUsers) / lastTotalUsers) * 100) : (((lastTotalUsers - currentTotalUsers) / currentTotalUsers) * 100);
+  // return [# total users, # users for this month, true/false growth better than previous month, percentage growth]
+  return [users.length, currentMonthData.length, monthlyGrowth, monthlyGrowthRate];
 };

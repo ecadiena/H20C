@@ -18,7 +18,8 @@ import FindSession from '../pages/FindSession';
 import NotAuthorized from '../pages/NotAuthorized';
 import { ROLE } from '../../api/role/Role';
 import SignInUp from '../pages/SignInUp';
-import Account from '../pages/Account';
+import ProfilePage from '../pages/ProfilePage';
+import AccountList from '../pages/AccountList';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -31,8 +32,9 @@ const App = () => (
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signout" element={<SignOut />} />
         <Route path="/sign-in-up" element={<SignInUp />} />
-        <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+        <Route path="/accounts" element={<AdminProtectedRoute><AccountList /></AdminProtectedRoute>} />
         <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
+        <Route path="/profile-page" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
         <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
         <Route path="/sessions" element={<FindSession />} />
         <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />

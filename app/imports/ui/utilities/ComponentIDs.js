@@ -7,13 +7,17 @@ export const COMPONENT_IDS = {
   NAVBAR_CURRENT_USER: 'navbar-current-user',
   NAVBAR_LANDING_PAGE: 'navbar-landing-page',
   NAVBAR_COLLAPSE: 'navbar-collapse',
+  NAVBAR_LOGIN_DROPDOWN: 'navbar-login-dropdown',
+  NAVBAR_SIGN_IN_UP: 'navbar-sign-in-up',
+  NAVBAR_PROFILE: 'navbar-profile',
   NAVBAR_LOGIN: 'navbar-login',
   NAVBAR_ACCOUNT: 'navbar-account',
   NAVBAR_MANAGE_DROPDOWN: 'navbar-manage-dropdown',
   NAVBAR_MANAGE_DROPDOWN_DATABASE: 'navbar-manage-dropdown-database',
   NAVBAR_SIGN_OUT: 'navbar-sign-out',
   NAVBAR_SIGN_UP: 'navbar-sign-up',
-  NAVBAR_SIGN_IN_UP: 'navbar-sign-in-up',
+  NAVBAR_ADMIN: 'navbar-admin',
+  NAVBAR_ACCOUNT_LIST: 'navbar-account-list',
 
   // SIGN IN PAGE
   SIGN_IN_FORM_EMAIL: 'sign-in-form-email',

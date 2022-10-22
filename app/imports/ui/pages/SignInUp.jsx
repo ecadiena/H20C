@@ -128,7 +128,7 @@ const SignInUp = () => {
   }
 
   return (
-    <Container style={{ position: 'relative', height: '70vh' }}>
+    <Container style={{ position: 'relative', height: '60vh' }}>
       <Card className="center">
         <Row>
           <Col xs={4}>

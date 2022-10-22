@@ -14,6 +14,10 @@ body {
   --bs-light-rgb: var(--matr-navbar-bg-rgb);
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: Georgia, serif;
+}
+
 /* Set the SignIn and SignUp alerts background. */
 #signin-page .alert-light, #signup-page .alert-light {
   --bs-alert-bg: var(--matr-navbar-bg);
@@ -39,6 +43,28 @@ body {
   transform: translateY(-50%);
 }
 
+.column-vertical-center {
+  align-items: center;
+}
+
 .nav-link {
   color: #1762A7 !important;
+}
+
+.navbar-dropdown-item {
+  padding-right: 40px !important;
+  color: #1762A7 !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  background-color: white !important;
+}
+
+.navbar-dropdown-item:hover {
+  background-color: whitesmoke !important;
+}
+
+.card-profile {
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
 }

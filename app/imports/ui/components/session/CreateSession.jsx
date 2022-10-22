@@ -42,8 +42,9 @@ const CreateSession = () => {
     defineMethod.callPromise({ collectionName, definitionData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => {
-        swal('Success', 'Session added successfully', 'success');
         setEventDropdown(false);
+        setSession({ title: '', summary: '', typeAdapt: '', difficultyAdapt: '', tagsAdapt: [], location: '', date: new Date(), startTimeAdapt: '', endTimeAdapt: '' });
+        swal('Success', 'Session added successfully', 'success');
       });
   };
 
@@ -54,23 +55,23 @@ const CreateSession = () => {
         <Form>
           <Form.Group>
             <Form.Label>Title: *</Form.Label>
-            <Form.Control type="title" placeholder="" onChange={(e) => updateSession(e.target.value, 'title')} />
+            <Form.Control value={session.title} type="title" placeholder="" onChange={(e) => updateSession(e.target.value, 'title')} />
           </Form.Group>
           <Form.Group>
             <Form.Label>Summary: *</Form.Label>
-            <Form.Control type="summary" placeholder="" onChange={(e) => updateSession(e.target.value, 'summary')} />
+            <Form.Control value={session.summary} type="summary" placeholder="" onChange={(e) => updateSession(e.target.value, 'summary')} />
           </Form.Group>
           <Form.Group>
             <Form.Label>Type: *</Form.Label>
-            <Select options={typeOptions} onChange={(e) => updateSession(e, 'typeAdapt')} />
+            <Select value={session.typeAdapt} options={typeOptions} onChange={(e) => updateSession(e, 'typeAdapt')} />
           </Form.Group>
           <Form.Group>
             <Form.Label>Difficulty: *</Form.Label>
-            <Select options={difficultyOptions} onChange={(e) => updateSession(e, 'difficultyAdapt')} />
+            <Select value={session.difficultyAdapt} options={difficultyOptions} onChange={(e) => updateSession(e, 'difficultyAdapt')} />
           </Form.Group>
           <Form.Group>
             <Form.Label>Tags: *</Form.Label>
-            <Select options={tagsOptions} isMulti closeMenuOnSelect={false} onChange={(e) => updateSession(e, 'tagsAdapt')} />
+            <Select value={session.tagsAdapt} options={tagsOptions} isMulti closeMenuOnSelect={false} onChange={(e) => updateSession(e, 'tagsAdapt')} />
           </Form.Group>
           { eventDropdown ? (
             <div>
@@ -115,7 +116,7 @@ const CreateSession = () => {
               </Form.Group>
               <Form.Group>
                 <Form.Label>Location: </Form.Label>
-                <Form.Control type="location" placeholder="" onChange={(e) => updateSession(e.target.value, 'location')} />
+                <Form.Control value={session.location} type="location" placeholder="" onChange={(e) => updateSession(e.target.value, 'location')} />
               </Form.Group>
             </div>
           ) : ''}

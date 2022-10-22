@@ -92,7 +92,7 @@ const CreateLesson = () => {
         swal('Success', 'Lesson added successfully', 'success');
         setLessonText([]);
         setQuiz([]);
-        setLesson({ sessionID: '', title: '', summary: '', videoLink: '' });
+        setLesson({ sessionID: sessionID, title: '', summary: '', videoLink: '' });
       });
   };
 
@@ -104,7 +104,7 @@ const CreateLesson = () => {
           <Form>
             <Form.Group>
               <Form.Label>Session: *</Form.Label>
-              <Select value={lesson.sessionID} options={sessionOptions} onChange={(e) => updateLesson(e, 'sessionID')} />
+              <Select options={sessionOptions} onChange={(e) => updateLesson(e, 'sessionID')} />
             </Form.Group>
             <Form.Group>
               <Form.Label required>Title: *</Form.Label>

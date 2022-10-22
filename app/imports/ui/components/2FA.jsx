@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Buffer } from 'buffer';
 import { Accounts } from 'meteor/accounts-base';
-import { Container, Button, Form, Modal } from 'react-bootstrap';
+import { Button, Form, Modal, Container } from 'react-bootstrap';
 
-/** Render a Not Found page if the user enters a URL that doesn't match any route. */
 const Account = () => {
   const [qrCode, setQrCode] = useState(null);
   const [qrKey, setQrKey] = useState('');
@@ -39,12 +38,13 @@ const Account = () => {
   };
 
   return (
-    <Container>
+    <Container style={{ alignSelf: 'flex-end', alignItems: 'flex-end', marginBottom: 20 }}>
       {is2faEnabled ?
-        <Button onClick={disable2FA}>Disable 2FA</Button> :
-        <Button onClick={generate2FA}>Enable 2FA</Button>}
+        <Button onClick={disable2FA}>Disable Two-Factor</Button> :
+        <Button onClick={generate2FA}>Enable Two-Factor</Button>}
 
       <Modal show={showQR} onHide={() => setShowQR(false)} centered>
+        <Modal.Header closeButton />
         <Modal.Body style={{ textAlign: 'center' }}>
           <h4>Scan the QR Code below with your authenticator app of choice.</h4>
           <img width="200" src={`data:image/svg+xml;base64,${qrCode}`} alt="2FA QR Code" />

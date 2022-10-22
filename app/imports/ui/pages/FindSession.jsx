@@ -1,42 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Table } from 'react-bootstrap';
-import { useTracker } from 'meteor/react-meteor-data';
-import { Lessons } from '../../api/lesson/LessonCollection';
+// import { useTracker } from 'meteor/react-meteor-data';
+// import { Lessons } from '../../api/lesson/LessonCollection';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import LoadingSpinner from '../components/LoadingSpinner';
-import SessionItem from '../components/SessionItem';
+// import LoadingSpinner from '../components/LoadingSpinner';
+// import LessonItem from '../components/LessonItem';
 
 /* Renders the FindClasses page for adding a testimony. */
 const FindSession = () => {
 
-  const { ready, lessons } = useTracker(() => {
-    // Note that this subscription will get cleaned up
-    // when your component is unmounted or deps change.
-    // Get access to Stuff documents.
-    const subscription = Lessons.subscribeLesson();
-    // Determine if the subscription is ready
-    const rdy = subscription.ready();
-    // Get the Stuff documents
-    const lessonItems = Lessons.find({}, { sort: { name: 1 } }).fetch();
-    return {
-      lessons: lessonItems,
-      ready: rdy,
-    };
+  // const { ready, lessons } = useTracker(() => {
+  //   // Note that this subscription will get cleaned up
+  //   // when your component is unmounted or deps change.
+  //   // Get access to Stuff documents.
+  //   const subscription = Lessons.subscribeLesson();
+  //   // Determine if the subscription is ready
+  //   const rdy = subscription.ready();
+  //   // Get the Stuff documents
+  //   const lessonItems = Lessons.find({}, { sort: { name: 1 } }).fetch();
+  //   return {
+  //     lessons: lessonItems,
+  //     ready: rdy,
+  //   };
+  // }, []);
+
+  const [data, setData] = useState([]);
+  const [detailsShown, setDetailsShown] = useState([]);
+
+  async function getData() {
+    const result = await fetch('https://jsonplaceholder.typicode.com/users');
+    const getResults = await result.json();
+    setData(getResults);
+    console.log(getResults);
+  }
+
+  useEffect(() => {
+    getData();
   }, []);
 
-  return (ready ? (
+  const toggleShown = (username) => {
+    // slice method to return selected elements as new array
+    const shownState = detailsShown.slice();
+    const index = shownState.indexOf(username);
+    if (index >= 0) {
+      shownState.splice(index, 1);
+      setDetailsShown(shownState);
+    } else {
+      shownState.push(username);
+      setDetailsShown(shownState);
+    }
+  };
+
+  return (
     <Container id={PAGE_IDS.FIND_LESSONS}>
-      <Table
-        striped
-        borderless
-        hover
-        id="table"
-        data-toggle="table"
-        data-show-toggle="true"
-        data-detail-view="true"
-        data-detail-view-icon="false"
-        data-detail-view-by-click="true"
-      >
+      <Table borderless striped hover>
         <thead>
           <tr>
             <th>Title</th>
@@ -46,19 +63,27 @@ const FindSession = () => {
           </tr>
         </thead>
         <tbody>
-          <tr data-toggle="collapse" data-target="#accordion" data-has-detail-view="true">
-            <td>Session Option #1</td>
-            <td>Summary Option #1</td>
-            <td>Tags Option #1</td>
-            <td>Difficulty Option #1</td>
-          </tr>
-          <tr className="detail-view">
-            <td id="accordion" colSpan="4">Hidden Row for Option #1</td>
-          </tr>
+          {
+            data.map(function (user) {
+              return ([
+                <tr key={user.id}>
+                  <td>{user.id}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td><button type="button" onClick={() => toggleShown(user.name)}>Show Lessons</button></td>
+                  {detailsShown.includes(user.name) && (
+                    <tr>
+                      <td colSpan="4">{user.website}</td>
+                    </tr>
+                  )}
+                </tr>,
+              ]);
+            })
+          }
         </tbody>
       </Table>
     </Container>
-  ) : <LoadingSpinner message="Loading Sessions" />);
+  );
 };
 
 export default FindSession;

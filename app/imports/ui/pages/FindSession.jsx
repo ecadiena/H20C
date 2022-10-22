@@ -1,10 +1,10 @@
 import React from 'react';
 import { Container, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
+import Accordion from 'react-bootstrap/Accordion';
 import { Lessons } from '../../api/lesson/LessonCollection';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import LoadingSpinner from '../components/LoadingSpinner';
-import SessionItem from '../components/SessionItem';
 
 /* Renders the FindClasses page for adding a testimony. */
 const FindSession = () => {
@@ -26,18 +26,8 @@ const FindSession = () => {
 
   return (ready ? (
     <Container id={PAGE_IDS.FIND_LESSONS}>
-      <Table
-        striped
-        borderless
-        hover
-        id="table"
-        data-toggle="table"
-        data-show-toggle="true"
-        data-detail-view="true"
-        data-detail-view-icon="false"
-        data-detail-view-by-click="true"
-      >
-        <thead>
+      <Table>
+        <thead style={{ marginLeft: 20 }}>
           <tr>
             <th>Title</th>
             <th>Summary</th>
@@ -45,16 +35,45 @@ const FindSession = () => {
             <th>Difficulty</th>
           </tr>
         </thead>
+      </Table>
+      <Table>
         <tbody>
-          <tr data-toggle="collapse" data-target="#accordion" data-has-detail-view="true">
-            <td>Session Option #1</td>
-            <td>Summary Option #1</td>
-            <td>Tags Option #1</td>
-            <td>Difficulty Option #1</td>
-          </tr>
-          <tr className="detail-view">
-            <td id="accordion" colSpan="4">Hidden Row for Option #1</td>
-          </tr>
+          <Accordion>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>
+                <Table>
+                  <tr>
+                    <th>Session Option #1</th>
+                    <th>Summary Option #1</th>
+                    <th>Tags Option #1</th>
+                    <th>Difficulty Option #1</th>
+                  </tr>
+                </Table>
+              </Accordion.Header>
+              <Accordion.Body>
+                <Table>
+                  <tr>
+                    <th scope="row">Session Option #1</th>
+                    <td>Summary Option #1</td>
+                    <td>Tags Option #1</td>
+                    <td>Difficulty Option #1</td>
+                  </tr>
+                  <tr>
+                    <td>Session Option #1</td>
+                    <td>Summary Option #1</td>
+                    <td>Tags Option #1</td>
+                    <td>Difficulty Option #1</td>
+                  </tr>
+                  <tr>
+                    <td>Session Option #1</td>
+                    <td>Summary Option #1</td>
+                    <td>Tags Option #1</td>
+                    <td>Difficulty Option #1</td>
+                  </tr>
+                </Table>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
         </tbody>
       </Table>
     </Container>

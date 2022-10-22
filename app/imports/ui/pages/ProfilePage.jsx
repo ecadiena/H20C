@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import Account from './Account';
+import Account from '../components/2FA';
 
 /* A simple static component to render some text for the landing page. */
 const ProfilePage = () => (

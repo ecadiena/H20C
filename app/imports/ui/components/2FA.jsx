@@ -3,7 +3,6 @@ import { Buffer } from 'buffer';
 import { Accounts } from 'meteor/accounts-base';
 import { Button, Form, Modal, Container } from 'react-bootstrap';
 
-/** Render a Not Found page if the user enters a URL that doesn't match any route. */
 const Account = () => {
   const [qrCode, setQrCode] = useState(null);
   const [qrKey, setQrKey] = useState('');

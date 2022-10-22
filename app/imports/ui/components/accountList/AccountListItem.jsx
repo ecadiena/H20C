@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Accordion, Button, Card, Col, Row } from 'react-bootstrap';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 import { CaretDown } from 'react-bootstrap-icons';
-// import { Link } from 'react-router-dom';
-// import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const AccountListItem = ({ eventKey, account }) => {
   const decoratedOnClick = useAccordionButton(eventKey);

@@ -1,15 +1,14 @@
 import React from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
-import { Container, Row, Col, Card, ListGroup, Form, Button, InputGroup, Accordion, useAccordionButton } from 'react-bootstrap';
-import { Search, CaretDown } from 'react-bootstrap-icons';
+import { Container, Row, Col, Card, ListGroup, Form, Button, InputGroup, Accordion } from 'react-bootstrap';
+import { Search } from 'react-bootstrap-icons';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { AdminProfiles } from '../../api/user/AdminProfileCollection';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
 import AccountListItem from '../components/accountList/AccountListItem';
 
-/** Render a Not Found page if the user enters a URL that doesn't match any route. */
 const AccountList = () => {
   const { ready, accounts } = useTracker(() => {
     const userProfileSubscription = UserProfiles.subscribe();

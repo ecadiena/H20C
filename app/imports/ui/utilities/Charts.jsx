@@ -1,16 +1,37 @@
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { _ } from 'meteor/underscore';
 import moment from 'moment';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  ArcElement,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  ArcElement,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+);
 
-export const PieChartSetup = (labels, title, data) => {
+// ChartJS.register(ArcElement, Tooltip, Legend);
+
+export const PieChartSetup = (data) => {
   const template = {
-    labels: labels,
+    labels: data[0],
     datasets: [
       {
-        label: title,
-        data: data,
+        label: data[1],
+        data: data[2],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -34,11 +55,65 @@ export const PieChartSetup = (labels, title, data) => {
   return template;
 };
 
+export const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+export const genderLineGraphSetup = (data) => {
+  const template = {
+    labels: months,
+    datasets: [
+      {
+        label: 'Male',
+        data: data[0],
+        fill: false,
+        borderColor: 'rgba(75,192,192,1)',
+      },
+      {
+        label: 'Female',
+        data: data[1],
+        fill: false,
+        borderColor: 'rgba(2, 2, 86, 1)',
+      },
+      {
+        label: 'Other',
+        data: data[2],
+        fill: false,
+        borderColor: 'rgba(255, 159, 64, 1)',
+      },
+    ],
+  };
+
+  return template;
+};
+
 export const staticGenerator = (users, type, title) => {
   const usersType = _.countBy(users, type);
   const keys = _.keys(usersType);
   const values = _.values(usersType);
   const result = [keys, title, values];
+  return result;
+};
+
+export const lineGenerator = (users) => {
+  const usersList = users.map(user => ({ ...user, joined: moment(user.joined).month() + 1 }));
+  const usersType = _.groupBy(usersList, 'joined');
+  const maleTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
+  const femaleTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
+  const otherTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
+  _.each(otherTemplate, (key, value) => {
+    if (usersType[value] !== undefined) {
+      const temp = _.countBy(usersType[value], 'gender');
+      if (_.contains(_.keys(temp), 'Male')) {
+        maleTemplate[value] = temp.Male;
+      }
+      if (_.contains(_.keys(temp), 'Female')) {
+        femaleTemplate[value] = temp.Female;
+      }
+      if (_.contains(_.keys(temp), 'Other')) {
+        otherTemplate[value] = temp.Other;
+      }
+    }
+  });
+  const result = [_.values(maleTemplate), _.values(femaleTemplate), _.values(otherTemplate)];
   return result;
 };
 

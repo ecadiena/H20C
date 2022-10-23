@@ -20,6 +20,7 @@ import SignInUp from '../pages/SignInUp';
 import ProfilePage from '../pages/ProfilePage';
 import Account from '../pages/Account';
 import About from '../pages/About';
+import HelpButton from '../components/HelpButton';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -43,6 +44,7 @@ const App = () => (
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <HelpButton />
       <Footer />
     </div>
   </Router>

@@ -24,7 +24,7 @@ const Landing = () => {
         </Col>
       </Row>
       <Row className="align-middle text-center bg-light px-5 pb-5 mx-0">
-        <Row><h1 className="justify-content-center pt-5 pb-3" style={headingStyle2}>Our purpose</h1></Row>
+        <Row><h1 className="justify-content-center pt-5 pb-3" style={headingStyle2}>Our mission</h1></Row>
         <Row className="justify-content-center">
           <Col md={{ span: 3 }}>
             <Image src="images/collaboration.png" />

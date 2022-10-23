@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Container, Button, Modal } from 'react-bootstrap';
-import { QuestionCircle} from 'react-bootstrap-icons';
+import { Button, Modal } from 'react-bootstrap';
+import { QuestionCircle } from 'react-bootstrap-icons';
 
 /** The Help button appears at sticky bottom right of screen. Rendered by the App Layout component. */
 const HelpButton = () => {
   const buttonStyle = { background: '#E9D777', borderColor: '#E9D777', fontSize: '16px', fontWeight: 600, borderTopLeftRadius: '50px', borderBottomLeftRadius: '50px',
-    borderTopRightRadius: '50px', borderBottomRightRadius: '50px', right: "20px", position: "fixed", bottom: "20px" };
+    borderTopRightRadius: '50px', borderBottomRightRadius: '50px', right: '20px', position: 'fixed', bottom: '20px' };
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -19,7 +19,7 @@ const HelpButton = () => {
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close

@@ -16,14 +16,16 @@ class UserLessonCollection extends BaseCollection {
       registeredUser: String,
       sessionID: { type: String, optional: true },
       lessonID: { type: String, optional: true },
+      joined: Date,
     }));
   }
 
-  define({ registeredUser, sessionID, lessonID }) {
+  define({ registeredUser, sessionID, lessonID, joined }) {
     const docID = this._collection.insert({
       registeredUser,
       sessionID,
       lessonID,
+      joined,
     });
     return docID;
   }
@@ -31,7 +33,7 @@ class UserLessonCollection extends BaseCollection {
   /**
    * Updates the given document.
    */
-  update(docID, { registeredUser, sessionID, lessonID }) {
+  update(docID, { registeredUser, sessionID, lessonID, joined }) {
     const updateData = {};
     if (registeredUser) {
       updateData.registeredUser = registeredUser;
@@ -41,6 +43,9 @@ class UserLessonCollection extends BaseCollection {
     }
     if (lessonID) {
       updateData.lessonID = lessonID;
+    }
+    if (joined) {
+      updateData.joined = joined;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -125,7 +130,8 @@ class UserLessonCollection extends BaseCollection {
     const registeredUser = doc.registeredUser;
     const sessionID = doc.sessionID;
     const lessonID = doc.lessonID;
-    return { registeredUser, sessionID, lessonID };
+    const joined = doc.joined;
+    return { registeredUser, sessionID, lessonID, joined };
   }
 }
 

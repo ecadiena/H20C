@@ -1,6 +1,7 @@
 export const COMPONENT_IDS = {
   // NAVBAR
   LIST_STUFF_EDIT: 'list-stuff-edit',
+  NAVBAR_ABOUT: 'navbar-about',
   NAVBAR_ADD_STUFF: 'navbar-add-stuff',
   NAVBAR_LIST_STUFF: 'navbar-list-stuff',
   NAVBAR_LIST_STUFF_ADMIN: 'navbar-list-stuff-admin',

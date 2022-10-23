@@ -7,6 +7,7 @@ import {
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
@@ -18,6 +19,7 @@ ChartJS.register(
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
@@ -25,7 +27,7 @@ ChartJS.register(
 
 // ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const PieChartSetup = (data) => {
+export const ChartSetup = (data) => {
   const template = {
     labels: data[0],
     datasets: [
@@ -53,6 +55,15 @@ export const PieChartSetup = (data) => {
     ] };
 
   return template;
+};
+
+export const BarOptions = {
+  indexAxis: 'y',
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
 };
 
 export const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -130,6 +141,29 @@ export const staticGenerator = (users, type, title) => {
   const usersType = _.countBy(users, type);
   const keys = _.keys(usersType);
   const values = _.values(usersType);
+  const result = [keys, title, values];
+  return result;
+};
+
+export const ageGroupGenerator = (users, title) => {
+  const keys = ['<18', '18-24', '25-34', '35-44', '44-54', '55+'];
+  const values = [0, 0, 0, 0, 0, 0];
+  const usersType = _.countBy(users, 'age');
+  _.each(usersType, (key, value) => {
+    if (value < 18) {
+      values[0]++;
+    } else if (value > 18 && value <= 24) {
+      values[1]++;
+    } else if (value > 25 && value <= 34) {
+      values[2]++;
+    } else if (value > 34 && value <= 44) {
+      values[3]++;
+    } else if (value > 44 && value <= 54) {
+      values[4]++;
+    } else {
+      values[5]++;
+    }
+  });
   const result = [keys, title, values];
   return result;
 };

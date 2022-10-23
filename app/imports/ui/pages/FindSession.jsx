@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table } from 'react-bootstrap';
+import { CaretLeftFill } from 'react-bootstrap-icons';
 // import { useTracker } from 'meteor/react-meteor-data';
 // import { Lessons } from '../../api/lesson/LessonCollection';
 import { PAGE_IDS } from '../utilities/PageIDs';
@@ -70,11 +71,11 @@ const FindSession = () => {
                   <td>{user.id}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
-                  <td><button type="button" onClick={() => toggleShown(user.name)}>Show Lessons</button></td>
+                  <td><button type="button" onClick={() => toggleShown(user.name)}><CaretLeftFill /></button></td>
+                </tr>,
+                <tr>
                   {detailsShown.includes(user.name) && (
-                    <tr>
-                      <td colSpan="4">{user.website}</td>
-                    </tr>
+                    <td colSpan="4">{user.website}</td>
                   )}
                 </tr>,
               ]);

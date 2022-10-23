@@ -85,6 +85,47 @@ export const genderLineGraphSetup = (data) => {
   return template;
 };
 
+// 'Grade K - 6', 'Grade 7 - 8', 'High School', 'Some College', 'College'
+export const educationLineGraphSetup = (data) => {
+  const template = {
+    labels: months,
+    datasets: [
+      {
+        label: 'Grade K - 6',
+        data: data[0],
+        fill: false,
+        borderColor: 'rgba(75,192,192,1)',
+      },
+      {
+        label: 'Grade 7 - 8',
+        data: data[1],
+        fill: false,
+        borderColor: 'rgba(2, 2, 86, 1)',
+      },
+      {
+        label: 'High School',
+        data: data[2],
+        fill: false,
+        borderColor: 'rgba(255, 159, 64, 1)',
+      },
+      {
+        label: 'Some College',
+        data: data[3],
+        fill: false,
+        borderColor: 'rgba(153, 102, 255, 1)',
+      },
+      {
+        label: 'College',
+        data: data[4],
+        fill: false,
+        borderColor: 'rgba(54, 162, 235, 1)',
+      },
+    ],
+  };
+
+  return template;
+};
+
 export const staticGenerator = (users, type, title) => {
   const usersType = _.countBy(users, type);
   const keys = _.keys(usersType);
@@ -93,9 +134,14 @@ export const staticGenerator = (users, type, title) => {
   return result;
 };
 
-export const lineGenerator = (users) => {
+export const lineStartUp = (users) => {
   const usersList = users.map(user => ({ ...user, joined: moment(user.joined).month() + 1 }));
   const usersType = _.groupBy(usersList, 'joined');
+  return usersType;
+};
+
+export const genderLineGenerator = (users) => {
+  const usersType = lineStartUp(users);
   const maleTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
   const femaleTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
   const otherTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
@@ -114,6 +160,38 @@ export const lineGenerator = (users) => {
     }
   });
   const result = [_.values(maleTemplate), _.values(femaleTemplate), _.values(otherTemplate)];
+  return result;
+};
+
+// 'Grade K - 6', 'Grade 7 - 8', 'High School', 'Some College', 'College'
+export const educationLineGenerator = (users) => {
+  const usersType = lineStartUp(users);
+  const elementaryTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
+  const middleTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
+  const highTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
+  const someCollegeTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
+  const CollegeTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
+  _.each(elementaryTemplate, (key, value) => {
+    if (usersType[value] !== undefined) {
+      const temp = _.countBy(usersType[value], 'education');
+      if (_.contains(_.keys(temp), 'Grade K - 6')) {
+        elementaryTemplate[value] = temp['Grade K - 6'];
+      }
+      if (_.contains(_.keys(temp), 'Grade 7 - 8')) {
+        middleTemplate[value] = temp['Grade 7 - 8'];
+      }
+      if (_.contains(_.keys(temp), 'High School')) {
+        highTemplate[value] = temp['High School'];
+      }
+      if (_.contains(_.keys(temp), 'Some College')) {
+        someCollegeTemplate[value] = temp['Some College'];
+      }
+      if (_.contains(_.keys(temp), 'College')) {
+        CollegeTemplate[value] = temp.College;
+      }
+    }
+  });
+  const result = [_.values(elementaryTemplate), _.values(middleTemplate), _.values(highTemplate), _.values(someCollegeTemplate), _.values(CollegeTemplate)];
   return result;
 };
 

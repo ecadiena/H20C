@@ -3,10 +3,10 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Pie, Line } from 'react-chartjs-2';
 import { Container, Row, Col, Card, Nav, Tab } from 'react-bootstrap';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
-import { PieChartSetup, staticGenerator, userAccGenerator, genderLineGraphSetup, lineGenerator } from '../utilities/Charts';
+import { PieChartSetup, staticGenerator, userAccGenerator, genderLineGraphSetup, genderLineGenerator, educationLineGenerator, educationLineGraphSetup } from '../utilities/Charts';
 
 const AnalyticsDashBoard = () => {
-  const { ready, genderSetup, zipcodeSetup, educationSetup, totalUsers, genderLineSetup } = useTracker(() => {
+  const { ready, genderSetup, zipcodeSetup, educationSetup, totalUsers, genderLineSetup, educationLineSetup } = useTracker(() => {
     const userSubscription = UserProfiles.subscribe();
     const rdy = userSubscription.ready();
 
@@ -16,7 +16,8 @@ const AnalyticsDashBoard = () => {
     const usersEducation = staticGenerator(users, 'education', '# of users by education');
     const totalNumUsers = userAccGenerator(users);
 
-    const genderLine = lineGenerator(users);
+    const genderLine = genderLineGenerator(users);
+    const educationLine = educationLineGenerator(users);
     return {
       ready: rdy,
       genderSetup: usersGender,
@@ -24,6 +25,7 @@ const AnalyticsDashBoard = () => {
       educationSetup: usersEducation,
       totalUsers: totalNumUsers,
       genderLineSetup: genderLine,
+      educationLineSetup: educationLine,
     };
   }, []);
 
@@ -31,8 +33,7 @@ const AnalyticsDashBoard = () => {
   const zipcodePieChart = PieChartSetup(zipcodeSetup);
   const educationPieChart = PieChartSetup(educationSetup);
   const genderLineGraph = genderLineGraphSetup(genderLineSetup);
-  console.log(genderLineGraph);
-  // const genderLineGraph = genderLineSetup()
+  const educationLineGraph = educationLineGraphSetup(educationLineSetup);
 
   return (ready ? (
     <Container className="py-3">
@@ -82,7 +83,7 @@ const AnalyticsDashBoard = () => {
                     <Nav.Link eventKey="first">Gender</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link eventKey="second">Tab 2</Nav.Link>
+                    <Nav.Link eventKey="second">Education</Nav.Link>
                   </Nav.Item>
                 </Nav>
               </Col>
@@ -93,7 +94,8 @@ const AnalyticsDashBoard = () => {
                     <Line data={genderLineGraph} />
                   </Tab.Pane>
                   <Tab.Pane eventKey="second">
-                    <Line data={genderLineGraph} />
+                    <h4>New Users OverTime by Education</h4>
+                    <Line data={educationLineGraph} />
                   </Tab.Pane>
                 </Tab.Content>
               </Col>

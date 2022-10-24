@@ -10,14 +10,14 @@ const Footer = () => {
       <Container className="pt-4 pb-2">
         <Row>
           <Col>
-            <h1>Product Name</h1>
+            <h1>Broadband for Hawaiʻi</h1>
           </Col>
           <Col>
             <ul style={{ listStyle: 'none', lineHeight: '30px' }}>
               <li><a href="/" style={linkStyle}>Home</a></li>
-              <li><a href="/" style={linkStyle}>Classes</a></li>
+              <li><a href="/classes" style={linkStyle}>Classes</a></li>
               <li><a href="/about" style={linkStyle}>About</a></li>
-              <li><a href="/" style={linkStyle}>Resources</a></li>
+              <li><a href="/resources" style={linkStyle}>Resources</a></li>
             </ul>
           </Col>
           <Col>
@@ -28,7 +28,7 @@ const Footer = () => {
           </Col>
         </Row>
         <Row className="justify-content-center">
-          © 2022 Copyright: Product
+          © 2022 Copyright: Broadband for Hawaiʻi
         </Row>
       </Container>
     </footer>

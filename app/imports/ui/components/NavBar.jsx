@@ -27,7 +27,7 @@ const NavBar = () => {
           <Nav className="justify-content-start">
             <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_CLASSES} as={NavLink} to="/classes" key="classes">Classes</Nav.Link>
             <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_ABOUT} as={NavLink} to="/about" key="list">About</Nav.Link>
-            <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/list" key="list">Resources</Nav.Link>
+            <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/resources" key="list">Resources</Nav.Link>
 
             {currentUser !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ?
               <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/analytics" key="list">Data Analytics</Nav.Link> : (' ') }

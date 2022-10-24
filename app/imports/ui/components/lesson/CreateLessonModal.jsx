@@ -231,18 +231,18 @@ const CreateLessonModal = ({ lessonModal, sessionModal }) => {
             </Form.Group>
             <Form.Group style={formGroupStyle}>
               <Form.Label required>Title: *</Form.Label>
-              <Form.Control value={lesson.title} type="title" placeholder="" onChange={(e) => updateLesson(e.target.value, 'title')} />
+              <Form.Control value={lesson.title} type="title" placeholder="" onChange={(e) => updateLesson(e.target.value, 'title')} autoComplete="off" />
               <div className="valid-feedback">
                 Looks good!
               </div>
             </Form.Group>
             <Form.Group>
               <Form.Label>Video Link: </Form.Label>
-              <Form.Control value={lesson.videoLink} type="videoLink" placeholder="" onChange={(e) => updateLesson(e.target.value, 'videoLink')} />
+              <Form.Control value={lesson.videoLink} type="videoLink" placeholder="" onChange={(e) => updateLesson(e.target.value, 'videoLink')} autoComplete="off" />
             </Form.Group>
             <Form.Group>
               <Form.Label>Summary: *</Form.Label>
-              <Form.Control as="textarea" value={lesson.summary} type="summary" placeholder="" onChange={(e) => updateLesson(e.target.value, 'summary')} />
+              <Form.Control as="textarea" value={lesson.summary} type="summary" placeholder="" onChange={(e) => updateLesson(e.target.value, 'summary')} autoComplete="off" />
             </Form.Group>
 
             <h5 style={formGroupStyle}>Lesson Content</h5>
@@ -250,7 +250,7 @@ const CreateLessonModal = ({ lessonModal, sessionModal }) => {
               <Form.Group key={index} style={{ marginBottom: '20px' }}>
                 <Row>
                   <Col>
-                    <Form.Control id={`lessonContent-header-${index}`} type="header" placeholder="Header" size="lg" onChange={(event) => updateLessonContent(event.target.value, 'header', index)} value={item.header} />
+                    <Form.Control id={`lessonContent-header-${index}`} type="header" placeholder="Header" size="lg" onChange={(event) => updateLessonContent(event.target.value, 'header', index)} value={item.header} autoComplete="off" />
                   </Col>
                   <Col xs={3} className="text-end">
                     <ChevronUp className="mx-2" onClick={() => reorderLessonContent('up', index)} role="button" />
@@ -259,7 +259,7 @@ const CreateLessonModal = ({ lessonModal, sessionModal }) => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col><Form.Control id={`lessonContent-body-${index}`} as="textarea" type="body" placeholder="Body" onChange={(event) => updateLessonContent(event.target.value, 'body', index)} value={item.body} /></Col>
+                  <Col><Form.Control id={`lessonContent-body-${index}`} as="textarea" type="body" placeholder="Body" onChange={(event) => updateLessonContent(event.target.value, 'body', index)} value={item.body} autoComplete="off" /></Col>
                 </Row>
               </Form.Group>
             )) }
@@ -275,7 +275,7 @@ const CreateLessonModal = ({ lessonModal, sessionModal }) => {
                     <Button variant="outline-danger" size="sm" type="button" onClick={() => deleteQuizQuestion(index)}><XLg /></Button>
                   </Col>
                 </Row>
-                <Form.Control as="textarea" type="question" placeholder="" value={item.question} onChange={(e) => updateQuizQuestion(e.target.value, 'question', index)} />
+                <Form.Control as="textarea" type="question" placeholder="" value={item.question} onChange={(e) => updateQuizQuestion(e.target.value, 'question', index)} autoComplete="off" />
               </Form.Group>,
               <Col xs={10}>
                 <InputGroup>
@@ -287,6 +287,7 @@ const CreateLessonModal = ({ lessonModal, sessionModal }) => {
                     value={item.options.a}
                     onChange={(e) => updateQuizQuestion(e.target.value, 'a', index)}
                     style={item.correct === 0 ? { backgroundColor: '#bdf4bd' } : { backgroundColor: 'white' }}
+                    autoComplete="off"
                   />
                   <InputGroup.Radio id={`question-${index + 1}-checkbox-a`} aria-label="Checkbox for following text input" onChange={(e) => updateQuizQuestion(e.target.checked, 'checkbox-a', index)} checked={item.correct === 0} />
                 </InputGroup>
@@ -299,6 +300,7 @@ const CreateLessonModal = ({ lessonModal, sessionModal }) => {
                     value={item.options.b}
                     onChange={(e) => updateQuizQuestion(e.target.value, 'b', index)}
                     style={item.correct === 1 ? { backgroundColor: '#bdf4bd' } : { backgroundColor: 'white' }}
+                    autoComplete="off"
                   />
                   <InputGroup.Radio id={`question-${index + 1}-checkbox-b`} aria-label="Checkbox for following text input" onChange={(e) => updateQuizQuestion(e.target.checked, 'checkbox-b', index)} checked={item.correct === 1} />
                 </InputGroup>
@@ -311,6 +313,7 @@ const CreateLessonModal = ({ lessonModal, sessionModal }) => {
                     value={item.options.c}
                     onChange={(e) => updateQuizQuestion(e.target.value, 'c', index)}
                     style={item.correct === 2 ? { backgroundColor: '#bdf4bd' } : { backgroundColor: 'white' }}
+                    autoComplete="off"
                   />
                   <InputGroup.Radio id={`question-${index + 1}-checkbox-c`} aria-label="Checkbox for following text input" onChange={(e) => updateQuizQuestion(e.target.checked, 'checkbox-c', index)} checked={item.correct === 2} />
                 </InputGroup>
@@ -323,10 +326,11 @@ const CreateLessonModal = ({ lessonModal, sessionModal }) => {
                     value={item.options.d}
                     onChange={(e) => updateQuizQuestion(e.target.value, 'd', index)}
                     style={item.correct === 3 ? { backgroundColor: '#bdf4bd' } : { backgroundColor: 'white' }}
+                    autoComplete="off"
                   />
                   <InputGroup.Radio id={`question-${index + 1}-checkbox-d`} aria-label="Checkbox for following text input" onChange={(e) => updateQuizQuestion(e.target.checked, 'checkbox-d', index)} checked={item.correct === 3} />
                 </InputGroup>
-                <Form.Control className="my-2" type="feedback" placeholder="Question Feedback (optional)" onChange={(e) => updateQuizQuestion(e.target.value, 'feedback', index)} value={item.feedback} />
+                <Form.Control className="my-2" type="feedback" placeholder="Question Feedback (optional)" onChange={(e) => updateQuizQuestion(e.target.value, 'feedback', index)} value={item.feedback} autoComplete="off" />
               </Col>,
             ])) }
             <Button variant="outline-primary" type="button" onClick={addQuizQuestion} style={{ marginTop: '20px' }}><PlusLg /><span style={{ marginLeft: '10px' }}>Add Quiz Question</span></Button>

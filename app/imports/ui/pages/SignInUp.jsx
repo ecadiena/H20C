@@ -169,7 +169,7 @@ const SignInUp = () => {
                     <h6>Don&apos;t have an account? Sign up here.</h6>
                   </Col>
                   <Form onSubmit={(event) => signUp(event)}>
-                    <Row>
+                    <Row style={{ paddingBottom: 20 }}>
                       <Col>
                         <Form.Group style={{ marginLeft: 10 }}>
                           Email Address *
@@ -177,7 +177,7 @@ const SignInUp = () => {
                           Password *
                           <Form.Control id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD} type="password" placeholder="Create a password" style={{ marginBottom: 5 }} />
                         </Form.Group>
-                        <Row>
+                        <Row style={{ marginBottom: 5 }}>
                           <Col style={{ marginLeft: 10 }}>
                             <Form.Group>
                               First Name *
@@ -191,6 +191,10 @@ const SignInUp = () => {
                             </Form.Group>
                           </Col>
                         </Row>
+                        <Form.Group style={{ marginLeft: 10 }}>
+                          Zipcode *
+                          <Form.Control id={COMPONENT_IDS.SIGN_UP_FORM_ZIPCODE} type="number" min="0" placeholder="Enter your zipcode" style={{ marginBottom: 5 }} />
+                        </Form.Group>
                       </Col>
                       <Col style={{ marginRight: 10 }}>
                         <Form.Group>
@@ -198,8 +202,15 @@ const SignInUp = () => {
                           <Form.Control id={COMPONENT_IDS.SIGN_UP_FORM_AGE} type="number" min="0" placeholder="Enter your age" style={{ marginBottom: 5 }} />
                         </Form.Group>
                         <Form.Group>
-                          Zipcode *
-                          <Form.Control id={COMPONENT_IDS.SIGN_UP_FORM_ZIPCODE} type="number" min="0" placeholder="Enter your zipcode" style={{ marginBottom: 5 }} />
+                          Gender *
+                          <Form.Select id={COMPONENT_IDS.SIGN_UP_GENDER} placeholder="Enter your gender" style={{ marginBottom: 5 }}>
+                            <option disabled>Select</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Transgender</option>
+                            <option>Non-binary</option>
+                            <option>Prefer not to say</option>
+                          </Form.Select>
                         </Form.Group>
                         <Form.Group>
                           Ethnicity *

@@ -12,7 +12,7 @@ const FindSession = () => {
 
   const { ready, sessions, lessons } = useTracker(() => {
     const subscription1 = Sessions.subscribeSession();
-    const subscription2 = Lessons.subscribeSession();
+    const subscription2 = Lessons.subscribeLesson();
 
     const rdy = subscription1.ready() && subscription2.ready();
 
@@ -66,7 +66,7 @@ const FindSession = () => {
               </tr>,
               <tr>
                 {lessonsShown.includes(session.owner) && (
-                  lessons.map((lesson) => <LessonItem lesson={lesson} />)
+                  lessons.map((lesson) => <td colSpan="4"><LessonItem lesson={lesson} /></td>)
                 )}
               </tr>,
             ]))

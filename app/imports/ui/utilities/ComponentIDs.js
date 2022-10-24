@@ -1,6 +1,7 @@
 export const COMPONENT_IDS = {
   // NAVBAR
   LIST_STUFF_EDIT: 'list-stuff-edit',
+  NAVBAR_CLASSES: 'navbar-classes',
   NAVBAR_ABOUT: 'navbar-about',
   NAVBAR_ADD_STUFF: 'navbar-add-stuff',
   NAVBAR_LIST_STUFF: 'navbar-list-stuff',
@@ -63,4 +64,8 @@ export const COMPONENT_IDS = {
   SIGN_UP_FORM_EDUCATION: 'sign-up-form-education',
   SIGN_UP_GENDER: 'sign-up-form-gender',
   SIGN_UP_FORM_SUBMIT: 'sign-up-form-submit',
+
+  // CLASSES PAGE
+  CLASSES_CREATE_SESSION_MODAL: 'classes-create-session-modal',
+  CLASSES_CREATE_LESSON_MODAL: 'classes-create-lesson-modal',
 };

@@ -15,9 +15,9 @@ const Footer = () => {
           <Col>
             <ul style={{ listStyle: 'none', lineHeight: '30px' }}>
               <li><a href="/" style={linkStyle}>Home</a></li>
-              <li><a href="/" style={linkStyle}>Classes</a></li>
+              <li><a href="/classes" style={linkStyle}>Classes</a></li>
               <li><a href="/about" style={linkStyle}>About</a></li>
-              <li><a href="/" style={linkStyle}>Resources</a></li>
+              <li><a href="/resources" style={linkStyle}>Resources</a></li>
             </ul>
           </Col>
           <Col>

@@ -26,8 +26,8 @@ const HelpButton = () => {
             Learn more in our <a href="/about">About page</a> and <a href="/resources">Resources page</a>.
           </p>
           <h4><b>How do I sign up for a class?</b></h4>
-          <p>To sign up you must first create an account at our <a href="/">Sign Up page</a>.
-            <br />You can then sign up for a class through the <a href="/">Classes page</a>.
+          <p>To sign up you must first create an account at our <a href="/sign-in-up">Sign Up page</a>.
+            <br />You can then sign up for a class through the <a href="/classes">Classes page</a>.
           </p>
           <h4><b>Any other questions or site not functioning properly?</b></h4>
           <p>Please send your question or describe the issue by emailing us at <a href="/">sample@email.com</a>

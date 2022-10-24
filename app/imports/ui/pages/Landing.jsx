@@ -19,7 +19,6 @@ const Landing = () => {
         <Col md={6} className="align-self-center">
           <h1 style={headingStyle}>Broadband for Hawaiʻi</h1>
           <h2 className="pb-3" style={subheadingStyle}>Connecting everyone, everywhere, <p style={{ textDecoration: 'underline', textDecorationThickness: '2px', textUnderlineOffset: '5px' }}>all the time.</p></h2>
-          <Button className="px-5 py-3" style={buttonStyle}>Get started</Button>
         </Col>
       </Row>
       <Row className="align-middle text-center bg-light px-5 pb-5 mx-0">
@@ -67,7 +66,7 @@ const Landing = () => {
         <Row><h1 className="justify-content-center py-3" style={headingStyle2}>Explore classes</h1></Row>
         <Col md={4} className="px-5 align-self-center">
           <Row><p style={largeTextStyle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p></Row>
-          <Button className="px-5 py-3" style={buttonStyle}>View classes</Button>
+          <a href="/classes"><Button className="px-5 py-3" style={buttonStyle}>View classes</Button></a>
         </Col>
         <Col md={4} className="align-self-center px-5"><Image fluid src="images/class-icon.png" /></Col>
       </Row>

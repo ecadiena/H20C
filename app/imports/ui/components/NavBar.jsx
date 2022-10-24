@@ -26,8 +26,11 @@ const NavBar = () => {
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="justify-content-start">
             <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_ADD_STUFF} as={NavLink} to="/add" key="add">Classes</Nav.Link>
-            <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/list" key="list">About</Nav.Link>
+            <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_ABOUT} as={NavLink} to="/about" key="list">About</Nav.Link>
             <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/list" key="list">Resources</Nav.Link>
+
+            {currentUser !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ?
+              <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/analytics" key="list">Data Analytics</Nav.Link> : (' ') }
           </Nav>
           <Nav className="ms-auto justify-content-end">
             {currentUser !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (

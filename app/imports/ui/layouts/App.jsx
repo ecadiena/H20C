@@ -19,7 +19,10 @@ import NotAuthorized from '../pages/NotAuthorized';
 import { ROLE } from '../../api/role/Role';
 import SignInUp from '../pages/SignInUp';
 import ProfilePage from '../pages/ProfilePage';
+import AnalyticsDashBoard from '../pages/AnalyticsDashboard';
 import AccountList from '../pages/AccountList';
+import About from '../pages/About';
+import HelpButton from '../components/HelpButton';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -28,6 +31,7 @@ const App = () => (
       <NavBar />
       <Routes>
         <Route exact path="/" element={<Landing />} />
+        <Route exact path="/about" element={<About />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signout" element={<SignOut />} />
@@ -40,9 +44,11 @@ const App = () => (
         <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
         <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
         <Route path="/admin" element={<AdminProtectedRoute><ListStuffAdmin /></AdminProtectedRoute>} />
+        <Route path="/analytics" element={<AdminProtectedRoute><AnalyticsDashBoard /></AdminProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <HelpButton />
       <Footer />
     </div>
   </Router>

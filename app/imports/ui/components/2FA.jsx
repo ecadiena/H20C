@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Buffer } from 'buffer';
 import { Accounts } from 'meteor/accounts-base';
-import { Button, Form, Modal, Container } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
 
 const Account = () => {
   const [qrCode, setQrCode] = useState(null);
@@ -38,10 +38,10 @@ const Account = () => {
   };
 
   return (
-    <Container style={{ alignSelf: 'flex-end', alignItems: 'flex-end', marginBottom: 20 }}>
+    <>
       {is2faEnabled ?
-        <Button onClick={disable2FA}>Disable Two-Factor</Button> :
-        <Button onClick={generate2FA}>Enable Two-Factor</Button>}
+        <Button onClick={disable2FA} variant="danger" style={{ display: 'block', width: '100%' }}>Disable Two-Factor</Button> :
+        <Button onClick={generate2FA} style={{ display: 'block', width: '100%' }}>Enable Two-Factor</Button>}
 
       <Modal show={showQR} onHide={() => setShowQR(false)} centered>
         <Modal.Header closeButton />
@@ -57,7 +57,7 @@ const Account = () => {
           </Form>
         </Modal.Body>
       </Modal>
-    </Container>
+    </>
   );
 };
 

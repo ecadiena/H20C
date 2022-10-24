@@ -19,15 +19,17 @@ class UserProfileCollection extends BaseProfileCollection {
    * @param ethnicity The ethnicity
    * @param education The highest level of education completed
    * @param totalPoints The total points for the application
+   * @param gender The user's gender
+   * @param joined The date the user created the account
    */
-  define({ email, firstName, lastName, password, age, zipcode, ethnicity, education, totalPoints }) {
+  define({ email, firstName, lastName, password, age, zipcode, ethnicity, education, totalPoints, gender, joined }) {
     // if (Meteor.isServer) {
     const username = email;
     const user = this.findOne({ email, firstName, lastName });
     if (!user) {
       const role = ROLE.USER;
       const userID = Users.define({ username, role, password });
-      const profileID = this._collection.insert({ email, firstName, lastName, userID, role, age, zipcode, ethnicity, education, totalPoints });
+      const profileID = this._collection.insert({ email, firstName, lastName, userID, role, age, zipcode, ethnicity, education, totalPoints, gender, joined });
       // this._collection.update(profileID, { $set: { userID } });
       return profileID;
     }

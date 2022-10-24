@@ -9,6 +9,10 @@ const rolesToCollectionNames = {};
 rolesToCollectionNames[ROLE.ADMIN] = 'AdminProfileCollection';
 rolesToCollectionNames[ROLE.USER] = 'UserProfileCollection';
 
+export const genderValues = ['Male', 'Female', 'Other'];
+export const educationValues = ['Grade K - 6', 'Grade 7 - 8', 'High School', 'Some College', 'College'];
+export const ethnicityValues = ['American Indian or Alaska Native', 'Asian', 'Black or African American', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander', 'White', 'Other'];
+
 class BaseProfileCollection extends BaseCollection {
   constructor(type, schema) {
     super(type, schema.extend(new SimpleSchema({
@@ -17,12 +21,21 @@ class BaseProfileCollection extends BaseCollection {
       lastName: String,
       role: String,
       userID: SimpleSchema.RegEx.Id,
+      gender: {
+        type: String,
+        allowedValues: genderValues,
+        defaultValue: 'Other',
+      },
+      joined: {
+        type: Date,
+        defaultValue: new Date(),
+      },
       age: { type: Number, defaultValue: 0 },
       zipcode: { type: Number, defaultValue: 0 },
       ethnicity: { type: String, defaultValue: 'None' },
       education: {
         type: String,
-        allowedValues: ['Grade K - 6', 'Grade 7 - 8', 'High School', 'Some College', 'College'],
+        allowedValues: educationValues,
         defaultValue: 'College',
       },
       totalPoints: { type: Number, defaultValue: 0 },

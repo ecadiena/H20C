@@ -22,8 +22,8 @@
   ],
 
   "defaultSession": [
-    { "title": "HTTP vs. HTTPS", "summary": "Difference between HTTP and HTTPS", "type": "event", "difficulty":  "basic", "tags":  ["technology", "security"], "owner":  "DPPfvScMnvhwCoaj9"},
-    { "title": "SSH", "summary": "What is SSH", "type": "event", "difficulty":  "basic", "tags":  ["technology", "security"], "owner":  "DPPfvScMnvhwCoaj9"}
+    { "title": "HTTP vs. HTTPS", "summary": "Difference between HTTP and HTTPS", "type": "Event", "difficulty":  "Basic", "tags":  ["Technology", "Security"], "owner":  "DPPfvScMnvhwCoaj9"},
+    { "title": "SSH", "summary": "What is SSH", "type": "Event", "difficulty":  "Basic", "tags":  ["Technology", "Security"], "owner":  "DPPfvScMnvhwCoaj9"}
   ],
 
   "defaultLesson": [

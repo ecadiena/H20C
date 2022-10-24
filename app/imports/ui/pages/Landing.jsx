@@ -60,7 +60,7 @@ const Landing = () => {
         <Col md={5} className="p-5 align-self-center">
           <Row><h1 style={headingStyle2}>Resources available</h1></Row>
           <Row><p style={largeTextStyle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p></Row>
-          <Button className="px-5 py-3" style={buttonStyle}>Learn more</Button>
+          <a href="/resources"><Button className="px-5 py-3" style={buttonStyle}>View resources</Button></a>
         </Col>
       </Row>
       <Row className="justify-content-center align-middle text-center py-5 mx-0">

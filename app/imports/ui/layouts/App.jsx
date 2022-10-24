@@ -22,6 +22,7 @@ import AnalyticsDashBoard from '../pages/AnalyticsDashboard';
 import AccountList from '../pages/AccountList';
 import About from '../pages/About';
 import HelpButton from '../components/HelpButton';
+import Resources from '../pages/Resources';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -31,6 +32,7 @@ const App = () => (
       <Routes>
         <Route exact path="/" element={<Landing />} />
         <Route exact path="/about" element={<About />} />
+        <Route exact path="/resources" element={<Resources />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signout" element={<SignOut />} />

@@ -21,12 +21,12 @@ const HelpButton = () => {
         </Modal.Header>
         <Modal.Body>
           <h4><b>What is Broadband for Hawaiʻi?</b></h4>
-          <p>Broadband for Hawaiʻi is text text text text text
+          <p>Broadband for Hawaiʻi is an accessible and user-friendly educational platform that allows everyone to learn more about the internet and to explore its benefits.
             <br />
             Learn more in our <a href="/about">About page</a> and <a href="/resources">Resources page</a>.
           </p>
           <h4><b>How do I sign up for a class?</b></h4>
-          <p>To sign up you must first create an account at our <a href="/sign-in-up">Sign Up page</a>.
+          <p>To sign up, you must first create an account at the <a href="/sign-in-up">Sign Up page</a>.
             <br />You can then sign up for a class through the <a href="/classes">Classes page</a>.
           </p>
           <h4><b>Any other questions or site not functioning properly?</b></h4>

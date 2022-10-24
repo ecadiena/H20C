@@ -27,17 +27,17 @@ const Landing = () => {
           <Col md={{ span: 3 }}>
             <Image src="images/collaboration.png" />
             <h2 style={subheadingStyle} className="py-2">Engage</h2>
-            <p style={smallTextStyle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p style={smallTextStyle}>Explore the tools provided by Broadband for Hawaiʻi, ask questions, and visit the Help section for FAQs.</p>
           </Col>
           <Col md={{ span: 3 }}>
             <Image src="images/study.png" />
             <h2 style={subheadingStyle} className="py-2">Educate</h2>
-            <p style={smallTextStyle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p style={smallTextStyle}>Utilize the Resources and Classes Pages that allows you to learn more about the benefits and uses of the Internet.</p>
           </Col>
           <Col md={{ span: 3 }}>
             <Image src="images/account.png" />
             <h2 style={subheadingStyle} className="py-2">Empower</h2>
-            <p style={smallTextStyle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p style={smallTextStyle}>Share your experience to others and spread the knowledge you have gathered to grow as a community.</p>
           </Col>
         </Row>
       </Row>
@@ -45,7 +45,8 @@ const Landing = () => {
         <Col md={5} className="p-5 align-self-center">
           <Row><h1 style={headingStyle2}>What is broadband?</h1></Row>
           <Row>
-            <p style={largeTextStyle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            <p style={largeTextStyle}>
+              Learn more about Broadband for Hawaiʻi and its goal.
             </p>
           </Row>
           <a href="/about"><Button className="px-5 py-3" style={buttonStyle}>Learn more</Button></a>
@@ -58,14 +59,19 @@ const Landing = () => {
         </Col>
         <Col md={5} className="p-5 align-self-center">
           <Row><h1 style={headingStyle2}>Resources available</h1></Row>
-          <Row><p style={largeTextStyle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p></Row>
+          <Row><p style={largeTextStyle}>Checkout some resources we catered for you to explore the internet and to learn more about its benefits.</p></Row>
           <a href="/resources"><Button className="px-5 py-3" style={buttonStyle}>View resources</Button></a>
         </Col>
       </Row>
       <Row className="justify-content-center align-middle text-center py-5 mx-0">
         <Row><h1 className="justify-content-center py-3" style={headingStyle2}>Explore classes</h1></Row>
         <Col md={4} className="px-5 align-self-center">
-          <Row><p style={largeTextStyle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p></Row>
+          <Row>
+            <p style={largeTextStyle}>
+              Want to get more hands-on with learning about the use of the internet?
+              Head into the Classes page where you will get some interactive learning experience with the list of interesting topics related to the uses and benefits of the internet.
+            </p>
+          </Row>
           <a href="/classes"><Button className="px-5 py-3" style={buttonStyle}>View classes</Button></a>
         </Col>
         <Col md={4} className="align-self-center px-5"><Image fluid src="images/class-icon.png" /></Col>

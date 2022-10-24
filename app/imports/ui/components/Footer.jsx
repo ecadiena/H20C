@@ -11,11 +11,7 @@ const Footer = () => {
       <Container className="pt-4 pb-2">
         <Row>
           <Col>
-<<<<<<< HEAD
-            <h1>Broadband for Hawai'i</h1>
-=======
             <h1>Broadband for Hawaiʻi</h1>
->>>>>>> main
           </Col>
           <Col>
             <ul style={{ listStyle: 'none', lineHeight: '30px' }}>
@@ -50,11 +46,7 @@ const Footer = () => {
           </Col>
         </Row>
         <Row className="justify-content-center">
-<<<<<<< HEAD
-          © 2022 Copyright: Broadband for Hawai'i
-=======
           © 2022 Copyright: Broadband for Hawaiʻi
->>>>>>> main
         </Row>
       </Container>
     </footer>

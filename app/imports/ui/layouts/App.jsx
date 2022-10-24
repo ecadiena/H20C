@@ -22,6 +22,7 @@ import AnalyticsDashBoard from '../pages/AnalyticsDashboard';
 import AccountList from '../pages/AccountList';
 import About from '../pages/About';
 import HelpButton from '../components/HelpButton';
+import Classes from '../pages/Classes';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -35,6 +36,7 @@ const App = () => (
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signout" element={<SignOut />} />
         <Route path="/sign-in-up" element={<SignInUp />} />
+        <Route path="/classes" element={<Classes />} />
         <Route path="/accounts" element={<AdminProtectedRoute><AccountList /></AdminProtectedRoute>} />
         <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
         <Route path="/profile-page" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />

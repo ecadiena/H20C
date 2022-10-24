@@ -3,9 +3,9 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 
-export const sessionType = ['event', 'course'];
-export const difficultyType = ['basic', 'intermediate', 'advanced'];
-export const tagType = ['technology', 'security', 'internet'];
+export const sessionType = ['Event', 'Course'];
+export const difficultyType = ['Basic', 'Intermediate', 'Advanced'];
+export const tagType = ['Technology', 'Security', 'Internet'];
 export const selectFormSetup = (arr, type) => {
   type.forEach(item => {
     arr.push({ value: item, label: item });
@@ -23,12 +23,12 @@ class SessionCollection extends BaseCollection {
       type: {
         type: String,
         allowedValues: sessionType,
-        defaultValue: 'event',
+        defaultValue: 'Event',
       },
       difficulty: {
         type: String,
         allowedValues: difficultyType,
-        defaultValue: 'basic',
+        defaultValue: 'Basic',
       },
       tags: Array,
       'tags.$': String,

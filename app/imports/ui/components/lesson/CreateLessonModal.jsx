@@ -193,7 +193,10 @@ const CreateLessonModal = ({ lessonModal, sessionModal }) => {
     });
     const definitionData = { sessionID, title, summary, videoLink, owner, lessonText, quiz };
     defineMethod.callPromise({ collectionName, definitionData })
-      .catch(error => swal('Error', error.message, 'error'))
+      .catch(err => {
+        swal('Error', err.message, 'error');
+        throw err;
+      })
       .then(() => {
         swal('Success', 'Lesson added successfully', 'success');
         setLessonContent([]);

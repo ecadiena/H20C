@@ -4,3 +4,5 @@ import '../imports/startup/client/Startup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Override the default bootstrap styles.
 import './style.css';
+// To make rows collapsible
+import 'bootstrap/js/src/collapse.js';

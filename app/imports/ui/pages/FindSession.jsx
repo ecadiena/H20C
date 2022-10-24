@@ -6,7 +6,6 @@ import { Lessons } from '../../api/lesson/LessonCollection';
 import { Sessions } from '../../api/session/SessionCollection';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import LoadingSpinner from '../components/LoadingSpinner';
-// import LessonItem from '../components/LessonItem';
 
 /* Renders the FindClasses page for adding a testimony. */
 const FindSession = () => {
@@ -53,6 +52,8 @@ const FindSession = () => {
             <th>Difficulty</th>
           </tr>
         </thead>
+      </Table>
+      <Table>
         <tbody>
           {
             sessions.map(function (session) {

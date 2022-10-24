@@ -14,7 +14,7 @@ body {
   --bs-light-rgb: var(--matr-navbar-bg-rgb);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h5, h6 {
   font-family: Georgia, serif;
 }
 
@@ -33,6 +33,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .divider {
   border-left: 0.0625rem solid #c1c0c0;
+}
+
+.modal-90w {
+  width: 90%!important;
+  max-width: none!important;
 }
 
 .center {
@@ -67,4 +72,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto;
   float: none;
   margin-bottom: 10px;
+}
+
+.modal-90w {
+  align-content: center;
+  width: 80%!important;
+  max-width: none!important;
 }

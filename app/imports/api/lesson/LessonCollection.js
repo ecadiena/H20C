@@ -33,7 +33,7 @@ const quizType = new SimpleSchema(
     options: Array,
     'options.$': String,
     correct: String,
-    feedback: String,
+    feedback: { type: String, optional: true },
   },
 );
 

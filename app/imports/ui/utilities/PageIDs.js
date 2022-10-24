@@ -15,4 +15,5 @@ export const PAGE_IDS = {
   SIGN_UP: 'sign-up',
   PROFILE_PAGE: 'profile-page',
   ACCOUNT_PAGE: 'account-page',
+  CLASSES_PAGE: 'classes-page',
 };

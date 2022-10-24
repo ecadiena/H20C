@@ -36,9 +36,15 @@ const FindSession = () => {
   }, [lessonsShown]);
 
   const toggleShown = (sessionOwner) => {
-    const filteredLessons = _.where(lessons, { owner: sessionOwner });
-    setLessonsShown(filteredLessons);
-    console.log(filteredLessons);
+    const shownState = lessonsShown.slice();
+    const index = shownState.indexOf(sessionOwner);
+    if (index >= 0) {
+      shownState.splice(index, 1);
+      setLessonsShown(shownState);
+    } else {
+      shownState.push(sessionOwner);
+      setLessonsShown(shownState);
+    }
   };
 
   return (ready ? (
@@ -64,7 +70,7 @@ const FindSession = () => {
                 </tr>,
                 <tr>
                   {lessonsShown.includes(session.owner) && (
-                    <td colSpan="4">{lessons.title}</td>
+                    <td>{session.title}</td>
                   )}
                 </tr>,
               ]);

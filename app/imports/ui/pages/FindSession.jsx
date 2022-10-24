@@ -1,81 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table } from 'react-bootstrap';
-import { CaretLeftFill } from 'react-bootstrap-icons';
-// import { useTracker } from 'meteor/react-meteor-data';
-// import { Lessons } from '../../api/lesson/LessonCollection';
+import { useTracker } from 'meteor/react-meteor-data';
+import _ from 'underscore';
+import { Lessons } from '../../api/lesson/LessonCollection';
+import { Sessions } from '../../api/session/SessionCollection';
 import { PAGE_IDS } from '../utilities/PageIDs';
-// import LoadingSpinner from '../components/LoadingSpinner';
+import LoadingSpinner from '../components/LoadingSpinner';
 // import LessonItem from '../components/LessonItem';
 
 /* Renders the FindClasses page for adding a testimony. */
 const FindSession = () => {
 
-  // const { ready, lessons } = useTracker(() => {
-  //   // Note that this subscription will get cleaned up
-  //   // when your component is unmounted or deps change.
-  //   // Get access to Stuff documents.
-  //   const subscription = Lessons.subscribeLesson();
-  //   // Determine if the subscription is ready
-  //   const rdy = subscription.ready();
-  //   // Get the Stuff documents
-  //   const lessonItems = Lessons.find({}, { sort: { name: 1 } }).fetch();
-  //   return {
-  //     lessons: lessonItems,
-  //     ready: rdy,
-  //   };
-  // }, []);
-
-  const [data, setData] = useState([]);
-  const [detailsShown, setDetailsShown] = useState([]);
-
-  async function getData() {
-    const result = await fetch('https://jsonplaceholder.typicode.com/users');
-    const getResults = await result.json();
-    setData(getResults);
-    console.log(getResults);
-  }
-
-  useEffect(() => {
-    getData();
+  const { ready, lessons, sessions } = useTracker(() => {
+    // Note that this subscription will get cleaned up
+    // when your component is unmounted or deps change.
+    // Get access to Stuff documents.
+    const subscription1 = Lessons.subscribeLesson();
+    const subscription2 = Sessions.subscribeSession();
+    // Determine if the subscription is ready
+    const rdy = subscription1.ready() && subscription2.ready();
+    // Get the Stuff documents
+    const lessonItems = Lessons.find({}, {}).fetch();
+    const sessionItems = Sessions.find({}, {}).fetch();
+    return {
+      lessons: lessonItems,
+      sessions: sessionItems,
+      ready: rdy,
+    };
   }, []);
 
-  const toggleShown = (username) => {
-    // slice method to return selected elements as new array
-    const shownState = detailsShown.slice();
-    const index = shownState.indexOf(username);
-    if (index >= 0) {
-      shownState.splice(index, 1);
-      setDetailsShown(shownState);
-    } else {
-      shownState.push(username);
-      setDetailsShown(shownState);
-    }
+  // state to populate the session data
+  const [lessonsShown, setLessonsShown] = useState([]);
+
+  useEffect(() => {
+    console.log('Lessons Shown: ', lessonsShown);
+  }, [lessonsShown]);
+
+  const toggleShown = (sessionOwner) => {
+    const filteredLessons = _.where(lessons, { owner: sessionOwner });
+    setLessonsShown(filteredLessons);
+    console.log(filteredLessons);
   };
 
-  return (
+  return (ready ? (
     <Container id={PAGE_IDS.FIND_LESSONS}>
       <Table borderless striped hover>
         <thead>
           <tr>
             <th>Title</th>
             <th>Summary</th>
-            <th>Tags</th>
+            <th>Type</th>
             <th>Difficulty</th>
           </tr>
         </thead>
         <tbody>
           {
-            data.map(function (user) {
+            sessions.map(function (session) {
               return ([
-                <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td><button type="button" onClick={() => toggleShown(user.name)}><CaretLeftFill /></button></td>
+                <tr onClick={() => toggleShown(session.owner)} key={session._id}>
+                  <td>{session.title}</td>
+                  <td>{session.summary}</td>
+                  <td>{session.type}</td>
+                  <td>{session.difficulty}</td>
                 </tr>,
                 <tr>
-                  {detailsShown.includes(user.name) && (
-                    <td colSpan="4">{user.website}</td>
+                  {lessonsShown.includes(session.owner) && (
+                    <td colSpan="4">{lessons.title}</td>
                   )}
                 </tr>,
               ]);
@@ -84,7 +74,7 @@ const FindSession = () => {
         </tbody>
       </Table>
     </Container>
-  );
+  ) : <LoadingSpinner message="Loading Sessions" />);
 };
 
 export default FindSession;

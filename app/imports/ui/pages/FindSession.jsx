@@ -52,8 +52,6 @@ const FindSession = () => {
             <th>Difficulty</th>
           </tr>
         </thead>
-      </Table>
-      <Table>
         <tbody>
           {
             sessions.map(function (session) {

@@ -200,6 +200,7 @@ const CreateLessonModal = ({ lessonModal, sessionModal }) => {
         setQuizContent([]);
         setLesson({ sessionID: sessionID, title: '', summary: '', videoLink: '' });
         setUpdate(0);
+        lessonModal.setShow(false);
       });
   };
 

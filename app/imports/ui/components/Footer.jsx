@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
+import { Twitter, Facebook, Instagram, Youtube } from 'react-bootstrap-icons';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 const Footer = () => {
@@ -21,7 +22,24 @@ const Footer = () => {
             </ul>
           </Col>
           <Col>
-            <ul style={{ listStyle: 'none' }}>
+            <ul style={{ listStyle: 'none', lineHeight: '30px' }}>
+              <li>
+                <a href="https://twitter.com/UHawaiiNews" style={{ textDecoration: 'none', color: 'white', marginRight: 10 }}>
+                  <Twitter />
+                </a>
+                <a href="https://www.facebook.com/universityofhawaii" style={{ textDecoration: 'none', color: 'white', marginRight: 10 }}>
+                  <Facebook />
+                </a>
+                <a href="https://www.instagram.com/uhawaiinews/" style={{ textDecoration: 'none', color: 'white', marginRight: 10 }}>
+                  <Instagram />
+                </a>
+                <a href="https://www.flickr.com/photos/uhawaii">
+                  <img src="https://www.hawaii.edu/broadband/wp-content/themes/system2021/images/icon-flickr.png" alt="flickr-icon" style={{ height: '18px', marginRight: 10 }} />
+                </a>
+                <a href="https://www.youtube.com/user/uhmagazine" style={{ textDecoration: 'none', color: 'white', marginRight: 10 }}>
+                  <Youtube />
+                </a>
+              </li>
               <li><b>Contact Us</b></li>
               <li>Questions or want to get involved? Email us at <a style={linkStyle} href="/">sample@email.com</a></li>
             </ul>

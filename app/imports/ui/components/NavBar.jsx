@@ -25,7 +25,7 @@ const NavBar = () => {
         <Navbar.Toggle className="ms-auto justify-content-end" aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="justify-content-start">
-            <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_ADD_STUFF} as={NavLink} to="/add" key="add">Classes</Nav.Link>
+            <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_CLASSES} as={NavLink} to="/classes" key="classes">Classes</Nav.Link>
             <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_ABOUT} as={NavLink} to="/about" key="list">About</Nav.Link>
             <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/list" key="list">Resources</Nav.Link>
 

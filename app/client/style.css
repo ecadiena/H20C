@@ -73,3 +73,9 @@ h1, h2, h3, h4, h5, h6 {
   float: none;
   margin-bottom: 10px;
 }
+
+.modal-90w {
+  align-content: center;
+  width: 80%!important;
+  max-width: none!important;
+}

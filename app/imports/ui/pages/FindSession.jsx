@@ -1,29 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import _ from 'underscore';
-import { Lessons } from '../../api/lesson/LessonCollection';
 import { Sessions } from '../../api/session/SessionCollection';
+import { Lessons } from '../../api/lesson/LessonCollection';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import LoadingSpinner from '../components/LoadingSpinner';
+import LessonItem from '../components/LessonItem';
 
 /* Renders the FindClasses page for adding a testimony. */
 const FindSession = () => {
 
-  const { ready, lessons, sessions } = useTracker(() => {
-    // Note that this subscription will get cleaned up
-    // when your component is unmounted or deps change.
-    // Get access to Stuff documents.
-    const subscription1 = Lessons.subscribeLesson();
-    const subscription2 = Sessions.subscribeSession();
-    // Determine if the subscription is ready
+  const { ready, sessions, lessons } = useTracker(() => {
+    const subscription1 = Sessions.subscribeSession();
+    const subscription2 = Lessons.subscribeSession();
+
     const rdy = subscription1.ready() && subscription2.ready();
-    // Get the Stuff documents
-    const lessonItems = Lessons.find({}, {}).fetch();
+
     const sessionItems = Sessions.find({}, {}).fetch();
+    const lessonItems = Lessons.find({}, {}).fetch();
     return {
-      lessons: lessonItems,
       sessions: sessionItems,
+      lessons: lessonItems,
       ready: rdy,
     };
   }, []);
@@ -60,21 +57,19 @@ const FindSession = () => {
         </thead>
         <tbody>
           {
-            sessions.map(function (session) {
-              return ([
-                <tr onClick={() => toggleShown(session.owner)} key={session._id}>
-                  <td>{session.title}</td>
-                  <td>{session.summary}</td>
-                  <td>{session.type}</td>
-                  <td>{session.difficulty}</td>
-                </tr>,
-                <tr>
-                  {lessonsShown.includes(session.owner) && (
-                    <td>{session.title}</td>
-                  )}
-                </tr>,
-              ]);
-            })
+            sessions.map((session) => ([
+              <tr onClick={() => toggleShown(session.owner)} key={session._id}>
+                <td>{session.title}</td>
+                <td>{session.summary}</td>
+                <td>{session.type}</td>
+                <td>{session.difficulty}</td>
+              </tr>,
+              <tr>
+                {lessonsShown.includes(session.owner) && (
+                  lessons.map((lesson) => <LessonItem lesson={lesson} />)
+                )}
+              </tr>,
+            ]))
           }
         </tbody>
       </Table>

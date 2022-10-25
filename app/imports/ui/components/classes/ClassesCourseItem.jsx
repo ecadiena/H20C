@@ -11,7 +11,7 @@ const ClassesCourseItem = ({ eventKey, session, lessons }) => {
 
   return (
     <Card className="my-4">
-      <Card.Header style={eventKey % 2 === 0 ? { backgroundColor: 'whitesmoke' } : { backgroundColor: '#fbfbfb' }}>
+      <Card.Header style={{ backgroundColor: '#f0f8ff' }}>
         <Row>
           <Col xs={7}>
             <h3 style={{ display: 'inline', marginRight: '0.5em' }}>

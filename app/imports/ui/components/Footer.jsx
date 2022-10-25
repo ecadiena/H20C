@@ -26,18 +26,23 @@ const Footer = () => {
               <li>
                 <a href="https://twitter.com/UHawaiiNews" style={{ textDecoration: 'none', color: 'white', marginRight: 10 }}>
                   <Twitter />
+                  <span className="screen-reader-text">Twitter</span>
                 </a>
                 <a href="https://www.facebook.com/universityofhawaii" style={{ textDecoration: 'none', color: 'white', marginRight: 10 }}>
                   <Facebook />
+                  <span className="screen-reader-text">Facebook</span>
                 </a>
                 <a href="https://www.instagram.com/uhawaiinews/" style={{ textDecoration: 'none', color: 'white', marginRight: 10 }}>
                   <Instagram />
+                  <span className="screen-reader-text">Instagram</span>
                 </a>
                 <a href="https://www.flickr.com/photos/uhawaii">
                   <img src="https://www.hawaii.edu/broadband/wp-content/themes/system2021/images/icon-flickr.png" alt="flickr-icon" style={{ height: '18px', marginRight: 10 }} />
+                  <span className="screen-reader-text">Flickr</span>
                 </a>
                 <a href="https://www.youtube.com/user/uhmagazine" style={{ textDecoration: 'none', color: 'white', marginRight: 10 }}>
                   <Youtube />
+                  <span className="screen-reader-text">Youtube</span>
                 </a>
               </li>
               <li><b>Contact Us</b></li>

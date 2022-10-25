@@ -31,6 +31,14 @@ h1, h2, h3, h5, h6 {
   padding-bottom: 20px;
 }
 
+.screen-reader-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
 .divider {
   border-left: 0.0625rem solid #c1c0c0;
 }

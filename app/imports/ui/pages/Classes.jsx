@@ -62,6 +62,9 @@ const Classes = () => {
       if (post.type.toLowerCase().includes(search.toLowerCase())) {
         return post;
       }
+      if (post.difficulty.toLowerCase().includes(search.toLowerCase())) {
+        return post;
+      }
       if (_.contains(post.tags, `${search.substring(0, 1).toUpperCase()}${search.substring(1).toLowerCase()}`)) {
         return post;
       }
@@ -87,6 +90,9 @@ const Classes = () => {
         return post;
       }
       if (post.type.toLowerCase().includes(search.toLowerCase())) {
+        return post;
+      }
+      if (post.difficulty.toLowerCase().includes(search.toLowerCase())) {
         return post;
       }
       if (_.contains(post.tags, `${search.substring(0, 1).toUpperCase()}${search.substring(1).toLowerCase()}`)) {

@@ -10,7 +10,12 @@ const RegisterSession = ({ sessionID, type, modal }) => {
   const submit = () => {
     const username = Meteor.user().username;
     const collectionName = UserLessons.getCollectionName();
-    const definitionData = { registeredUser: username, sessionID: sessionID, joined: new Date() };
+    let definitionData;
+    if (type === 'Event') {
+      definitionData = { registeredUser: username, sessionID: sessionID, joined: new Date() };
+    } else {
+      definitionData = { registeredUser: username, lessonID: sessionID, joined: new Date() };
+    }
     defineMethod.callPromise({ collectionName, definitionData })
       .catch(error => {
         swal('Error', error.message, 'error');

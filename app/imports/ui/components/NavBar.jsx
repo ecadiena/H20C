@@ -28,14 +28,12 @@ const NavBar = () => {
             <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_CLASSES} as={NavLink} to="/classes" key="classes">Classes</Nav.Link>
             <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_ABOUT} as={NavLink} to="/about" key="list">About</Nav.Link>
             <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/resources" key="list">Resources</Nav.Link>
-
-            {currentUser !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ?
-              <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/analytics" key="list">Data Analytics</Nav.Link> : (' ') }
           </Nav>
           <Nav className="ms-auto justify-content-end">
             {currentUser !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
               <NavDropdown style={rightItemStyle} id={COMPONENT_IDS.NAVBAR_ADMIN} title="Admin" key="Admin">
                 <NavDropdown.Item className="navbar-dropdown-item" id={COMPONENT_IDS.NAVBAR_ACCOUNT_LIST} as={NavLink} to="/accounts" key="accounts">Account List</NavDropdown.Item>
+                <NavDropdown.Item className="navbar-dropdown-item" id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/analytics" key="list">Data Analytics</NavDropdown.Item>
               </NavDropdown>
             ) : ''}
             {currentUser === '' ? ([

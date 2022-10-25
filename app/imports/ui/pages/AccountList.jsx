@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
 import { Container, Row, Col, Card, ListGroup, Form, Button, InputGroup, Accordion } from 'react-bootstrap';
-import { Search, ChevronRight, ChevronDoubleRight, ChevronLeft, ChevronDoubleLeft } from 'react-bootstrap-icons';
+import { Search, ChevronRight, ChevronDoubleRight, ChevronLeft, ChevronDoubleLeft, Person } from 'react-bootstrap-icons';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { AdminProfiles } from '../../api/user/AdminProfileCollection';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
@@ -110,8 +110,8 @@ const AccountList = () => {
 
   return ready ? (
     <Container id={PAGE_IDS.ACCOUNT_PAGE} className="py-3">
-      <h1>User Accounts</h1>
-      <Card>
+      <h1><Person style={{ marginRight: '1em' }} />User Accounts</h1>
+      <Card className="my-4">
         <ListGroup variant="flush">
           <ListGroup.Item className="p-4">
             <InputGroup>

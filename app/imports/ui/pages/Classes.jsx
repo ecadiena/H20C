@@ -210,7 +210,7 @@ const Classes = () => {
         </Row>
       ) : <h1><Book style={{ marginRight: '1em' }} />Classes</h1>}
 
-      <Card className="mt-4">
+      <Card className="my-4">
         <ListGroup variant="flush">
           <ListGroup.Item className="p-4">
             <InputGroup>

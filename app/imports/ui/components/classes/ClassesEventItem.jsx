@@ -7,17 +7,17 @@ const ClassesEventItem = ({ eventKey, session }) => (
   <Card className="my-4">
     <Card.Body style={eventKey % 2 === 0 ? { backgroundColor: 'whitesmoke' } : { backgroundColor: '#fbfbfb' }}>
       <Row>
-        <Col xs={8}>
+        <Col xs={6}>
           <h3 style={{ display: 'inline', marginRight: '0.5em' }}>
             {session.title}
           </h3>
+        </Col>
+        <Col className="text-end" xs={6}>
           <h5 style={{ display: 'inline-block' }}>
             {session.difficulty === 'Basic' ? <Badge bg="success">{session.difficulty}</Badge> : ''}
             {session.difficulty === 'Intermediate' ? <Badge bg="warning">{session.difficulty}</Badge> : ''}
             {session.difficulty === 'Advanced' ? <Badge bg="danger">{session.difficulty}</Badge> : ''}
           </h5>
-        </Col>
-        <Col className="text-end" xs={4}>
           <span className="px-4">{session.date ? session.date.toLocaleDateString() : ''}</span>
           <span>{session.date ? `${session.startTime} - ${session.endTime}` : ''}</span>
           <p><b>Location: </b>{session.location}</p>

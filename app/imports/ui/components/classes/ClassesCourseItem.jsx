@@ -13,17 +13,17 @@ const ClassesCourseItem = ({ eventKey, session, lessons }) => {
     <Card className="my-4">
       <Card.Header style={eventKey % 2 === 0 ? { backgroundColor: 'whitesmoke' } : { backgroundColor: '#fbfbfb' }}>
         <Row>
-          <Col xs={10} md={11}>
+          <Col xs={7}>
             <h3 style={{ display: 'inline', marginRight: '0.5em' }}>
               {session.title}
             </h3>
-            <h5 style={{ display: 'inline-block' }}>
+          </Col>
+          <Col xs={5} className="text-end">
+            <h5 style={{ display: 'inline-block', marginRight: '1em' }}>
               {session.difficulty === 'Basic' ? <Badge bg="success">{session.difficulty}</Badge> : ''}
               {session.difficulty === 'Intermediate' ? <Badge bg="warning">{session.difficulty}</Badge> : ''}
               {session.difficulty === 'Advanced' ? <Badge bg="danger">{session.difficulty}</Badge> : ''}
             </h5>
-          </Col>
-          <Col xs={2} md={1} className="text-end">
             <Button variant="outline-secondary" type="button" onClick={decoratedOnClick} size="sm"><CaretDown /></Button>
           </Col>
         </Row>

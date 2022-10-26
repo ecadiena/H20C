@@ -55,8 +55,9 @@ class LessonCollection extends BaseCollection {
   /**
    * Defines a new Lesson item.
    */
-  define({ sessionID, title, summary, videoLink, lessonText, quiz, owner }) {
+  define({ _id, sessionID, title, summary, videoLink, lessonText, quiz, owner }) {
     const docID = this._collection.insert({
+      _id,
       sessionID,
       title,
       summary,

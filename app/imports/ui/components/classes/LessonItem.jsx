@@ -42,7 +42,7 @@ const LessonItem = ({ eventKey, lesson }) => {
       <Accordion.Collapse eventKey={`lesson-${eventKey}`}>
         <Card.Body style={{ border: '1px solid lightgray' }}>
           <Row>
-            <Col><SummaryText summary={lesson.summary} eventKey={eventKey} textLen={100} /></Col>
+            <Col><SummaryText summary={lesson.summary} eventKey={`lesson-summary-${eventKey}`} textLen={200} /></Col>
           </Row>
           <Row>
             <Col className="text-end">

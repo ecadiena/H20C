@@ -152,7 +152,7 @@ const SignInUp = () => {
                         <Form.Control id={COMPONENT_IDS.SIGN_IN_FORM_PASSWORD} type="password" placeholder="Enter your password" />
                       </Form.Group>
                     </Row>
-                    <Button variant="primary" type="submit" style={{ position: 'absolute', bottom: 20, marginLeft: 20 }} onClick={(event) => signIn(event)}>
+                    <Button variant="primary" type="submit" style={{ position: 'absolute', bottom: 20, marginLeft: 20 }} onClick={(event) => signIn(event)} alt="Sign In">
                       Sign In
                     </Button>
                   </Form>
@@ -254,7 +254,7 @@ const SignInUp = () => {
           Input 2FA Code
           <Form>
             <Form.Control id={COMPONENT_IDS.SIGN_IN_FORM_2FA} placeholder="2FA Code" />
-            <Button variant="primary" type="submit" onClick={(event) => signInWith2FA(event)}>Submit</Button>
+            <Button variant="primary" type="submit" onClick={(event) => signInWith2FA(event)} alt="Submit 2FA Code">Submit</Button>
           </Form>
         </Modal.Body>
       </Modal>

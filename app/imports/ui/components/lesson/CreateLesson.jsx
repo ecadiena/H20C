@@ -129,7 +129,7 @@ const CreateLesson = () => {
                     <Card.Body>
                       <Card.Title>Header: {item.header}</Card.Title>
                       <Card.Text>Body: {item.body}</Card.Text>
-                      <Button onClick={() => handleLessonText(item.header)}>-</Button>
+                      <Button onClick={() => handleLessonText(item.header)} alt="Delete Lesson Text">-</Button>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -139,7 +139,7 @@ const CreateLesson = () => {
             { lessonDropdown ? (
               <>
                 <br />
-                <Button type="button" onClick={() => setLessonDropDown(!lessonDropdown)} variant="secondary">Minimize Lesson Text</Button>
+                <Button type="button" onClick={() => setLessonDropDown(!lessonDropdown)} variant="secondary" alt="Minimize Lesson Text">Minimize Lesson Text</Button>
                 <Form.Group>
                   <Form.Label>Header: </Form.Label>
                   <Form.Control type="header" placeholder="" value={lessonTextForm.header} onChange={(e) => updateLessonTextForm(e.target.value, 'header')} />
@@ -150,12 +150,12 @@ const CreateLesson = () => {
                 </Form.Group>
 
                 <br />
-                <Button type="button" onClick={() => addLessonText()} variant="primary">+</Button>
+                <Button type="button" onClick={() => addLessonText()} variant="primary" alt="Add Lesson Text">+</Button>
               </>
             ) : (
               <>
                 <br />
-                <Button type="button" onClick={() => setLessonDropDown(!lessonDropdown)} variant="primary">Add Lesson Text</Button>
+                <Button type="button" onClick={() => setLessonDropDown(!lessonDropdown)} variant="primary" alt="Add Lesson Text">Add Lesson Text</Button>
               </>
             )}
 
@@ -177,7 +177,7 @@ const CreateLesson = () => {
                       </Row>
                       <Card.Title>Correct Answer: {item.correct}</Card.Title>
                       <Card.Title>Feedback: {item.feedback}</Card.Title>
-                      <Button onClick={() => handleQuiz(item.question)}>-</Button>
+                      <Button onClick={() => handleQuiz(item.question)} alt="Delete Quize">-</Button>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -187,7 +187,7 @@ const CreateLesson = () => {
             { quizDropdown ? (
               <>
                 <br />
-                <Button type="button" onClick={() => setQuizDropdown(!quizDropdown)} variant="secondary">Minimize Quiz</Button>
+                <Button type="button" onClick={() => setQuizDropdown(!quizDropdown)} variant="secondary" alt="Minimize Quiz">Minimize Quiz</Button>
                 <Form.Group>
                   <Form.Label>Question: </Form.Label>
                   <Form.Control type="question" placeholder="" value={quizForm.question} onChange={(e) => updateQuizForm(e.target.value, 'question')} />
@@ -237,19 +237,19 @@ const CreateLesson = () => {
                 </Row>
 
                 <br />
-                <Button type="button" onClick={() => addQuiz()} variant="primary">+</Button>
+                <Button type="button" onClick={() => addQuiz()} variant="primary" alt="Add Quiz">+</Button>
               </>
             ) : (
               <>
                 <br />
-                <Button type="button" onClick={() => setQuizDropdown(!quizDropdown)} variant="primary">Add Quiz</Button>
+                <Button type="button" onClick={() => setQuizDropdown(!quizDropdown)} variant="primary" alt="Add Quiz">Add Quiz</Button>
               </>
             ) }
           </Form>
         </Row>
         <br />
         <Row className="justify-content-center">
-          <Button type="button" onClick={() => submit()} variant="primary" className="mx-3">Submit</Button>
+          <Button type="button" onClick={() => submit()} variant="primary" className="mx-3" alt="Submit Lesson">Submit</Button>
         </Row>
       </Container>
     ) : ' ')

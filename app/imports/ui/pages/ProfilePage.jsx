@@ -109,7 +109,7 @@ const ProfilePage = () => {
         </Col>
         <Col xs={2}>
           <Account />
-          <Button variant="outline-primary" onClick={() => setShow(true)} style={{ display: 'block', width: '100%', marginTop: 10 }}>
+          <Button variant="outline-primary" onClick={() => setShow(true)} style={{ display: 'block', width: '100%', marginTop: 10 }} alt="Edit Profile">
             Edit Profile
           </Button>
         </Col>
@@ -189,7 +189,7 @@ const ProfilePage = () => {
                   </Form.Group>
                 </Col>
               </Row>
-              <Button variant="primary" type="submit" style={{ position: 'absolute', marginTop: 20, bottom: 10, marginLeft: 10 }}>
+              <Button variant="primary" type="submit" style={{ position: 'absolute', marginTop: 20, bottom: 10, marginLeft: 10 }} alt="Submit Changes">
                 Submit Changes
               </Button>
             </Form>

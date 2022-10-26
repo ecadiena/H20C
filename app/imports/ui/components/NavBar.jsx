@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
-import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Container, Navbar, Nav, NavDropdown, Image } from 'react-bootstrap';
 import { BoxArrowRight, Person } from 'react-bootstrap-icons';
 import { ROLE } from '../../api/role/Role';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
@@ -20,7 +20,7 @@ const NavBar = () => {
     <Navbar style={menuStyle} expand="lg" id={COMPONENT_IDS.NAVBAR_LANDING_PAGE}>
       <Container>
         <Navbar.Brand as={NavLink} to="/" style={{ minWidth: '270px', width: '22vw', position: 'absolute', top: 0, left: '50%', marginLeft: '-170px' }}>
-          <img className="img-fluid" src="/images/uh-logo.png" alt="University of Hawaii Logo" />
+          <Image className="img-fluid" src="/images/uh-logo.png" alt="University of Hawaii Logo" />
         </Navbar.Brand>
         <Navbar.Toggle className="ms-auto justify-content-end" aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>

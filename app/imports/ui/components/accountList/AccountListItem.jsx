@@ -15,7 +15,7 @@ const AccountListItem = ({ eventKey, account }) => {
           <Col>{account.email}</Col>
           <Col xs={2}>{account.role}</Col>
           <Col xs={1} className="text-end">
-            <Button variant="outline-secondary" type="button" onClick={decoratedOnClick} size="sm"><CaretDown /></Button>
+            <Button variant="outline-secondary" type="button" onClick={decoratedOnClick} size="sm" alt="Open Account Info"><CaretDown /></Button>
           </Col>
         </Row>
       </Card.Header>

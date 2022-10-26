@@ -14,7 +14,7 @@ const Landing = () => {
     <div id={PAGE_IDS.LANDING}>
       <Row className="justify-content-center mx-0 p-5">
         <Col md={3}>
-          <Image fluid roundedCircle src="/images/hawaii-seal.png" />
+          <Image fluid roundedCircle src="/images/hawaii-seal.png" alt="State of Hawaii Seal" />
         </Col>
         <Col md={6} className="align-self-center">
           <h1 style={headingStyle}>Broadband for Hawaiʻi</h1>
@@ -25,17 +25,17 @@ const Landing = () => {
         <Row><h1 className="justify-content-center pt-5 pb-3" style={headingStyle2}>Our mission</h1></Row>
         <Row className="justify-content-center">
           <Col md={{ span: 3 }}>
-            <Image src="images/collaboration.png" />
+            <Image src="images/collaboration.png" alt="Engage Icon" />
             <h2 style={subheadingStyle} className="py-2">Engage</h2>
             <p style={smallTextStyle}>Explore the tools provided by Broadband for Hawaiʻi, ask questions, and visit the Help section for FAQs.</p>
           </Col>
           <Col md={{ span: 3 }}>
-            <Image src="images/study.png" />
+            <Image src="images/study.png" alt="Educate Icon" />
             <h2 style={subheadingStyle} className="py-2">Educate</h2>
             <p style={smallTextStyle}>Utilize the Resources and Classes Pages that allows you to learn more about the benefits and uses of the Internet.</p>
           </Col>
           <Col md={{ span: 3 }}>
-            <Image src="images/account.png" />
+            <Image src="images/account.png" alt="Empower Icon" />
             <h2 style={subheadingStyle} className="py-2">Empower</h2>
             <p style={smallTextStyle}>Share your experience to others and spread the knowledge you have gathered to grow as a community.</p>
           </Col>
@@ -49,18 +49,18 @@ const Landing = () => {
               Learn more about Broadband for Hawaiʻi and its goal.
             </p>
           </Row>
-          <a href="/about"><Button className="px-5 py-3" style={buttonStyle}>Learn more</Button></a>
+          <a href="/about"><Button className="px-5 py-3" style={buttonStyle} alt="Learn More">Learn more</Button></a>
         </Col>
-        <Col md={5} className="align-self-center p-5"><Image fluid src="images/broadband-icon.png" /></Col>
+        <Col md={5} className="align-self-center p-5"><Image fluid src="images/broadband-icon.png" alt="Broadband Icon" /></Col>
       </Row>
       <Row className="justify-content-center bg-light mx-0 px-5">
         <Col md={5} className="p-5 align-self-center">
-          <Image fluid src="/images/resource-icon.png" />
+          <Image fluid src="/images/resource-icon.png" alt="Resources Icon" />
         </Col>
         <Col md={5} className="p-5 align-self-center">
           <Row><h1 style={headingStyle2}>Resources available</h1></Row>
           <Row><p style={largeTextStyle}>Checkout some resources we catered for you to explore the internet and to learn more about its benefits.</p></Row>
-          <a href="/resources"><Button className="px-5 py-3" style={buttonStyle}>View resources</Button></a>
+          <a href="/resources"><Button className="px-5 py-3" style={buttonStyle} alt="View Resources">View resources</Button></a>
         </Col>
       </Row>
       <Row className="justify-content-center align-middle text-center py-5 mx-0">
@@ -72,9 +72,9 @@ const Landing = () => {
               Head into the Classes page where you will get some interactive learning experience with the list of interesting topics related to the uses and benefits of the internet.
             </p>
           </Row>
-          <a href="/classes"><Button className="px-5 py-3" style={buttonStyle}>View classes</Button></a>
+          <a href="/classes"><Button className="px-5 py-3" style={buttonStyle} alt="View Classes">View classes</Button></a>
         </Col>
-        <Col md={4} className="align-self-center px-5"><Image fluid src="images/class-icon.png" /></Col>
+        <Col md={4} className="align-self-center px-5"><Image fluid src="images/class-icon.png" alt="Class Icon" /></Col>
       </Row>
     </div>
   );

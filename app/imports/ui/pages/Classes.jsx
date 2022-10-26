@@ -5,7 +5,6 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Roles } from 'meteor/alanning:roles';
 import { Meteor } from 'meteor/meteor';
 import { ChevronDoubleLeft, ChevronDoubleRight, ChevronLeft, ChevronRight, Search, Book } from 'react-bootstrap-icons';
-import Joyride, { STATUS } from 'react-joyride';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { Sessions } from '../../api/session/SessionCollection';
 import { Lessons } from '../../api/lesson/LessonCollection';
@@ -25,20 +24,6 @@ const Classes = () => {
   const [currentCoursePage, setCurrentCoursePage] = useState(1);
   const [itemsPerEventPage, setItemsPerEventPage] = useState(10);
   const [currentEventPage, setCurrentEventPage] = useState(1);
-  const [tour, setTour] = useState({
-    steps: [
-      {
-        target: '.tour-search',
-        content: 'This is a search bar!',
-        disableBeacon: true,
-      },
-      {
-        target: '.tour-courses',
-        content: 'This is all the courses!',
-      },
-    ],
-    run: false,
-  });
 
   const { ready, sessions, lessons } = useTracker(() => {
     const subscription1 = Sessions.subscribeSession();
@@ -212,16 +197,6 @@ const Classes = () => {
     setCurrentEventPage(1);
     setSearch(document.getElementById('classes-search').value);
   };
-  // supposed to reset run so that it runs tour again but it is never called for some reason
-  const handleTourCallback = (data) => {
-    const { status } = data;
-
-    if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
-      setTour({ run: false });
-    }
-
-    console.log(data);
-  };
 
   return (ready ? (
     <Container id={PAGE_IDS.CLASSES_PAGE} className="py-3">
@@ -241,23 +216,8 @@ const Classes = () => {
         </Row>
       ) : (
         <Row>
-          <Joyride
-            steps={tour.steps}
-            run={tour.run}
-            continuous
-            hideCloseButton
-            showProgress
-            showSkipButton
-            scrollToFirstStep
-            callback={handleTourCallback}
-          />
           <Col xs={4}>
             <h1><Book style={{ marginRight: '1em' }} />Classes</h1>
-          </Col>
-          <Col>
-            <div className="text-end">
-              <Button variant="outline-primary" type="button" onClick={() => { setTour({ ...tour, run: !tour.run }); }}>First time? Click here</Button>{' '}
-            </div>
           </Col>
         </Row>
       )}

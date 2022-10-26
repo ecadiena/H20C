@@ -7,8 +7,26 @@ import { UserLessons } from '../../../api/user/UserLessonCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
 
 const RegisterSession = ({ sessionID, type, modal }) => {
+  const username = Meteor.user() ? Meteor.user().username : '';
+
+  if (username === '') {
+    return (
+      <Modal
+        show={modal.show}
+        onHide={() => {
+          modal.setShow(false);
+        }}
+        centered
+      >
+        <Modal.Body className="text-center p-5">
+          <h2>{`Please log in to register for this ${type.toLowerCase()}, track your progress, and take quizzes`}</h2>
+          <Button variant="primary" button="button" href="/sign-in-up">Log in</Button>
+        </Modal.Body>
+      </Modal>
+    );
+  }
+
   const submit = () => {
-    const username = Meteor.user().username;
     const collectionName = UserLessons.getCollectionName();
     let definitionData;
     if (type === 'Event') {

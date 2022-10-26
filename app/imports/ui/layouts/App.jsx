@@ -24,6 +24,8 @@ import About from '../pages/About';
 import HelpButton from '../components/HelpButton';
 import Classes from '../pages/Classes';
 import Resources from '../pages/Resources';
+import Quiz from '../pages/Quiz';
+import QuizResults from '../pages/QuizResults';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -44,6 +46,8 @@ const App = () => (
         <Route path="/profile-page" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
         <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
         <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
+        <Route path="/quiz/:_id" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
+        <Route path="/quiz-results/:_id" element={<ProtectedRoute><QuizResults /></ProtectedRoute>} />
         <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
         <Route path="/admin" element={<AdminProtectedRoute><ListStuffAdmin /></AdminProtectedRoute>} />
         <Route path="/analytics" element={<AdminProtectedRoute><AnalyticsDashBoard /></AdminProtectedRoute>} />

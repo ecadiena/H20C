@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Col, Image, Row, Button } from 'react-bootstrap';
+import Joyride, { STATUS } from 'react-joyride';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
 /* A simple static component to render some text for the landing page. */
@@ -10,18 +11,64 @@ const Landing = () => {
   const subheadingStyle = { fontSize: '32px', fontFamily: 'Georgia, serif', fontWeight: 400 };
   const largeTextStyle = { fontSize: '24px', fontWeight: 500, lineHeight: 1.2 };
   const smallTextStyle = { fontSize: '18px' };
+
+  const [tour, setTour] = useState({
+    steps: [
+      {
+        target: '.our-mission',
+        content: 'blah blah blah',
+        disableBeacon: true,
+      },
+      {
+        target: '.what-is-broadband',
+        content: 'what is braodnabd',
+      },
+      {
+        target: '.resources-available',
+        content: 'reousrces',
+      },
+      {
+        target: '.explore-classes',
+        content: 'classes',
+      },
+    ],
+    run: false,
+  });
+
+  // supposed to reset run so that it runs tour again but it is never called for some reason
+  const handleTourCallback = (data) => {
+    const { status } = data;
+
+    if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+      setTour({ run: false });
+    }
+
+    console.log(data);
+  };
+
   return (
     <div id={PAGE_IDS.LANDING}>
       <Row className="justify-content-center mx-0 p-5">
+        <Joyride
+            steps={tour.steps}
+            run={tour.run}
+            continuous
+            hideCloseButton
+            showProgress
+            showSkipButton
+            scrollToFirstStep
+            callback={handleTourCallback}
+        />
         <Col md={3}>
           <Image fluid roundedCircle src="/images/hawaii-seal.png" />
         </Col>
         <Col md={6} className="align-self-center">
           <h1 style={headingStyle}>Broadband for Hawaiʻi</h1>
           <h2 className="pb-3" style={subheadingStyle}>Connecting everyone, everywhere, <p style={{ textDecoration: 'underline', textDecorationThickness: '2px', textUnderlineOffset: '5px' }}>all the time.</p></h2>
+          <Button className="px-5 py-3" style={buttonStyle} onClick={() => { setTour({ ...tour, run: !tour.run }); }}>Get started</Button>
         </Col>
       </Row>
-      <Row className="align-middle text-center bg-light px-5 pb-5 mx-0">
+      <Row className="align-middle text-center bg-light px-5 pb-5 mx-0 our-mission">
         <Row><h1 className="justify-content-center pt-5 pb-3" style={headingStyle2}>Our mission</h1></Row>
         <Row className="justify-content-center">
           <Col md={{ span: 3 }}>
@@ -42,7 +89,7 @@ const Landing = () => {
         </Row>
       </Row>
       <Row className="justify-content-center px-5 mx-0">
-        <Col md={5} className="p-5 align-self-center">
+        <Col md={5} className="p-5 align-self-center what-is-broadband">
           <Row><h1 style={headingStyle2}>What is broadband?</h1></Row>
           <Row>
             <p style={largeTextStyle}>
@@ -53,7 +100,7 @@ const Landing = () => {
         </Col>
         <Col md={5} className="align-self-center p-5"><Image fluid src="images/broadband-icon.png" /></Col>
       </Row>
-      <Row className="justify-content-center bg-light mx-0 px-5">
+      <Row className="justify-content-center bg-light mx-0 px-5 resources-available">
         <Col md={5} className="p-5 align-self-center">
           <Image fluid src="/images/resource-icon.png" />
         </Col>
@@ -63,7 +110,7 @@ const Landing = () => {
           <a href="/resources"><Button className="px-5 py-3" style={buttonStyle}>View resources</Button></a>
         </Col>
       </Row>
-      <Row className="justify-content-center align-middle text-center py-5 mx-0">
+      <Row className="justify-content-center align-middle text-center py-5 mx-0 explore-classes">
         <Row><h1 className="justify-content-center py-3" style={headingStyle2}>Explore classes</h1></Row>
         <Col md={4} className="px-5 align-self-center">
           <Row>

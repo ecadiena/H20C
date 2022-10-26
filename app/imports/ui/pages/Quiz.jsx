@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
-import { useParams } from 'react-router';
+import { Navigate, useParams } from 'react-router';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Container, Form, Button } from 'react-bootstrap';
 import swal from 'sweetalert';
@@ -42,6 +42,7 @@ QuizQuestion.propTypes = {
 
 const Quiz = () => {
   const { _id } = useParams();
+  const [redirect, setRedirect] = useState('');
   const answers = [];
   const username = Meteor.user() ? Meteor.user().username : '';
 
@@ -90,10 +91,15 @@ const Quiz = () => {
         swal('Error', err.message, 'error');
         throw err;
       })
-      .then(() => {
+      .then((response) => {
         swal('Success', 'Quiz submitted!', 'success');
+        setRedirect(response);
       });
   };
+
+  if (redirect !== '') {
+    return <Navigate to={`/quiz-results/${redirect}`} />;
+  }
 
   // Populate answers array
   if (ready) {

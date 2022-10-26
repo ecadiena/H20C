@@ -35,13 +35,15 @@ class SubmittedQuizCollection extends BaseCollection {
    * @param lessonID The lesson the quiz is attached to
    * @param numCorrect The number of correctly answered questions
    * @param answers An array of the user's questions and responses
+   * @param firstAttempt Indicator if this was the first quiz submitted by user
    */
-  define({ owner, lessonID, numCorrect, answers }) {
+  define({ owner, lessonID, numCorrect, answers, firstAttempt }) {
     return this._collection.insert({
       owner,
       lessonID,
       numCorrect,
       answers,
+      firstAttempt,
     });
   }
 

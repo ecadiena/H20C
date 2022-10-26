@@ -18,4 +18,5 @@ export const PAGE_IDS = {
   ACCOUNT_PAGE: 'account-page',
   CLASSES_PAGE: 'classes-page',
   QUIZ_PAGE: 'quiz-page',
+  QUIZ_RESULTS_PAGE: 'quiz-results-page',
 };

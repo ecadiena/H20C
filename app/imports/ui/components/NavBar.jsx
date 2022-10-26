@@ -15,7 +15,7 @@ const NavBar = () => {
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
   const menuStyle = { paddingTop: '10px', paddingBottom: '10px', marginBottom: '10px', borderBottom: '0.1px solid #D6D8DA', position: 'relative' };
-  const itemStyle = { paddingRight: '40px', color: '#1762A7', fontWeight: 'bold', fontSize: '14px' };
+  const itemStyle = { paddingRight: '20px', paddingLeft: '20px', color: '#1762A7', fontWeight: 'bold', fontSize: '14px' };
   const rightItemStyle = { color: '#1762A7', fontWeight: 'bold', fontSize: '14px' };
   return (
     <Navbar style={menuStyle} expand="lg" id={COMPONENT_IDS.NAVBAR_LANDING_PAGE}>
@@ -26,9 +26,36 @@ const NavBar = () => {
         <Navbar.Toggle className="ms-auto justify-content-end" aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>
           <Nav className="justify-content-start">
-            <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_CLASSES} as={NavLink} to="/classes" key="classes">Classes</Nav.Link>
-            <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_ABOUT} as={NavLink} to="/about" key="list">About</Nav.Link>
-            <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/resources" key="list">Resources</Nav.Link>
+            <Nav.Link
+              style={itemStyle}
+              id={COMPONENT_IDS.NAVBAR_CLASSES}
+              as={NavLink}
+              to="/classes"
+              key="classes"
+              className="classes"
+            >
+              Classes
+            </Nav.Link>
+            <Nav.Link
+              style={itemStyle}
+              id={COMPONENT_IDS.NAVBAR_ABOUT}
+              as={NavLink}
+              to="/about"
+              key="list"
+              className="about"
+            >
+              About
+            </Nav.Link>
+            <Nav.Link
+              style={itemStyle}
+              id={COMPONENT_IDS.NAVBAR_LIST_STUFF}
+              as={NavLink}
+              to="/resources"
+              key="list"
+              className="resources"
+            >
+              Resources
+            </Nav.Link>
           </Nav>
           <Nav className="ms-auto justify-content-end">
             { currentUser !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.USER]) ?
@@ -40,7 +67,14 @@ const NavBar = () => {
               </NavDropdown>
             ) : ''}
             {currentUser === '' ? ([
-              <Nav.Link style={rightItemStyle} id={COMPONENT_IDS.NAVBAR_SIGN_IN_UP} as={NavLink} to="/sign-in-up" key="sign-in-up">
+              <Nav.Link
+                style={rightItemStyle}
+                id={COMPONENT_IDS.NAVBAR_SIGN_IN_UP}
+                as={NavLink}
+                to="/sign-in-up"
+                key="sign-in-up"
+                className="signinup"
+              >
                 Sign in / Sign up
               </Nav.Link>,
             ]) : ([

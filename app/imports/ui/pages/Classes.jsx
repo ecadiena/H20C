@@ -214,7 +214,13 @@ const Classes = () => {
           <CreateSessionModal modal={{ show: showCreateSession, setShow: setShowCreateSession }} />
           <CreateLessonModal lessonModal={{ show: showCreateLesson, setShow: setShowCreateLesson }} sessionModal={{ show: showCreateSession, setShow: setShowCreateSession }} />
         </Row>
-      ) : <h1><Book style={{ marginRight: '1em' }} />Classes</h1>}
+      ) : (
+        <Row>
+          <Col xs={4}>
+            <h1><Book style={{ marginRight: '1em' }} />Classes</h1>
+          </Col>
+        </Row>
+      )}
 
       <Card className="my-4">
         <ListGroup variant="flush">
@@ -222,6 +228,7 @@ const Classes = () => {
             <InputGroup>
               <InputGroup.Text style={{ border: 'none' }}><Search /></InputGroup.Text>
               <Form.Control
+                className="tour-search"
                 id="classes-search"
                 type="search"
                 placeholder="Search"
@@ -247,7 +254,7 @@ const Classes = () => {
               }}
             >
               <Tab eventKey="courses" title="Courses">
-                <Accordion>
+                <Accordion className="tour-courses">
                   {getFilteredCourses().map((course, index) => <ClassesCourseItem key={index} eventKey={index} session={course} lessons={_.where(lessons, { sessionID: course._id })} />)}
                 </Accordion>
               </Tab>

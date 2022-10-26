@@ -7,6 +7,7 @@ import { Container, Navbar, Nav, NavDropdown, Image } from 'react-bootstrap';
 import { BoxArrowRight, Person } from 'react-bootstrap-icons';
 import { ROLE } from '../../api/role/Role';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
+import Survey from './Survey';
 
 const NavBar = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -30,6 +31,8 @@ const NavBar = () => {
             <Nav.Link style={itemStyle} id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/resources" key="list">Resources</Nav.Link>
           </Nav>
           <Nav className="ms-auto justify-content-end">
+            { currentUser !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.USER]) ?
+              <Survey /> : ''}
             {currentUser !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
               <NavDropdown style={rightItemStyle} id={COMPONENT_IDS.NAVBAR_ADMIN} title="Admin" key="Admin">
                 <NavDropdown.Item className="navbar-dropdown-item" id={COMPONENT_IDS.NAVBAR_ACCOUNT_LIST} as={NavLink} to="/accounts" key="accounts">Account List</NavDropdown.Item>

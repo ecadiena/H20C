@@ -23,6 +23,24 @@ h1, h2, h3, h4, h5, h6 {
   --bs-alert-bg: var(--matr-navbar-bg);
 }
 
+
+.survey-button {
+  --bs-btn-color: #1762A7;
+  --bs-btn-border-color: none!important;
+  --bs-btn-hover-color: none!important;
+  --bs-btn-hover-bg: none!important;
+  --bs-btn-hover-border-color: none!important;
+  --bs-btn-focus-shadow-rgb: none!important;
+  --bs-btn-active-color: none!important;
+  --bs-btn-active-bg: none!important;
+  --bs-btn-active-border-color: none!important;
+  --bs-btn-active-shadow: none!important;
+  --bs-btn-disabled-color: #6c757d;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-gradient: none;
+}
+
 /* Define custom styles */
 .gray-background {
   background-color: #F5F5F5;

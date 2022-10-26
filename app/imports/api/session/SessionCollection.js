@@ -43,8 +43,9 @@ class SessionCollection extends BaseCollection {
   /**
    * Defines a new Session item.
    */
-  define({ title, summary, type, difficulty, tags, date, startTime, endTime, location, owner }) {
+  define({ _id, title, summary, type, difficulty, tags, date, startTime, endTime, location, owner }) {
     const docID = this._collection.insert({
+      _id,
       title,
       summary,
       type,

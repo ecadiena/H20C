@@ -18,18 +18,22 @@ const Landing = () => {
         target: '.our-mission',
         content: 'blah blah blah',
         disableBeacon: true,
+        placement: 'auto'
       },
       {
         target: '.what-is-broadband',
         content: 'what is braodnabd',
+        placement: 'auto'
       },
       {
         target: '.resources-available',
         content: 'reousrces',
+        placement: 'auto'
       },
       {
         target: '.explore-classes',
         content: 'classes',
+        placement: 'auto'
       },
     ],
     run: false,
@@ -69,7 +73,7 @@ const Landing = () => {
         </Col>
       </Row>
       <Row className="align-middle text-center bg-light px-5 pb-5 mx-0 our-mission">
-        <Row><h1 className="justify-content-center pt-5 pb-3" style={headingStyle2}>Our mission</h1></Row>
+        <h1 className="justify-content-center pt-5 pb-3" style={headingStyle2}>Our mission</h1>
         <Row className="justify-content-center">
           <Col md={{ span: 3 }}>
             <Image src="images/collaboration.png" />
@@ -88,8 +92,8 @@ const Landing = () => {
           </Col>
         </Row>
       </Row>
-      <Row className="justify-content-center px-5 mx-0">
-        <Col md={5} className="p-5 align-self-center what-is-broadband">
+      <Row className="justify-content-center px-5 mx-0 what-is-broadband">
+        <Col md={5} className="p-5 align-self-center">
           <Row><h1 style={headingStyle2}>What is broadband?</h1></Row>
           <Row>
             <p style={largeTextStyle}>

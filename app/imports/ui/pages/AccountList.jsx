@@ -124,7 +124,7 @@ const AccountList = () => {
                 autoComplete="off"
                 onKeyUp={(e) => handleSearch(e)}
               />
-              <Button variant="dark" type="button" style={{ marginLeft: '2em' }} onClick={(e) => handleSearch(e)}>Search User</Button>
+              <Button variant="dark" type="button" style={{ marginLeft: '2em' }} onClick={(e) => handleSearch(e)} alt="Search User">Search User</Button>
             </InputGroup>
           </ListGroup.Item>
           <ListGroup.Item className="p-4">
@@ -140,19 +140,20 @@ const AccountList = () => {
           </ListGroup.Item>
           <ListGroup.Item>
             <Row className="d-flex flex-row-reverse">
-              <Button variant="outline-light" style={{ width: '50px', color: 'black' }} onClick={goToLastPage}>
+
+              <Button variant="outline-light" style={{ width: '50px', color: 'black' }} onClick={goToLastPage} alt="Go to Last Page">
                 <ChevronDoubleRight />
               </Button>
-              <Button variant="outline-light" style={{ width: '50px', color: 'black' }} onClick={goToNextPage}>
+              <Button variant="outline-light" style={{ width: '50px', color: 'black' }} onClick={goToNextPage} alt="Go to Next Page">
                 <ChevronRight />
               </Button>
               <Form.Select id="pagination-select-page" style={{ width: '90px' }} onChange={getItemsInPage}>
                 {[...Array(numPages)].map((e, i) => <option value={i + 1} key={i}>{i + 1}</option>)}
               </Form.Select>
-              <Button variant="outline-light" style={{ width: '50px', color: 'black' }} onClick={goToPrevPage}>
+              <Button variant="outline-light" style={{ width: '50px', color: 'black' }} onClick={goToPrevPage} alt="Go to Previous Page">
                 <ChevronLeft />
               </Button>
-              <Button variant="outline-light" style={{ width: '50px', color: 'black' }} onClick={goToFirstPage}>
+              <Button variant="outline-light" style={{ width: '50px', color: 'black' }} onClick={goToFirstPage} alt="Go to First Page">
                 <ChevronDoubleLeft />
               </Button>
               <Form.Select id="pagination-items-per-page" style={{ width: '80px', marginRight: '3em' }} onChange={getItemsPerPage}>

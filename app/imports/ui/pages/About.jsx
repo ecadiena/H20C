@@ -23,7 +23,7 @@ const About = () => {
           </p>
         </Col>
         <Col md={9} fluid className="justify-content-center">
-          <Image className="p-5" fluid src="images/broadband-101.png" />
+          <Image className="p-5" fluid src="images/broadband-101.png" alt="What is Broadband?" />
         </Col>
       </Row>
       <Row fluid className="justify-content-center mx-0">
@@ -48,7 +48,7 @@ const About = () => {
           </p>
         </Col>
         <Col md={9} fluid className="justify-content-center">
-          <Image className="p-5" fluid src="images/hawaii-internet.png" />
+          <Image className="p-5" fluid src="images/hawaii-internet.png" alt="How the Internet Reaches Hawaii" />
         </Col>
       </Row>
       <p style={smallTextStyle} className="text-center pb-2 mx-0"><i>*information gathered from <a href="https://www.hawaii.edu/broadband/">Broadband</a>*</i></p>

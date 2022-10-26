@@ -40,8 +40,8 @@ const Account = () => {
   return (
     <>
       {is2faEnabled ?
-        <Button onClick={disable2FA} variant="danger" style={{ display: 'block', width: '100%' }}>Disable Two-Factor</Button> :
-        <Button onClick={generate2FA} style={{ display: 'block', width: '100%' }}>Enable Two-Factor</Button>}
+        <Button onClick={disable2FA} variant="danger" style={{ display: 'block', width: '100%' }} alt="Disable Two-Factor">Disable Two-Factor</Button> :
+        <Button onClick={generate2FA} style={{ display: 'block', width: '100%' }} alt="Enable Two-Factor">Enable Two-Factor</Button>}
 
       <Modal show={showQR} onHide={() => setShowQR(false)} centered>
         <Modal.Header closeButton />
@@ -53,7 +53,7 @@ const Account = () => {
           <Form>
             Enter 2FA code from your authenticator app.
             <Form.Control id="2fa" />
-            <Button variant="primary" type="submit" onClick={(event) => submit2FA(event)} style={{ marginTop: '1em' }}>Submit</Button>
+            <Button variant="primary" type="submit" onClick={(event) => submit2FA(event)} style={{ marginTop: '1em' }} alt="Submit 2FA Code">Submit</Button>
           </Form>
         </Modal.Body>
       </Modal>

@@ -28,10 +28,10 @@ const AddStuff = () => {
     <Container>
       <h2 style={subheadingStyle}>Create your own classes</h2>
       <div>
-        <Button variant="primary" onClick={handleShowSesh} className="me-2">
+        <Button variant="primary" onClick={handleShowSesh} className="me-2" alt="Create Session">
           Create Session
         </Button>
-        <Button variant="primary" onClick={handleShowLes}>
+        <Button variant="primary" onClick={handleShowLes} alt="Create Lesson">
           Create Lesson
         </Button>
 

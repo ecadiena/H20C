@@ -124,7 +124,7 @@ const CreateSession = () => {
       </Row>
       <br />
       <Row className="justify-content-center">
-        <Button type="button" onClick={() => submit()} variant="primary" className="mx-3">Submit</Button>
+        <Button type="button" onClick={() => submit()} variant="primary" className="mx-3" alt="Submit Session">Submit</Button>
       </Row>
     </Container>
   );

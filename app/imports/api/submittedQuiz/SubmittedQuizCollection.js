@@ -13,6 +13,7 @@ export const submittedQuizPublications = {
 
 const answersSchema = new SimpleSchema({
   question: String,
+  selected: Number,
   correct: Boolean,
 });
 
@@ -24,6 +25,7 @@ class SubmittedQuizCollection extends BaseCollection {
       numCorrect: Number,
       answers: Array,
       'answers.$': answersSchema,
+      firstAttempt: { type: Boolean, defaultValue: true },
     }));
   }
 

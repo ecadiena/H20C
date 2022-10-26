@@ -47,7 +47,7 @@ const LessonItem = ({ eventKey, lesson }) => {
           <Row>
             <Col className="text-end">
               <Button variant="outline-primary" type="button" size="sm">Begin Lesson</Button>{' '}
-              { registered && lesson.quiz.length > 0 ? <Button variant="outline-danger" type="button" size="sm">Take Quiz</Button> : '' }{' '}
+              { registered && lesson.quiz.length > 0 ? <Button variant="outline-danger" type="button" size="sm" href={`/quiz/${lesson._id}`}>Take Quiz</Button> : '' }{' '}
               { !registered ? <Button variant="outline-success" type="button" size="sm" onClick={() => setRegisterModal(true)}>Register for Lesson</Button> : '' }
             </Col>
           </Row>

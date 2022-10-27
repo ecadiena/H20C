@@ -54,17 +54,17 @@ const NavBar = () => {
               id={COMPONENT_IDS.NAVBAR_ABOUT}
               as={NavLink}
               to="/about"
-              key="list"
+              key="about"
               className="about"
             >
               About
             </Nav.Link>
             <Nav.Link
               style={itemStyle}
-              id={COMPONENT_IDS.NAVBAR_LIST_STUFF}
+              id={COMPONENT_IDS.NAVBAR_RESOURCES}
               as={NavLink}
               to="/resources"
-              key="list"
+              key="resources"
               className="resources"
             >
               Resources
@@ -75,7 +75,7 @@ const NavBar = () => {
             {username !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
               <NavDropdown style={rightItemStyle} id={COMPONENT_IDS.NAVBAR_ADMIN} title="Admin" key="Admin">
                 <NavDropdown.Item className="navbar-dropdown-item" id={COMPONENT_IDS.NAVBAR_ACCOUNT_LIST} as={NavLink} to="/accounts" key="accounts">Account List</NavDropdown.Item>
-                <NavDropdown.Item className="navbar-dropdown-item" id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} to="/analytics" key="list">Data Analytics</NavDropdown.Item>
+                <NavDropdown.Item className="navbar-dropdown-item" as={NavLink} to="/analytics" key="analytics">Data Analytics</NavDropdown.Item>
               </NavDropdown>
             ) : ''}
             {username === '' ? ([
@@ -90,9 +90,9 @@ const NavBar = () => {
                 Sign in / Sign up
               </Nav.Link>,
             ]) : ([
-              <NavDropdown style={rightItemStyle} id={COMPONENT_IDS.NAVBAR_CURRENT_USER} title={username}>
-                <NavDropdown.Item className="navbar-dropdown-item" id={COMPONENT_IDS.NAVBAR_ACCOUNT} as={NavLink} to="/profile-page"><Person /> My Profile</NavDropdown.Item>
-                <NavDropdown.Item className="navbar-dropdown-item" id={COMPONENT_IDS.NAVBAR_SIGN_OUT} as={NavLink} to="/signout"><BoxArrowRight /> Sign out</NavDropdown.Item>
+              <NavDropdown style={rightItemStyle} id={COMPONENT_IDS.NAVBAR_CURRENT_USER} title={username} key="User">
+                <NavDropdown.Item className="navbar-dropdown-item" id={COMPONENT_IDS.NAVBAR_ACCOUNT} as={NavLink} to="/profile-page" key="profile"><Person /> My Profile</NavDropdown.Item>
+                <NavDropdown.Item className="navbar-dropdown-item" id={COMPONENT_IDS.NAVBAR_SIGN_OUT} as={NavLink} to="/signout" key="signout"><BoxArrowRight /> Sign out</NavDropdown.Item>
               </NavDropdown>,
             ])}
           </Nav>

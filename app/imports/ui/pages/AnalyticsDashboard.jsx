@@ -4,6 +4,7 @@ import { Pie, Line, Bar } from 'react-chartjs-2';
 import { Container, Row, Col, Card, Nav, Tab } from 'react-bootstrap';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { ChartSetup, staticGenerator, userAccGenerator, genderLineGraphSetup, genderLineGenerator, educationLineGenerator, educationLineGraphSetup, ageGroupGenerator, BarOptions } from '../utilities/Charts';
+import { GoogleMaps } from '../components/maps/GoogleMaps';
 
 const AnalyticsDashBoard = () => {
   const { ready, genderSetup, zipcodeSetup, educationSetup, totalUsers, genderLineSetup, educationLineSetup, ethnicitySetup, ageSetup } = useTracker(() => {
@@ -42,6 +43,7 @@ const AnalyticsDashBoard = () => {
 
   return (ready ? (
     <Container className="py-3">
+      <GoogleMaps />
       <h2>Data Report of 2022</h2>
       <Row>
         <Col sm={3}>

@@ -3,6 +3,8 @@
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.18.3",
+    "@reach/combobox": "^0.18.0",
+    "@react-google-maps/api": "^2.13.1",
     "bootstrap": "^5.2.2",
     "chart.js": "^3.9.1",
     "classnames": "^2.3.1",
@@ -27,7 +29,8 @@
     "underscore": "^1.13.6",
     "uniforms": "^3.9.1",
     "uniforms-bootstrap5": "^3.9.1",
-    "uniforms-bridge-simple-schema-2": "^3.9.1"
+    "uniforms-bridge-simple-schema-2": "^3.9.1",
+    "use-places-autocomplete": "^4.0.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.2",

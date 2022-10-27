@@ -42,7 +42,7 @@ const ClassesEventItem = ({ eventKey, session }) => {
         </Row>
         <Row>
           <Col>
-            <SummaryText summary={session.summary} eventKey={eventKey} textLen={300} />
+            <SummaryText summary={session.summary} eventKey={`${eventKey}`} textLen={300} />
           </Col>
         </Row>
         <Row>

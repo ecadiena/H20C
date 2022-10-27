@@ -11,18 +11,18 @@ import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { AdminProfiles } from '../../api/user/AdminProfileCollection';
 
 const NavBar = () => {
-  const username = Meteor.user() ? Meteor.user().username : '';
-  const { ready, currentUser } = useTracker(() => {
-
+  const { ready, currentUser, username } = useTracker(() => {
+    const usrname = Meteor.user() ? Meteor.user().username : '';
     const sub = UserProfiles.subscribe();
     const sub2 = AdminProfiles.subscribe();
     const rdy = sub.ready() && sub2.ready();
 
-    let user = UserProfiles.findOne({ email: username }, {});
-    if (user === undefined) user = AdminProfiles.findOne({ email: username }, {});
+    let user = UserProfiles.findOne({ email: usrname }, {});
+    if (user === undefined) user = AdminProfiles.findOne({ email: usrname }, {});
     return {
       ready: rdy,
       currentUser: user,
+      username: usrname,
     };
   }, []);
   const menuStyle = { paddingTop: '10px', paddingBottom: '10px', marginBottom: '10px', borderBottom: '0.1px solid #D6D8DA', position: 'relative' };

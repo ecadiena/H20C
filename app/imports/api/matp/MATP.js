@@ -6,6 +6,7 @@ import { Sessions } from '../session/SessionCollection';
 import { Lessons } from '../lesson/LessonCollection';
 import { UserLessons } from '../user/UserLessonCollection';
 import { SubmittedQuizzes } from '../submittedQuiz/SubmittedQuizCollection';
+import { Surveys } from '../survey/SurveyCollection';
 
 class MATPClass {
   collections;
@@ -24,6 +25,7 @@ class MATPClass {
       Lessons,
       UserLessons,
       SubmittedQuizzes,
+      Surveys,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -36,6 +38,7 @@ class MATPClass {
       Lessons,
       UserLessons,
       SubmittedQuizzes,
+      Surveys,
     ];
 
     /*

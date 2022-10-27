@@ -3,7 +3,6 @@ export const PAGE_IDS = {
   ABOUT: 'about',
   ADD_STUFF: 'add-stuff',
   EDIT_STUFF: 'edit-stuff',
-  FIND_LESSONS: 'find-lessons',
   LANDING: 'landing',
   LIST_STUFF: 'list-stuff',
   LIST_STUFF_ADMIN: 'list-stuff-admin',
@@ -19,4 +18,5 @@ export const PAGE_IDS = {
   CLASSES_PAGE: 'classes-page',
   QUIZ_PAGE: 'quiz-page',
   QUIZ_RESULTS_PAGE: 'quiz-results-page',
+  LESSON_PAGE: 'lesson-page',
 };

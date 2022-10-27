@@ -26,6 +26,7 @@ import Classes from '../pages/Classes';
 import Resources from '../pages/Resources';
 import Quiz from '../pages/Quiz';
 import QuizResults from '../pages/QuizResults';
+import Lesson from '../pages/Lesson';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -48,6 +49,7 @@ const App = () => (
         <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
         <Route path="/quiz/:_id" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
         <Route path="/quiz-results/:_id" element={<ProtectedRoute><QuizResults /></ProtectedRoute>} />
+        <Route path="/lesson/:_id" element={<Lesson />} />
         <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
         <Route path="/admin" element={<AdminProtectedRoute><ListStuffAdmin /></AdminProtectedRoute>} />
         <Route path="/analytics" element={<AdminProtectedRoute><AnalyticsDashBoard /></AdminProtectedRoute>} />

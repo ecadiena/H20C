@@ -29,7 +29,7 @@ const QuizQuestion = ({ quizItem, index, selected, correct }) => {
           />
         ))}
       </Form>
-      <p>{`Feedback: ${quizItem.feedback}`}</p>
+      <p>{quizItem.feedback ? `Feedback: ${quizItem.feedback}` : ''}</p>
     </div>
   );
 };

@@ -27,7 +27,7 @@ const LessonItem = ({ eventKey, lesson }) => {
     <Card style={{ border: 'none', borderRadius: 0 }}>
       <Card.Header style={eventKey % 2 === 0 ? { backgroundColor: 'whitesmoke', border: 'none' } : { backgroundColor: '#fbfbfb', border: 'none' }}>
         <Row>
-          <Col sm={3} md={3} lg={1}>
+          <Col sm={3} md={3} lg={2}>
             <b>{`Lesson ${eventKey + 1}:`}</b>
           </Col>
           <Col>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
+import { Roles } from 'meteor/alanning:roles';
 import { Navigate, useParams } from 'react-router';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Container, Form, Button } from 'react-bootstrap';
@@ -9,7 +10,10 @@ import swal from 'sweetalert';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { Lessons } from '../../api/lesson/LessonCollection';
 import { SubmittedQuizzes } from '../../api/submittedQuiz/SubmittedQuizCollection';
-import { defineMethod } from '../../api/base/BaseCollection.methods';
+import { defineMethod, updateMethod } from '../../api/base/BaseCollection.methods';
+import { UserProfiles } from '../../api/user/UserProfileCollection';
+import { AdminProfiles } from '../../api/user/AdminProfileCollection';
+import { ROLE } from '../../api/role/Role';
 
 const QuizQuestion = ({ quizItem, index, setAnswer }) => {
   const getOption = () => {
@@ -44,18 +48,24 @@ const Quiz = () => {
   const { _id } = useParams();
   const [redirect, setRedirect] = useState('');
   const answers = [];
-  const username = Meteor.user() ? Meteor.user().username : '';
 
-  const { ready, lesson, quizExists } = useTracker(() => {
+  const { ready, lesson, quizExists, user, username } = useTracker(() => {
+    const usrname = Meteor.user() ? Meteor.user().username : '';
     const subscription1 = Lessons.subscribeLesson();
     const subscription2 = SubmittedQuizzes.subscribeSubmittedQuiz();
-    const rdy = subscription1.ready() && subscription2.ready();
+    const subscription3 = UserProfiles.subscribe();
+    const subscription4 = AdminProfiles.subscribe();
+    const rdy = subscription1.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
     const lssn = Lessons.findOne({ _id: _id }, {});
-    const quizExist = SubmittedQuizzes.findOne({ owner: username, lessonID: _id }, {});
+    const quizExist = SubmittedQuizzes.findOne({ owner: usrname, lessonID: _id }, {});
 
+    let usr = UserProfiles.findOne({ email: usrname }, {});
+    if (usr === undefined) usr = AdminProfiles.findOne({ email: usrname }, {});
     return {
+      username: usrname,
       lesson: lssn,
       quizExists: quizExist !== undefined,
+      user: usr,
       ready: rdy,
     };
   }, [_id]);
@@ -86,6 +96,16 @@ const Quiz = () => {
     const numCorrect = _.where(answersFormatted, { correct: true }).length;
     const collectionName = SubmittedQuizzes.getCollectionName();
     const definitionData = { owner: username, lessonID: lesson._id, numCorrect: numCorrect, answers: answersFormatted, firstAttempt: !quizExists };
+
+    if (!quizExists) {
+      let userCollectionName = UserProfiles.getCollectionName();
+      if (Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN])) {
+        userCollectionName = AdminProfiles.getCollectionName();
+      }
+      const updateData = { id: user._id, totalPoints: user.totalPoints + Math.floor((numCorrect / answers.length) * 100) };
+      updateMethod.callPromise({ collectionName: userCollectionName, updateData });
+    }
+
     defineMethod.callPromise({ collectionName, definitionData })
       .catch(err => {
         swal('Error', err.message, 'error');

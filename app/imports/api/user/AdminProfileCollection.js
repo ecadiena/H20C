@@ -46,7 +46,7 @@ class AdminProfileCollection extends BaseProfileCollection {
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
    */
-  update(docID, { firstName, lastName }) {
+  update(docID, { firstName, lastName, totalPoints }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -54,6 +54,9 @@ class AdminProfileCollection extends BaseProfileCollection {
     }
     if (lastName) {
       updateData.lastName = lastName;
+    }
+    if (totalPoints) {
+      updateData.totalPoints = totalPoints;
     }
     this._collection.update(docID, { $set: updateData });
   }

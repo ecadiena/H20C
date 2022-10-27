@@ -20,8 +20,8 @@ import {
 // import { formatRelative } from "date-fns";
 //
 // import '@reach/combobox/styles.css';
-import mapStyles from './mapStyles';
 import Button from 'react-bootstrap/Button';
+import mapStyles from './mapStyles';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -58,14 +58,8 @@ export const GoogleMaps = () => {
   const panTo = React.useCallback(({ lat, lng }) => {
     setCenter({ lat: lat, lng: lng });
     // mapRef.current.panTo({ lat, lng });
-    setZoom(14);
+    setZoom(18);
   }, []);
-
-  // const locate = () => {
-  //   return (
-  //     <Button>locate me</Button>
-  //   );
-  // };
 
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'loading maps';
@@ -106,6 +100,7 @@ export const GoogleMaps = () => {
             ) : null}
           </GoogleMap>
           <Search panTo={panTo} />
+          <Locate panTo={panTo} />
         </div>
       ) : ' '}
     </div>
@@ -114,7 +109,6 @@ export const GoogleMaps = () => {
 };
 
 const Search = ({ panTo }) => {
-  console.log(panTo);
   const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
     requestOptions: {
       location: { lat: () => 43.653225, lng: () => -79.383186 },
@@ -144,13 +138,32 @@ const Search = ({ panTo }) => {
         placeholder="Enter an address"
       />
       <ComboboxPopover>
-        {status === 'OK' && data.map(({ id, description }) => (
-          <ComboboxOption key={id} value={description} />
-        ))}
+        <ComboboxList>
+          {status === 'OK' && data.map(({ id, description }) => (
+            <ComboboxOption key={id} value={description} />
+          ))}
+        </ComboboxList>
       </ComboboxPopover>
     </Combobox>
   );
 };
 Search.propTypes = {
+  panTo: PropTypes.func.isRequired,
+};
+
+const Locate = ({ panTo }) => (
+  <Button onClick={() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      panTo({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    }, () => null);
+  }}
+  >
+    Click Me
+  </Button>
+);
+Locate.propTypes = {
   panTo: PropTypes.func.isRequired,
 };

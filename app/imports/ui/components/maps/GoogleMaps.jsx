@@ -34,7 +34,7 @@ const options = {
 
 export const GoogleMaps = () => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyBcLgB7aJWH6us6SPcT6S78mPlvbUWzOlQ',
+    googleMapsApiKey: '',
     libraries,
   });
   const [markers, setMarkers] = useState([]);

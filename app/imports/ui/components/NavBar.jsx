@@ -72,9 +72,8 @@ const NavBar = () => {
             </Nav.Link>
           </Nav>
           <Nav className="ms-auto justify-content-end">
-            { username !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.USER]) ?
-              <Survey /> : ''}
             { username !== '' ? <Nav.Item style={pointsStyle}><StarFill style={{ marginRight: '0.3em', paddingBottom: '5px', fontSize: '25px' }} /><span style={{ marginTop: '1em' }}>{currentUser.totalPoints}</span></Nav.Item> : '' }
+            { username !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.USER]) ? <Survey /> : ''}
             {username !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
               <NavDropdown style={rightItemStyle} id={COMPONENT_IDS.NAVBAR_ADMIN} title="Admin" key="Admin">
                 <NavDropdown.Item className="navbar-dropdown-item" id={COMPONENT_IDS.NAVBAR_ACCOUNT_LIST} as={NavLink} to="/accounts" key="accounts">Account List</NavDropdown.Item>

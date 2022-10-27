@@ -40,7 +40,7 @@ export const GoogleMaps = () => {
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
   const [zoom, setZoom] = useState(8);
-  const [center, setCenter] = useState({ lat: 43.653225, lng: -79.383186 });
+  const [center, setCenter] = useState({ lat: 21.432423, lng: -157.404107 });
 
   const onMapClick = React.useCallback((event => {
     setMarkers(current => [...current, {
@@ -58,7 +58,7 @@ export const GoogleMaps = () => {
   const panTo = React.useCallback(({ lat, lng }) => {
     setCenter({ lat: lat, lng: lng });
     // mapRef.current.panTo({ lat, lng });
-    setZoom(18);
+    setZoom(16);
   }, []);
 
   if (loadError) return 'Error loading maps';
@@ -111,7 +111,7 @@ export const GoogleMaps = () => {
 const Search = ({ panTo }) => {
   const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
     requestOptions: {
-      location: { lat: () => 43.653225, lng: () => -79.383186 },
+      location: { lat: () => 21.432423, lng: () => -157.404107 },
       radius: 200 * 1000,
     },
   });

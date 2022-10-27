@@ -1,20 +1,19 @@
 import React from 'react';
-// import { Meteor } from 'meteor/meteor';
-// import PropTypes from 'prop-types';
-// import { _ } from 'meteor/underscore';
 import { useParams } from 'react-router';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Accordion, Button, Card, Container, Ratio } from 'react-bootstrap';
+import { Roles } from 'meteor/alanning:roles';
+import { Meteor } from 'meteor/meteor';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { Lessons } from '../../api/lesson/LessonCollection';
-
 import LessonView from '../components/classes/LessonView';
+import { ROLE } from '../../api/role/Role';
 
 // Lesson page
 const Lesson = () => {
   const { _id } = useParams();
 
-  const { ready, lesson, registered } = useTracker(() => {
+  const { ready, lesson } = useTracker(() => {
     const subscription1 = Lessons.subscribeLesson();
     const rdy = subscription1.ready();
     const lssn = Lessons.findOne({ _id: _id }, {});
@@ -31,7 +30,7 @@ const Lesson = () => {
       <p>{lesson?.summary}</p>
       <hr />
       {lesson.videoLink ? (
-        <Container>
+        <Container style={{ paddingRight: 150, paddingLeft: 150 }}>
           <Ratio aspectRatio="16x9" className="embed-responsive embed-responsive-16by9">
             <iframe
               src={`${lesson.videoLink}`}
@@ -52,9 +51,10 @@ const Lesson = () => {
             </Accordion>
           </Card.Body>
         </Accordion.Collapse>
-        {/*{ registered && lesson.quiz ? <Button variant="outline-danger" type="button" size="sm" href={`/quiz/${lesson._id}`}>Take Quiz</Button> : '' }*/}
       </Container>
-
+      <Container style={{ paddingBottom: '20px' }} className="text-end">
+        { Roles.userIsInRole(Meteor.userId(), [ROLE.USER]) ? <Button variant="outline-danger" type="button" size="LG" href={`/quiz/${lesson._id}`}>Take Quiz</Button> : '' }
+      </Container>
     </Container>
   ) : '';
 };

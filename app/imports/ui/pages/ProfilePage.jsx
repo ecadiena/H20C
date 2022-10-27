@@ -1,118 +1,161 @@
 import React, { useState } from 'react';
 import { Container, Card, Row, Col, Button, Modal, Form } from 'react-bootstrap';
+import { useTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
+// import { _ } from 'underscore';
+import { Link, NavLink } from 'react-router-dom';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import Account from '../components/2FA';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
+import { UserProfiles } from '../../api/user/UserProfileCollection';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { UserLessons } from '../../api/user/UserLessonCollection';
 
 /* A simple static component to render some text for the landing page. */
 const ProfilePage = () => {
   const [show, setShow] = useState(false);
 
-  return (
-    <Container id={PAGE_IDS.PROFILE_PAGE} style={{ position: 'relative', height: '60vh' }}>
-      <Row style={{ margin: 'auto' }} className="center">
-        <Col style={{ maxWidth: '60wh' }}>
-          <Card style={{ height: '60vh' }}>
-            <div style={{ marginTop: 40, marginBottom: 40 }}>
-              <Row style={{ textAlign: 'center', marginBottom: 20 }}>
-                <h2 id={COMPONENT_IDS.PROFILE_NAME}>John Foo</h2>
-                <hr
-                  style={{
-                    margin: 'auto',
-                    width: '85%',
-                    background: 'black',
-                    color: 'black',
-                    borderColor: 'black',
-                    height: '1px',
-                  }}
-                />
-                <Row style={{ marginTop: 20 }}>
-                  <Col id={COMPONENT_IDS.PROFILE_EMAIL}>
-                    <h6 style={{ fontWeight: 'bold' }}>Email Address</h6>
-                    <h7>john@foo.com</h7>
+  const { ready, user, data } = useTracker(() => {
+    const userProfileSubscription = UserProfiles.subscribe();
+    const userLessonSubscription = UserLessons.subscribeUserLesson();
+    const rdy = userProfileSubscription.ready() && userLessonSubscription.ready();
+
+    const currentUser = Meteor.user() ? Meteor.user().username : '';
+    const usr = UserProfiles.findOne({ email: currentUser }, {});
+    const usrLessons = UserLessons.find({ registeredUser: currentUser }, {}).fetch();
+
+    return {
+      user: usr,
+      ready: rdy,
+      data: usrLessons,
+    };
+  }, []);
+  console.log(data);
+
+  const map = data.map((d) => <Link as={NavLink} to={`/lesson/${d.lessonID}`}>Link to Lesson</Link>);
+
+  const cardStyle = { height: '80vh', marginBottom: 10 };
+  const headerStyle = { fontWeight: 'bold' };
+
+  return ready ? (
+    <Container id={PAGE_IDS.PROFILE_PAGE}>
+      <Row style={{ margin: 'auto', textAlign: 'center' }}>
+        <Row>
+          <Col>
+            <Card style={cardStyle}>
+              <div style={{ marginTop: 40, marginBottom: 40 }}>
+                <Row style={{ marginBottom: 20 }}>
+                  <h2 id={COMPONENT_IDS.PROFILE_NAME}>{user.firstName} {user.lastName}</h2>
+                  <hr
+                    style={{
+                      margin: 'auto',
+                      width: '85%',
+                      background: 'black',
+                      color: 'black',
+                      borderColor: 'black',
+                      height: '1px',
+                    }}
+                  />
+                  <Row style={{ marginTop: 20 }}>
+                    <Col id={COMPONENT_IDS.PROFILE_EMAIL}>
+                      <h6 style={headerStyle}>Email Address</h6>
+                      <h7>{user.email}</h7>
+                    </Col>
+                    <Col id={COMPONENT_IDS.PROFILE_ZIPCODE}>
+                      <h6 style={headerStyle}>Zipcode</h6>
+                      <h7>{user.zipcode}</h7>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col style={{ textAlign: 'center' }}>
+                      <Row style={{ marginBottom: 10, marginTop: 20 }}>
+                        <Col id={COMPONENT_IDS.PROFILE_GENDER}>
+                          <h6 style={headerStyle}>Gender</h6>
+                          <h7>{user.gender}</h7>
+                        </Col>
+                        <Col id={COMPONENT_IDS.PROFILE_AGE}>
+                          <h6 style={headerStyle}>Age</h6>
+                          <h7>{user.age}</h7>
+                        </Col>
+                      </Row>
+                      <Row style={{ marginBottom: 10 }}>
+                        <Col id={COMPONENT_IDS.PROFILE_ETHNICITY}>
+                          <h6 style={headerStyle}>Ethnicity</h6>
+                          <h7>{user.ethnicity}</h7>
+                        </Col>
+                        <Col id={COMPONENT_IDS.PROFILE_EDUCATION}>
+                          <h6 style={headerStyle}>Education Level</h6>
+                          <h7>{user.education}</h7>
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
+                </Row>
+                <Row style={{ width: '80%', margin: 'auto' }}>
+                  <Col>
+                    <Account />
                   </Col>
-                  <Col id={COMPONENT_IDS.PROFILE_ZIPCODE}>
-                    <h6 style={{ fontWeight: 'bold' }}>Zipcode</h6>
-                    <h7>96717</h7>
+                  <Col>
+                    <Button variant="outline-primary" onClick={() => setShow(true)} style={{ display: 'block', width: '100%' }} alt="Edit Profile">
+                      Edit Profile
+                    </Button>
                   </Col>
                 </Row>
-                <Row>
-                  <Col style={{ textAlign: 'center' }}>
-                    <Row style={{ marginBottom: 10, marginTop: 20 }}>
-                      <Col id={COMPONENT_IDS.PROFILE_GENDER}>
-                        <h6 style={{ fontWeight: 'bold' }}>Gender</h6>
-                        <h7>Male</h7>
-                      </Col>
-                      <Col id={COMPONENT_IDS.PROFILE_AGE}>
-                        <h6 style={{ fontWeight: 'bold' }}>Age</h6>
-                        <h7>20</h7>
-                      </Col>
-                    </Row>
-                    <Row style={{ marginBottom: 10 }}>
-                      <Col id={COMPONENT_IDS.PROFILE_ETHNICITY}>
-                        <h6 style={{ fontWeight: 'bold' }}>Ethnicity</h6>
-                        <h7>Asian, Pacific Islander</h7>
-                      </Col>
-                      <Col id={COMPONENT_IDS.PROFILE_EDUCATION}>
-                        <h6 style={{ fontWeight: 'bold' }}>Education Level</h6>
-                        <h7>College</h7>
-                      </Col>
-                    </Row>
-                  </Col>
+              </div>
+            </Card>
+          </Col>
+          <Col>
+            <Card style={cardStyle}>
+              <div style={{ marginTop: 40, marginBottom: 40 }}>
+                <Row style={{ textAlign: 'center', marginBottom: 20 }}>
+                  <h2>Your Dashboard</h2>
+                  <hr
+                    style={{
+                      margin: 'auto',
+                      width: '85%',
+                      background: 'black',
+                      color: 'black',
+                      borderColor: 'black',
+                      height: '1px',
+                    }}
+                  />
+                  <Row>
+                    <Col style={{ textAlign: 'center' }}>
+                      <h4 style={{ marginTop: 10 }}>Statistics</h4>
+                      <Row style={{ marginBottom: 10 }}>
+                        <Col id={COMPONENT_IDS.PROFILE_DASH_POINTS}>
+                          <h6 style={headerStyle}>Total Points</h6>
+                          <h7>{user.totalPoints}</h7>
+                        </Col>
+                        <Col id={COMPONENT_IDS.PROFILE_DASH_AVG_PERCENT}>
+                          <h6 style={headerStyle}>Average Quiz Percentage</h6>
+                          <h7>89%</h7>
+                        </Col>
+                      </Row>
+                      <Row style={{ marginBottom: 10 }}>
+                        <Col id={COMPONENT_IDS.PROFILE_DASH_COMP_CLASS}>
+                          <h6 style={headerStyle}>Completed Classes</h6>
+                          <h7>34</h7>
+                        </Col>
+                        <Col id={COMPONENT_IDS.PROFILE_DASH_COMP_CURR}>
+                          <h6 style={headerStyle}>Completed Sessions</h6>
+                          <h7>2</h7>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <h4 style={{ marginTop: 10 }}>Registered Classes</h4>
+                        {map}
+                      </Row>
+                      <Row>
+                        <h4 style={{ marginTop: 10 }}>Registered Sessions</h4>
+                      </Row>
+                    </Col>
+                  </Row>
                 </Row>
-              </Row>
-            </div>
-          </Card>
-        </Col>
-        <Col style={{ maxWidth: '30wh', display: 'flex' }}>
-          <Card style={{ height: '60vh' }}>
-            <div style={{ marginTop: 40, marginBottom: 40 }}>
-              <Row style={{ textAlign: 'center', marginBottom: 20 }}>
-                <h2>Your Dashboard</h2>
-                <hr
-                  style={{
-                    margin: 'auto',
-                    width: '85%',
-                    background: 'black',
-                    color: 'black',
-                    borderColor: 'black',
-                    height: '1px',
-                  }}
-                />
-                <Row>
-                  <Col style={{ textAlign: 'center' }}>
-                    <Row style={{ marginBottom: 10, marginTop: 20 }}>
-                      <Col id={COMPONENT_IDS.PROFILE_DASH_POINTS}>
-                        <h6 style={{ fontWeight: 'bold' }}>Total Points</h6>
-                        <h7>1500</h7>
-                      </Col>
-                      <Col id={COMPONENT_IDS.PROFILE_DASH_AVG_PERCENT}>
-                        <h6 style={{ fontWeight: 'bold' }}>Average Quiz Percentage</h6>
-                        <h7>89%</h7>
-                      </Col>
-                    </Row>
-                    <Row style={{ marginBottom: 10 }}>
-                      <Col id={COMPONENT_IDS.PROFILE_DASH_COMP_CLASS}>
-                        <h6 style={{ fontWeight: 'bold' }}>Completed Classes</h6>
-                        <h7>34</h7>
-                      </Col>
-                      <Col id={COMPONENT_IDS.PROFILE_DASH_COMP_CURR}>
-                        <h6 style={{ fontWeight: 'bold' }}>Completed Curriculums</h6>
-                        <h7>2</h7>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </Row>
-            </div>
-          </Card>
-        </Col>
-        <Col xs={2}>
-          <Account />
-          <Button variant="outline-primary" onClick={() => setShow(true)} style={{ display: 'block', width: '100%', marginTop: 10 }} alt="Edit Profile">
-            Edit Profile
-          </Button>
-        </Col>
+              </div>
+            </Card>
+          </Col>
+        </Row>
       </Row>
       { show ? (
         <Modal show={show} onHide={() => setShow(false)} centered dialogClassName="modal-90w">
@@ -197,7 +240,7 @@ const ProfilePage = () => {
         </Modal>
       ) : ''}
     </Container>
-  );
+  ) : <LoadingSpinner message="Loading Profile Page" />;
 };
 
 export default ProfilePage;

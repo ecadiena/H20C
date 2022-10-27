@@ -10,13 +10,17 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import Survey from './Survey';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { AdminProfiles } from '../../api/user/AdminProfileCollection';
+import { Surveys } from '../../api/survey/SurveyCollection';
 
 const NavBar = () => {
-  const { ready, currentUser, username } = useTracker(() => {
+  const { ready, currentUser, username, surveySubmitted } = useTracker(() => {
     const usrname = Meteor.user() ? Meteor.user().username : '';
     const sub = UserProfiles.subscribe();
     const sub2 = AdminProfiles.subscribe();
-    const rdy = sub.ready() && sub2.ready();
+    const sub3 = Surveys.subscribeSurvey();
+    const rdy = sub.ready() && sub2.ready() && sub3.ready();
+
+    const srvy = Surveys.findOne({ user: usrname }, {});
 
     let user = UserProfiles.findOne({ email: usrname }, {});
     if (user === undefined) user = AdminProfiles.findOne({ email: usrname }, {});
@@ -24,6 +28,7 @@ const NavBar = () => {
       ready: rdy,
       currentUser: user,
       username: usrname,
+      surveySubmitted: srvy !== undefined,
     };
   }, []);
   const menuStyle = { paddingTop: '10px', paddingBottom: '10px', marginBottom: '10px', borderBottom: '0.1px solid #D6D8DA', position: 'relative' };
@@ -73,7 +78,7 @@ const NavBar = () => {
           </Nav>
           <Nav className="ms-auto justify-content-end">
             { username !== '' ? <Nav.Item style={pointsStyle}><StarFill style={{ marginRight: '0.3em', paddingBottom: '5px', fontSize: '25px' }} /><span style={{ marginTop: '1em' }}>{currentUser.totalPoints}</span></Nav.Item> : '' }
-            { username !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.USER]) ? <Survey /> : ''}
+            { username !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.USER]) && !surveySubmitted ? <Survey /> : ''}
             {username !== '' && Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
               <NavDropdown style={rightItemStyle} id={COMPONENT_IDS.NAVBAR_ADMIN} title="Admin" key="Admin">
                 <NavDropdown.Item className="navbar-dropdown-item" id={COMPONENT_IDS.NAVBAR_ACCOUNT_LIST} as={NavLink} to="/accounts" key="accounts">Account List</NavDropdown.Item>

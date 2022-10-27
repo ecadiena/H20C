@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .survey-button {
-  --bs-btn-color: #1762A7;
+  --bs-btn-color: #1762A7!important;
   --bs-btn-border-color: none!important;
   --bs-btn-hover-color: none!important;
   --bs-btn-hover-bg: none!important;
@@ -61,8 +61,8 @@ h1, h2, h3, h4, h5, h6 {
   border-left: 0.0625rem solid #c1c0c0;
 }
 
-.modal-90w {
-  width: 90%!important;
+.modal-survey {
+  width: 60%!important;
   max-width: none!important;
 }
 

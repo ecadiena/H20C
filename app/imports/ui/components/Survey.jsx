@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, Modal, Row, Col, Alert } from 'react-bootstrap';
 import { ClipboardData } from 'react-bootstrap-icons';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const Account = () => {
   const [show, setShow] = useState(false);
@@ -24,7 +25,7 @@ const Account = () => {
             </Alert>
             <Form.Group style={{ marginTop: 30, marginBottom: 20 }}>
               <h6>Approximately how long have you been familiar with using the Internet</h6>
-              <Form.Select style={{ marginBottom: 5, width: '40%', textAlign: 'center', margin: 'auto' }}>
+              <Form.Select id={COMPONENT_IDS.SURVEY_FORM_Q1} style={{ marginBottom: 5, width: '40%', textAlign: 'center', margin: 'auto' }}>
                 <option disabled>Select</option>
                 <option>Less than 5 years</option>
                 <option>5 - 10 years</option>
@@ -33,7 +34,7 @@ const Account = () => {
                 <option>Unsure</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group style={{ marginTop: 0, marginBottom: 30 }}>
+            <Form.Group id={COMPONENT_IDS.SURVEY_FORM_Q2} style={{ marginTop: 0, marginBottom: 30 }}>
               <h6>How did you get introduced to the Internet?</h6>
               <Form.Select style={{ marginBottom: 5, width: '40%', textAlign: 'center', margin: 'auto' }}>
                 <option disabled>Select</option>
@@ -43,7 +44,7 @@ const Account = () => {
                 <option>Flyer/Infographic</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group style={{ marginTop: 30, marginBottom: 30 }}>
+            <Form.Group id={COMPONENT_IDS.SURVEY_FORM_Q3} style={{ marginTop: 30, marginBottom: 30 }}>
               <h6>{'\nOn a scale of 1 to 5, do you feel safe using the Internet?\n'}</h6>
               <h7 style={{ paddingRight: 15 }}>Disagree</h7>
               <Form.Check
@@ -84,7 +85,7 @@ const Account = () => {
               <h7> Agree</h7>
 
             </Form.Group>
-            <Form.Group style={{ marginTop: 20, marginBottom: 20 }}>
+            <Form.Group id={COMPONENT_IDS.SURVEY_FORM_Q4} style={{ marginTop: 20, marginBottom: 20 }}>
               <h6>On a scale of 1 to 5, how reliable is your access to the Internet?</h6>
               <h7 style={{ paddingRight: 15 }}>Not at all</h7>
               <Form.Check
@@ -124,7 +125,7 @@ const Account = () => {
               />
               <h7>Very Reliable</h7>
             </Form.Group>
-            <Form.Group style={{ marginTop: 30, marginBottom: 20 }}>
+            <Form.Group id={COMPONENT_IDS.SURVEY_FORM_Q5} style={{ marginTop: 30, marginBottom: 20 }}>
               <h6>Check some things that you feel make it difficult to adopt Internet usage.</h6>
               <Row>
                 <Col>
@@ -185,7 +186,7 @@ const Account = () => {
                 </Col>
               </Row>
             </Form.Group>
-            <Form.Group style={{ marginTop: 20, marginBottom: 30 }}>
+            <Form.Group id={COMPONENT_IDS.SURVEY_FORM_Q6} style={{ marginTop: 20, marginBottom: 30 }}>
               <h6 style={{ marginTop: 20 }}>Which devices do you (normally) use to access the Internet?</h6>
               <Row style={{ margin: 'auto', width: '90%', marginBottom: 20 }}>
                 <Col>
@@ -235,7 +236,7 @@ const Account = () => {
                 </Col>
               </Row>
             </Form.Group>
-            <Form.Group style={{ width: '90%', margin: 'auto' }}>
+            <Form.Group id={COMPONENT_IDS.SURVEY_FORM_Q7} style={{ width: '90%', margin: 'auto' }}>
               <h6>Anything else you&apos;d like to add?</h6>
               <Form.Control as="textarea" rows={3} placeholder="Type any additional comments or concerns here." />
             </Form.Group>

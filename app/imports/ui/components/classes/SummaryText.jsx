@@ -37,7 +37,7 @@ const SummaryText = ({ eventKey, summary, textLen }) => {
 };
 
 SummaryText.propTypes = {
-  eventKey: PropTypes.number.isRequired,
+  eventKey: PropTypes.string.isRequired,
   summary: PropTypes.string.isRequired,
   textLen: PropTypes.number.isRequired,
 };

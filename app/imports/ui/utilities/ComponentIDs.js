@@ -20,6 +20,8 @@ export const COMPONENT_IDS = {
   NAVBAR_SIGN_UP: 'navbar-sign-up',
   NAVBAR_ADMIN: 'navbar-admin',
   NAVBAR_ACCOUNT_LIST: 'navbar-account-list',
+  NAVBAR_SURVEY: 'navbar-survey',
+  NAVBAR_RESOURCES: 'navbar-resources',
 
   // SIGN IN PAGE
   SIGN_IN_FORM_EMAIL: 'sign-in-form-email',

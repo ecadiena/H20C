@@ -29,7 +29,7 @@ const QuizQuestion = ({ quizItem, index, selected, correct }) => {
           />
         ))}
       </Form>
-      <p>{`Feedback: ${quizItem.feedback}`}</p>
+      <p>{quizItem.feedback ? `Feedback: ${quizItem.feedback}` : ''}</p>
     </div>
   );
 };
@@ -79,7 +79,7 @@ const QuizResults = () => {
         <QuizQuestion key={index} quizItem={item} index={index} selected={quiz.answers[index].selected} correct={quiz.answers[index].correct} />
       ))}
 
-      <Button className="my-4" variant="primary" type="button">Return to Lesson</Button>
+      <Button className="my-4" variant="primary" type="button" href={`/lesson/${lesson._id}`}>Return to Lesson</Button>
     </Container>
   ) : '';
 

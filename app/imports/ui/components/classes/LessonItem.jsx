@@ -27,7 +27,7 @@ const LessonItem = ({ eventKey, lesson }) => {
     <Card style={{ border: 'none', borderRadius: 0 }}>
       <Card.Header style={eventKey % 2 === 0 ? { backgroundColor: 'whitesmoke', border: 'none' } : { backgroundColor: '#fbfbfb', border: 'none' }}>
         <Row>
-          <Col sm={3} md={3} lg={1}>
+          <Col sm={3} md={3} lg={2}>
             <b>{`Lesson ${eventKey + 1}:`}</b>
           </Col>
           <Col>
@@ -46,7 +46,7 @@ const LessonItem = ({ eventKey, lesson }) => {
           </Row>
           <Row>
             <Col className="text-end">
-              <Button variant="outline-primary" type="button" size="sm">Begin Lesson</Button>{' '}
+              <Button variant="outline-primary" type="button" size="sm" href={`/lesson/${lesson._id}`}>Begin Lesson</Button>{' '}
               { registered && lesson.quiz.length > 0 ? <Button variant="outline-danger" type="button" size="sm" href={`/quiz/${lesson._id}`}>Take Quiz</Button> : '' }{' '}
               { !registered ? <Button variant="outline-success" type="button" size="sm" onClick={() => setRegisterModal(true)}>Register for Lesson</Button> : '' }
             </Col>

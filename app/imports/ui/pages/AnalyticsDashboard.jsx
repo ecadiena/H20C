@@ -4,8 +4,6 @@ import { Pie, Line, Bar } from 'react-chartjs-2';
 import { Container, Row, Col, Card, Nav, Tab } from 'react-bootstrap';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { ChartSetup, staticGenerator, userAccGenerator, genderLineGraphSetup, genderLineGenerator, educationLineGenerator, educationLineGraphSetup, ageGroupGenerator, BarOptions } from '../utilities/Charts';
-import { GoogleMaps } from '../components/maps/GoogleMaps';
-import { Keys } from '../../api/key/KeyCollection';
 
 const AnalyticsDashBoard = () => {
   const { ready, genderSetup, zipcodeSetup, educationSetup, totalUsers, genderLineSetup, educationLineSetup, ethnicitySetup, ageSetup } = useTracker(() => {
@@ -34,16 +32,6 @@ const AnalyticsDashBoard = () => {
       educationLineSetup: educationLine,
     };
   }, []);
-
-  const { keys, key_ready } = useTracker(() => {
-    const keySubscription = Keys.subscribeKey();
-    const keyOptions = Keys.find({}, {}).fetch();
-    const rdy = keySubscription.ready();
-    return {
-      key_ready: rdy,
-      keys: keyOptions,
-    };
-  }, []);
   const genderPieChart = ChartSetup(genderSetup);
   const zipcodeBarGraph = ChartSetup(zipcodeSetup);
   const educationPieChart = ChartSetup(educationSetup);
@@ -54,7 +42,6 @@ const AnalyticsDashBoard = () => {
 
   return (ready ? (
     <Container className="py-3">
-      { key_ready ? <GoogleMaps keys={keys[0].key} /> : ' ' }
       <h2>Data Report of 2022</h2>
       <Row>
         <Col sm={3}>

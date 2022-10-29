@@ -1,19 +1,32 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
+import { useTracker } from 'meteor/react-meteor-data';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import swal from 'sweetalert';
+import { CreateSessionMaps } from '../maps/CreateSessionMaps';
 import { COMPONENT_IDS } from '../../utilities/ComponentIDs';
 import { difficultyType, selectFormSetup, Sessions, sessionType, tagType } from '../../../api/session/SessionCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
+import { Keys } from '../../../api/key/KeyCollection';
 
 const CreateSessionModal = ({ modal }) => {
+  const { keys, key_ready } = useTracker(() => {
+    const keySubscription = Keys.subscribeKey();
+    const keyOptions = Keys.find({}, {}).fetch();
+    const rdy = keySubscription.ready();
+    return {
+      key_ready: rdy,
+      keys: keyOptions,
+    };
+  }, []);
+
   const formGroupStyle = { marginTop: '20px' };
 
-  const [session, setSession] = useState({ title: '', summary: '', typeAdapt: '', difficultyAdapt: '', tagsAdapt: [], location: '', date: new Date(), startTimeAdapt: '', endTimeAdapt: '' });
+  const [session, setSession] = useState({ title: '', summary: '', typeAdapt: '', difficultyAdapt: '', tagsAdapt: [], location: '', date: new Date(), startTimeAdapt: '', endTimeAdapt: '', lng: null, lat: null });
   const typeOptions = [];
   const difficultyOptions = [];
   const tagsOptions = [];
@@ -31,6 +44,7 @@ const CreateSessionModal = ({ modal }) => {
   };
 
   const submit = () => {
+    console.log(session);
     const { title, summary, typeAdapt, difficultyAdapt, tagsAdapt, location, date, startTimeAdapt, endTimeAdapt } = session;
     const startTime = moment(startTimeAdapt).format('hh:mm a');
     const endTime = moment(endTimeAdapt).format('hh:mm a');
@@ -58,7 +72,7 @@ const CreateSessionModal = ({ modal }) => {
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => {
         setEventDropdown(false);
-        setSession({ title: '', summary: '', typeAdapt: '', difficultyAdapt: '', tagsAdapt: [], location: '', date: new Date(), startTimeAdapt: '', endTimeAdapt: '' });
+        setSession({ title: '', summary: '', typeAdapt: '', difficultyAdapt: '', tagsAdapt: [], location: '', date: new Date(), startTimeAdapt: '', endTimeAdapt: '', lng: null, lat: null });
         swal('Success', 'Session added successfully', 'success');
         modal.setShow(false);
       });
@@ -138,8 +152,7 @@ const CreateSessionModal = ({ modal }) => {
                 </Row>
               </Form.Group>
               <Form.Group>
-                <Form.Label>Location: *</Form.Label>
-                <Form.Control value={session.location} type="location" placeholder="" onChange={(e) => updateSession(e.target.value, 'location')} />
+                { key_ready ? <CreateSessionMaps keys={keys[0].key} setSession={setSession} /> : ' ' }
               </Form.Group>
             </div>
           ) : ''}

@@ -4,4 +4,4 @@
 node_modules
 app/.deploy/mup.js
 app/.deploy/settings.json
-config/settings.development.json
+settings.production.json

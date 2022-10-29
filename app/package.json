@@ -51,8 +51,7 @@
     "testcafe": "^1.19.0"
   },
   "scripts": {
-    "start": "meteor --no-release-check --exclude-archs web.browser.legacy,web.cordova --settings ../config/settings.development.json",
-    "prod": "meteor --no-release-check --exclude-archs web.browser.legacy,web.cordova --settings ../config/settings.production.json",
+    "start": "meteor --no-release-check --exclude-archs web.browser.legacy,web.cordova --settings ../config/settings.production.json",
     "lint": "eslint --quiet --ext .jsx --ext .js ./imports && eslint --quiet --ext .js ./tests",
     "lint-fix": "eslint --quiet --fix --ext .jsx --ext .js ./imports && eslint --quiet --ext .js ./tests",
     "test-unit": "cross-env TEST_BROWSER_DRIVER=puppeteer MOCHA_TIMEOUT=150000 meteor test --exclude-archs web.browser.legacy,web.cordova --no-release-check --once --driver-package meteortesting:mocha --port 3100",

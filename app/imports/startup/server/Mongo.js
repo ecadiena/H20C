@@ -4,7 +4,7 @@ import { Sessions } from '../../api/session/SessionCollection';
 import { Lessons } from '../../api/lesson/LessonCollection';
 import { UserLessons } from '../../api/user/UserLessonCollection';
 import { SubmittedQuizzes } from '../../api/submittedQuiz/SubmittedQuizCollection';
-import { API } from '../../api/api/APICollection';
+import { Keys } from '../../api/key/KeyCollection';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
@@ -33,9 +33,9 @@ const addUserLesson = (data) => {
   UserLessons.define(data);
 };
 
-const addAPIKey = (data) => {
+const addKey = (data) => {
   console.log(`  Adding: ${data.title} with key of (${data.key})`);
-  API.define(data);
+  Keys.define(data);
 };
 
 // Initialize the StuffsCollection if empty.
@@ -77,9 +77,9 @@ if (SubmittedQuizzes.count() === 0) {
   }
 }
 
-if (API.count() === 0) {
-  if (Meteor.settings.defaultAPI) {
+if (Keys.count() === 0) {
+  if (Meteor.settings.defaultKey) {
     console.log('Creating API Key.');
-    Meteor.settings.defaultAPI.map(data => addAPIKey(data));
+    Meteor.settings.defaultKey.map(data => addKey(data));
   }
 }

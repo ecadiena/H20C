@@ -3,13 +3,13 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 
-export const apiPublications = {
-  apis: 'apis',
+export const keyPublications = {
+  keys: 'keys',
 };
 
-class APICollection extends BaseCollection {
+class KeyCollection extends BaseCollection {
   constructor() {
-    super('API', new SimpleSchema({
+    super('Key', new SimpleSchema({
       title: String,
       key: String,
     }));
@@ -63,7 +63,7 @@ class APICollection extends BaseCollection {
       // get the StuffCollection instance.
       const instance = this;
       /** This subscription publishes for all */
-      Meteor.publish(apiPublications.apis, function publish() {
+      Meteor.publish(keyPublications.keys, function publish() {
         return instance._collection.find({});
       });
     }
@@ -73,9 +73,9 @@ class APICollection extends BaseCollection {
    * Subscription method for all.
    * It subscribes to the entire collection.
    */
-  subscribeAPI() {
+  subscribeKey() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(apiPublications.apis);
+      return Meteor.subscribe(keyPublications.keys);
     }
     return null;
   }
@@ -96,4 +96,4 @@ class APICollection extends BaseCollection {
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const API = new APICollection();
+export const Keys = new KeyCollection();

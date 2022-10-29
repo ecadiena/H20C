@@ -17,9 +17,7 @@ import {
   ComboboxList,
   ComboboxOption,
 } from '@reach/combobox';
-// import { formatRelative } from "date-fns";
-//
-// import '@reach/combobox/styles.css';
+import '@reach/combobox/styles.css';
 import Button from 'react-bootstrap/Button';
 import mapStyles from './mapStyles';
 
@@ -32,9 +30,10 @@ const options = {
   styles: mapStyles,
 };
 
-export const GoogleMaps = () => {
+export const GoogleMaps = ({ keys }) => {
+
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: '',
+    googleMapsApiKey: keys,
     libraries,
   });
   const [markers, setMarkers] = useState([]);
@@ -106,6 +105,10 @@ export const GoogleMaps = () => {
     </div>
   );
 
+};
+
+GoogleMaps.propTypes = {
+  keys: PropTypes.string.isRequired,
 };
 
 const Search = ({ panTo }) => {

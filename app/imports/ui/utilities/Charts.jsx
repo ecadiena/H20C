@@ -243,3 +243,24 @@ export const userAccGenerator = (users) => {
   // return [# total users, # users for this month, true/false growth better than previous month, percentage growth]
   return [users.length, currentMonthData.length, monthlyGrowth, monthlyGrowthRate];
 };
+
+export const surveyMultiSelectGroupGenerator = (surveys, type, title) => {
+  let keys = [];
+  let values = [];
+  if (type === 'difficulty') {
+    keys = ['Safety & Security', 'Uncertainty / Ambiguity', 'Data Protection', 'Reliable Connectivity', 'Difficulty Accessing/Inaccessible Resources', 'Cost'];
+    values = [0, 0, 0, 0, 0, 0];
+  }
+  if (type === 'devices') {
+    keys = ['Personal Smartphone(s)', 'Personal Tablet(s)', 'Personal Laptop(s)', 'Public/Work Devices', 'Other'];
+    values = [0, 0, 0, 0, 0];
+  }
+  const surveyType = _.pluck(surveys, type);
+  surveyType.forEach(item => {
+    item.forEach(x => {
+      const index = keys.indexOf(x);
+      values[index]++;
+    });
+  });
+  return [keys, title, values];
+};

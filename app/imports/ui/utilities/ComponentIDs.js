@@ -29,6 +29,15 @@ export const COMPONENT_IDS = {
   SIGN_IN_FORM_2FA: 'sign-in-form-2fa',
   SIGN_IN_FORM_SUBMIT: 'sign-in-form-submit',
 
+  // SURVEY PAGE
+  SURVEY_FORM_Q1: 'survey-q1',
+  SURVEY_FORM_Q2: 'survey-q2',
+  SURVEY_FORM_Q3: 'survey-q3',
+  SURVEY_FORM_Q4: 'survey-q4',
+  SURVEY_FORM_Q5: 'survey-q5',
+  SURVEY_FORM_Q6: 'survey-q6',
+  SURVEY_FORM_Q7: 'survey-q6',
+
   // PROFILE PAGE
   PROFILE_NAME: 'profile-name',
   PROFILE_EMAIL: 'profile-email',

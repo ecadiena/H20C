@@ -4,6 +4,7 @@ import { _ } from 'meteor/underscore';
 import swal from 'sweetalert';
 import { Button, Form, Modal, Row, Col, Alert } from 'react-bootstrap';
 import { ClipboardData } from 'react-bootstrap-icons';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { Surveys } from '../../api/survey/SurveyCollection';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 
@@ -88,7 +89,7 @@ const Survey = () => {
                 <option>Unsure</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group style={{ marginTop: 0, marginBottom: 30 }}>
+            <Form.Group id={COMPONENT_IDS.SURVEY_FORM_Q2} style={{ marginTop: 0, marginBottom: 30 }}>
               <h6>How did you get introduced to the Internet?</h6>
               <Form.Select style={{ marginBottom: 5, width: '40%', textAlign: 'center', margin: 'auto' }} onChange={(e) => updateSurveyProperty('introduced', e.target.value)}>
                 <option selected disabled>Select</option>
@@ -311,7 +312,7 @@ const Survey = () => {
                 </Col>
               </Row>
             </Form.Group>
-            <Form.Group style={{ width: '90%', margin: 'auto' }}>
+            <Form.Group id={COMPONENT_IDS.SURVEY_FORM_Q7} style={{ width: '90%', margin: 'auto' }}>
               <h6>Anything else you&apos;d like to add?</h6>
               <Form.Control as="textarea" rows={3} placeholder="Type any additional comments or concerns here." onChange={(e) => updateSurveyProperty('comments', e.target.value)} />
             </Form.Group>

@@ -5,7 +5,9 @@ import { Meteor } from 'meteor/meteor';
 import { Link, NavLink } from 'react-router-dom';
 import swal from 'sweetalert';
 import Alert from 'react-bootstrap/Alert';
+import { Roles } from 'meteor/alanning:roles';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import { ROLE } from '../../api/role/Role';
 import Account from '../components/2FA';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
@@ -13,6 +15,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { UserLessons } from '../../api/user/UserLessonCollection';
 import { Lessons } from '../../api/lesson/LessonCollection';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
+import { AdminProfiles } from '../../api/user/AdminProfileCollection';
 
 /* A simple static component to render some text for the landing page. */
 const ProfilePage = () => {
@@ -20,14 +23,20 @@ const ProfilePage = () => {
 
   const { ready, user, data, lessons } = useTracker(() => {
     const userProfileSubscription = UserProfiles.subscribe();
+    const adminProfileSubscription = AdminProfiles.subscribe();
     const userLessonSubscription = UserLessons.subscribeUserLesson();
     const lessonSubscription = Lessons.subscribeLesson();
-    const rdy = userProfileSubscription.ready() && userLessonSubscription.ready() && lessonSubscription.ready();
+    const rdy = userProfileSubscription.ready() && userLessonSubscription.ready() && adminProfileSubscription.ready() && lessonSubscription.ready();
 
     const currentUser = Meteor.user() ? Meteor.user().username : '';
-    const usr = UserProfiles.findOne({ email: currentUser }, {});
+    let usr = UserProfiles.findOne({ email: currentUser }, {});
+    if (usr === undefined) {
+      usr = AdminProfiles.findOne();
+    }
+
     const usrLessons = UserLessons.find({ registeredUser: currentUser }, {}).fetch();
     const lessonData = Lessons.find({ }, {}).fetch();
+
     return {
       user: usr,
       ready: rdy,
@@ -84,8 +93,14 @@ const ProfilePage = () => {
     const updateData = { id: user._id, email: user.email, firstName: newFirstName, lastName: newLastName,
       age: newAge, zipcode: newZipcode, ethnicity: newEthnicity, education: newEducation,
       gender: newGender, totalPoints: user.totalPoints };
-    const collectionName = UserProfiles.getCollectionName();
-    console.log(collectionName);
+    let collectionName;
+
+    if (Roles.userIsInRole(Meteor.userId(), [ROLE.USER])) {
+      collectionName = UserProfiles.getCollectionName();
+    } else {
+      collectionName = AdminProfiles.getCollectionName();
+    }
+
     updateMethod.callPromise({ collectionName, updateData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => swal('Success', 'Profile updated successfully', 'success'));

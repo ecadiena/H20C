@@ -31,7 +31,6 @@ const NavBar = () => {
       surveySubmitted: srvy !== undefined,
     };
   }, []);
-  console.log(currentUser);
   const menuStyle = { paddingTop: '10px', paddingBottom: '10px', marginBottom: '10px', borderBottom: '0.1px solid #D6D8DA', position: 'relative' };
   const itemStyle = { paddingRight: '30px', color: '#1762A7', fontWeight: 'bold', fontSize: '14px' };
   const rightItemStyle = { color: '#1762A7', fontWeight: 'bold', fontSize: '14px' };
@@ -41,7 +40,7 @@ const NavBar = () => {
     <Navbar style={menuStyle} expand="lg" id={COMPONENT_IDS.NAVBAR_LANDING_PAGE}>
       <Container>
         <Navbar.Brand as={NavLink} to="/" style={{ minWidth: '270px', width: '22vw', position: 'absolute', top: 0, left: '50%', marginLeft: '-170px' }}>
-          <Image className="img-fluid" src="/images/uh-logo.png" alt="University of Hawaii Logo" />
+          <Image className="img-fluid" src="/images/uh-logo.png" alt="University of Hawaii Logo" style={{ maxHeight: '45px' }} />
         </Navbar.Brand>
         <Navbar.Toggle className="ms-auto justify-content-end" aria-controls={COMPONENT_IDS.NAVBAR_COLLAPSE} />
         <Navbar.Collapse id={COMPONENT_IDS.NAVBAR_COLLAPSE}>

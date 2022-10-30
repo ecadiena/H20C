@@ -14,7 +14,7 @@ const Account = () => {
   });
 
   const generate2FA = () => {
-    Accounts.generate2faActivationQrCode('My app name', (err, result) => {
+    Accounts.generate2faActivationQrCode('Broadband for Hawaii', (err, result) => {
       if (err) {
         return;
       }

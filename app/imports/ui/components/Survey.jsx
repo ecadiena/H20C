@@ -79,7 +79,7 @@ const Survey = () => {
               </h6>
             </Alert>
             <Form.Group style={{ marginTop: 30, marginBottom: 20 }}>
-              <h6>Approximately how long have you been familiar with using the Internet</h6>
+              <h6>Approximately how long have you been familiar with using the Internet?</h6>
               <Form.Select style={{ marginBottom: 5, width: '40%', textAlign: 'center', margin: 'auto' }} onChange={(e) => updateSurveyProperty('familiar', e.target.value)}>
                 <option selected disabled>Select</option>
                 <option>Less than 5 years</option>
@@ -100,8 +100,8 @@ const Survey = () => {
               </Form.Select>
             </Form.Group>
             <Form.Group style={{ marginTop: 30, marginBottom: 30 }} onChange={(e) => updateSurveyProperty('safe', e.target.value)}>
-              <h6>{'\nOn a scale of 1 to 5, do you feel safe using the Internet?\n'}</h6>
-              <h7 style={{ paddingRight: 15 }}>Disagree</h7>
+              <h6>{'\nOn a scale of 1 to 5, how well do you feel safe using the Internet?\n'}</h6>
+              <h7 style={{ paddingRight: 15 }}>Not at all</h7>
               <Form.Check
                 inline
                 label="1"
@@ -142,7 +142,7 @@ const Survey = () => {
                 id="3"
                 value="5"
               />
-              <h7> Agree</h7>
+              <h7> Very Safe</h7>
 
             </Form.Group>
             <Form.Group style={{ marginTop: 20, marginBottom: 20 }} onChange={(e) => updateSurveyProperty('reliable', e.target.value)}>

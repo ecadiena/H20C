@@ -1,6 +1,5 @@
 // import { Selector, t } from 'testcafe';
 // import { addStuffPage, listStuffAdminPage, listStuffPage, editStuffPage, /* manageDatabasePage, */ signOutPage } from './simple.page';
-import { landingPage } from './landing.page';
 // import { signInPage } from './signin.page';
 // import { signUpPage } from './signup.page';
 // import { navBar } from './navbar.component';
@@ -17,5 +16,5 @@ fixture('meteor-application-template-production localhost test with default db')
   .page('http://localhost:3000');
 
 test('Test that landing page shows up', async () => {
-  await landingPage.isDisplayed();
+
 });

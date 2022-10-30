@@ -3,6 +3,7 @@ import { Container, Card, Row, Col, Button, Modal, Form } from 'react-bootstrap'
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Link, NavLink } from 'react-router-dom';
+import swal from 'sweetalert';
 import Alert from 'react-bootstrap/Alert';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import Account from '../components/2FA';
@@ -11,6 +12,7 @@ import { UserProfiles } from '../../api/user/UserProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { UserLessons } from '../../api/user/UserLessonCollection';
 import { Lessons } from '../../api/lesson/LessonCollection';
+import { updateMethod } from '../../api/base/BaseCollection.methods';
 
 /* A simple static component to render some text for the landing page. */
 const ProfilePage = () => {
@@ -39,6 +41,10 @@ const ProfilePage = () => {
   const lessonStyle = { padding: 0, margin: 10 };
   const headerStyle = { fontWeight: 'bold' };
 
+  const genderList = ['Male', 'Female', 'Other'];
+  const eduList = ['Grade K - 6', 'Grade 7 - 8', 'High School', 'Some College', 'College'];
+  const ethList = ['American Indian or Alaska Native', 'Asian', 'Black or African American', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander', 'White', 'Other'];
+
   const findLesson = (lessonID) => lessons.find((lesson) => lesson._id === lessonID);
   const maxChars = 300;
 
@@ -46,14 +52,14 @@ const ProfilePage = () => {
     <Card style={lessonStyle}>
       <Card.Body style={{ marginBottom: 10 }}>
         <Card.Title>
-          {findLesson(d.lessonID).title.length > 65 ?
-            `${findLesson(d.lessonID).title.substring(0, 65)} ... ` :
-            findLesson(d.lessonID).title.substring(0, 65)}
+          {findLesson(d.lessonID).title?.length > 65 ?
+            `${findLesson(d.lessonID).title?.substring(0, 65)} ... ` :
+            findLesson(d.lessonID).title?.substring(0, 65)}
         </Card.Title>
         <Card.Text>
-          {findLesson(d.lessonID).summary.length > maxChars ?
-            `${findLesson(d.lessonID).summary.substring(0, maxChars)} .... ` :
-            findLesson(d.lessonID).summary.substring(0, maxChars)}
+          {findLesson(d.lessonID).summary?.length > maxChars ?
+            `${findLesson(d.lessonID).summary?.substring(0, maxChars)} .... ` :
+            findLesson(d.lessonID).summary?.substring(0, maxChars)}
         </Card.Text>
       </Card.Body>
       <Card.Footer style={{ paddingRight: 0, paddingLeft: 0 }}>
@@ -65,6 +71,25 @@ const ProfilePage = () => {
       </Card.Footer>
     </Card>
   ));
+
+  const submit = () => {
+    const newFirstName = document.getElementById(COMPONENT_IDS.EDIT_PROFILE_FIRST_NAME).value;
+    const newLastName = document.getElementById(COMPONENT_IDS.EDIT_PROFILE_LAST_NAME).value;
+    const newAge = document.getElementById(COMPONENT_IDS.EDIT_PROFILE_AGE).value;
+    const newZipcode = document.getElementById(COMPONENT_IDS.EDIT_PROFILE_ZIPCODE).value;
+    const newEthnicity = document.getElementById(COMPONENT_IDS.EDIT_PROFILE_ETHNICITY).value;
+    const newEducation = document.getElementById(COMPONENT_IDS.EDIT_PROFILE_EDUCATION).value;
+    const newGender = document.getElementById(COMPONENT_IDS.EDIT_PROFILE_GENDER).value;
+
+    const updateData = { id: user._id, email: user.email, firstName: newFirstName, lastName: newLastName,
+      age: newAge, zipcode: newZipcode, ethnicity: newEthnicity, education: newEducation,
+      gender: newGender, totalPoints: user.totalPoints };
+    const collectionName = UserProfiles.getCollectionName();
+    console.log(collectionName);
+    updateMethod.callPromise({ collectionName, updateData })
+      .catch(error => swal('Error', error.message, 'error'))
+      .then(() => swal('Success', 'Profile updated successfully', 'success'));
+  };
 
   return ready ? (
     <Container id={PAGE_IDS.PROFILE_PAGE}>
@@ -202,78 +227,66 @@ const ProfilePage = () => {
         <Modal show={show} onHide={() => setShow(false)} centered dialogClassName="modal-90w">
           <Modal.Header closeButton />
           <Modal.Body>
-            <h4>Edit Profile Settings</h4>
+            <h4 style={{ textAlign: 'center' }}>Edit Profile Settings</h4>
             <Form>
               <Row style={{ paddingBottom: 20 }}>
                 <Col>
-                  <Form.Group style={{ marginLeft: 10 }}>
-                    Email Address *
-                    <Form.Control id={COMPONENT_IDS.EDIT_PROFILE_EMAIL} placeholder="Enter your email" style={{ marginBottom: 5 }} />
-                    Password *
-                    <Form.Control id={COMPONENT_IDS.EDIT_PROFILE_PASSWORD} type="password" placeholder="Create a password" style={{ marginBottom: 5 }} />
-                  </Form.Group>
                   <Row style={{ marginBottom: 5 }}>
                     <Col style={{ marginLeft: 10 }}>
                       <Form.Group>
                         First Name *
-                        <Form.Control id={COMPONENT_IDS.EDIT_PROFILE_FIRST_NAME} placeholder="Enter your first name" />
+                        <Form.Control id={COMPONENT_IDS.EDIT_PROFILE_FIRST_NAME} placeholder="Enter your new first name" />
                       </Form.Group>
                     </Col>
                     <Col>
                       <Form.Group>
                         Last Name *
-                        <Form.Control id={COMPONENT_IDS.EDIT_PROFILE_LAST_NAME} placeholder="Enter your last name" />
+                        <Form.Control id={COMPONENT_IDS.EDIT_PROFILE_LAST_NAME} placeholder="Enter your new last name" />
                       </Form.Group>
                     </Col>
                   </Row>
-                  <Form.Group style={{ marginLeft: 10 }}>
-                    Zipcode *
-                    <Form.Control id={COMPONENT_IDS.EDIT_PROFILE_ZIPCODE} type="number" min="0" placeholder="Enter your zipcode" style={{ marginBottom: 5 }} />
-                  </Form.Group>
+                  <div style={{ marginLeft: 10 }}>
+                    <Form.Group>
+                      Age *
+                      <Form.Control id={COMPONENT_IDS.EDIT_PROFILE_AGE} type="number" min="0" placeholder="Enter your new age" style={{ marginBottom: 5 }} />
+                    </Form.Group>
+                    <Form.Group>
+                      Zipcode *
+                      <Form.Control id={COMPONENT_IDS.EDIT_PROFILE_ZIPCODE} type="number" min="0" placeholder="Enter your new zipcode" style={{ marginBottom: 5 }} />
+                    </Form.Group>
+                  </div>
                 </Col>
                 <Col style={{ marginRight: 10 }}>
                   <Form.Group>
-                    Age *
-                    <Form.Control id={COMPONENT_IDS.EDIT_PROFILE_AGE} type="number" min="0" placeholder="Enter your age" style={{ marginBottom: 5 }} />
-                  </Form.Group>
-                  <Form.Group>
                     Gender *
-                    <Form.Select id={COMPONENT_IDS.EDIT_PROFILE_GENDER} placeholder="Enter your gender" style={{ marginBottom: 5 }}>
+                    <Form.Select id={COMPONENT_IDS.EDIT_PROFILE_GENDER} placeholder="Enter your gender" options={genderList} style={{ marginBottom: 5 }}>
                       <option disabled>Select</option>
-                      <option>Male</option>
-                      <option>Female</option>
-                      <option>Transgender</option>
-                      <option>Non-binary</option>
-                      <option>Prefer not to say</option>
+                      {genderList.map((name) => (
+                        <option value={name}>{name}</option>
+                      ))}
                     </Form.Select>
                   </Form.Group>
                   <Form.Group>
                     Ethnicity *
-                    <Form.Select id={COMPONENT_IDS.EDIT_PROFILE_ETHNICITY}>
+                    <Form.Select id={COMPONENT_IDS.EDIT_PROFILE_ETHNICITY} options={ethList}>
                       <option disabled>Select</option>
-                      <option>American Indian or Alaska Native</option>
-                      <option>Asian</option>
-                      <option>Black or African American</option>
-                      <option>Hispanic or Latino</option>
-                      <option>Native Hawaiian or Other Pacific Islander</option>
-                      <option>White</option>
-                      <option>Other</option>
+                      {ethList.map((eth) => (
+                        <option value={eth}>{eth}</option>
+                      ))}
                     </Form.Select>
                   </Form.Group>
                   <Form.Group style={{ marginTop: 5, marginBottom: 30 }}>
                     Education Level *
-                    <Form.Select id={COMPONENT_IDS.EDIT_PROFILE_EDUCATION}>
+                    <Form.Select id={COMPONENT_IDS.EDIT_PROFILE_EDUCATION} options={eduList}>
                       <option disabled>Select</option>
-                      <option>Grade K - 6</option>
-                      <option>Grade 7 - 8</option>
-                      <option>High School</option>
-                      <option>Some College</option>
-                      <option>College</option>
+                      {eduList.map((edu) => (
+                        <option value={edu}>{edu}</option>
+                      ))}
                     </Form.Select>
                   </Form.Group>
                 </Col>
               </Row>
-              <Button variant="primary" type="submit" style={{ position: 'absolute', marginTop: 20, bottom: 10, marginLeft: 10 }} alt="Submit Changes">
+              <Button variant="primary" type="submit" style={{ position: 'absolute', marginTop: 20, bottom: 10, marginLeft: 10 }} alt="Submit Changes" onClick={submit}>
                 Submit Changes
               </Button>
             </Form>

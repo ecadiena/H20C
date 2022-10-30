@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { _ } from 'meteor/underscore';
 import { Container, Card, Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
@@ -16,17 +17,21 @@ import { UserLessons } from '../../api/user/UserLessonCollection';
 import { Lessons } from '../../api/lesson/LessonCollection';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 import { AdminProfiles } from '../../api/user/AdminProfileCollection';
+import { Sessions } from '../../api/session/SessionCollection';
+import { SubmittedQuizzes } from '../../api/submittedQuiz/SubmittedQuizCollection';
 
 /* A simple static component to render some text for the landing page. */
 const ProfilePage = () => {
   const [show, setShow] = useState(false);
 
-  const { ready, user, data, lessons } = useTracker(() => {
+  const { ready, user, data, lessons, sessions, submittedQuizzes } = useTracker(() => {
     const userProfileSubscription = UserProfiles.subscribe();
     const adminProfileSubscription = AdminProfiles.subscribe();
     const userLessonSubscription = UserLessons.subscribeUserLesson();
     const lessonSubscription = Lessons.subscribeLesson();
-    const rdy = userProfileSubscription.ready() && userLessonSubscription.ready() && adminProfileSubscription.ready() && lessonSubscription.ready();
+    const sessionsSubscription = Sessions.subscribeSession();
+    const submittedQuizSubscription = SubmittedQuizzes.subscribeSubmittedQuiz();
+    const rdy = userProfileSubscription.ready() && userLessonSubscription.ready() && adminProfileSubscription.ready() && lessonSubscription.ready() && sessionsSubscription.ready() && submittedQuizSubscription.ready();
 
     const currentUser = Meteor.user() ? Meteor.user().username : '';
     let usr = UserProfiles.findOne({ email: currentUser }, {});
@@ -35,6 +40,8 @@ const ProfilePage = () => {
     }
 
     const usrLessons = UserLessons.find({ registeredUser: currentUser }, {}).fetch();
+    const sessionss = Sessions.find({ type: 'Course' }, {}).fetch();
+    const submittedQuiz = SubmittedQuizzes.find({}, {}).fetch();
     const lessonData = Lessons.find({ }, {}).fetch();
 
     return {
@@ -42,6 +49,8 @@ const ProfilePage = () => {
       ready: rdy,
       data: usrLessons,
       lessons: lessonData,
+      sessions: sessionss,
+      submittedQuizzes: submittedQuiz,
     };
   }, []);
 
@@ -56,6 +65,33 @@ const ProfilePage = () => {
 
   const findLesson = (lessonID) => lessons.find((lesson) => lesson._id === lessonID);
   const maxChars = 300;
+
+  const completed = { courses: 0, lessons: 0, quizPercentage: 0 };
+  const userFirstSubmittedQuizzes = _.where(submittedQuizzes, { firstAttempt: true });
+  const groupSubmittedQuizzes = _.groupBy(submittedQuizzes, quiz => quiz.lessonID);
+  const bestSubmittedQuizzes = [];
+  _.each(groupSubmittedQuizzes, lessonGroup => {
+    const bestQuiz = _.max(lessonGroup, quiz => quiz.numCorrect);
+    bestSubmittedQuizzes.push(bestQuiz);
+  });
+  sessions.forEach(session => {
+    const thisLessons = _.where(lessons, { sessionID: session._id });
+    let thisLessonsCompleted = 0;
+    thisLessons.forEach(lesson => {
+      const completedLesson = _.where(userFirstSubmittedQuizzes, { lessonID: lesson._id });
+      if (completedLesson.length > 0) {
+        thisLessonsCompleted++;
+      }
+    });
+    if (thisLessons.length === thisLessonsCompleted) {
+      completed.courses++;
+    }
+    completed.lessons += thisLessonsCompleted;
+  });
+  bestSubmittedQuizzes.forEach(quiz => {
+    completed.quizPercentage += (quiz.numCorrect / quiz.answers.length) * 100;
+  });
+  completed.quizPercentage /= bestSubmittedQuizzes.length;
 
   const userLessons = data.map((d) => (
     <Card style={lessonStyle}>
@@ -197,17 +233,17 @@ const ProfilePage = () => {
                         </Col>
                         <Col id={COMPONENT_IDS.PROFILE_DASH_AVG_PERCENT}>
                           <h6 style={headerStyle}>Average Quiz Percentage</h6>
-                          <h7>89%</h7>
+                          <h7>{completed.lessons > 0 ? `${completed.quizPercentage}%` : ''}</h7>
                         </Col>
                       </Row>
                       <Row style={{ marginBottom: 10 }}>
                         <Col id={COMPONENT_IDS.PROFILE_DASH_COMP_CLASS}>
-                          <h6 style={headerStyle}>Completed Classes</h6>
-                          <h7>34</h7>
+                          <h6 style={headerStyle}>Completed Courses</h6>
+                          <h7>{completed.courses}</h7>
                         </Col>
                         <Col id={COMPONENT_IDS.PROFILE_DASH_COMP_CURR}>
-                          <h6 style={headerStyle}>Completed Sessions</h6>
-                          <h7>2</h7>
+                          <h6 style={headerStyle}>Completed Lessons</h6>
+                          <h7>{completed.lessons}</h7>
                         </Col>
                       </Row>
                     </Col>

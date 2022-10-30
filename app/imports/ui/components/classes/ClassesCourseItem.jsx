@@ -59,8 +59,10 @@ const ClassesCourseItem = ({ eventKey, session, lessons }) => {
 
 ClassesCourseItem.propTypes = {
   eventKey: PropTypes.number.isRequired,
-  session: PropTypes.shape.isRequired,
-  lessons: PropTypes.shape.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  session: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  lessons: PropTypes.any.isRequired,
 };
 
 export default ClassesCourseItem;

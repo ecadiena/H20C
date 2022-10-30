@@ -93,7 +93,7 @@ class SubmittedQuizCollection extends BaseCollection {
       });
 
       /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(submittedQuizPublications.submittedQuizAdmin.stuffAdmin, function publish() {
+      Meteor.publish(submittedQuizPublications.submittedQuizAdmin, function publish() {
         if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
           return instance._collection.find();
         }

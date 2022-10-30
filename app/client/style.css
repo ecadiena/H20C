@@ -105,3 +105,8 @@ h1, h2, h3, h4, h5, h6 {
   width: 80%!important;
   max-width: none!important;
 }
+
+.form-view {
+  border-radius: 5px;
+  border-width: 0.01em;
+}

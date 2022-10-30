@@ -36,6 +36,8 @@ class SessionCollection extends BaseCollection {
       startTime: { type: String, optional: true },
       endTime: { type: String, optional: true },
       location: { type: String, optional: true },
+      lat: { type: Number, optional: true },
+      lng: { type: Number, optional: true },
       owner: String,
     }));
   }
@@ -43,7 +45,7 @@ class SessionCollection extends BaseCollection {
   /**
    * Defines a new Session item.
    */
-  define({ _id, title, summary, type, difficulty, tags, date, startTime, endTime, location, owner }) {
+  define({ _id, title, summary, type, difficulty, tags, date, startTime, endTime, location, owner, lat, lng }) {
     const docID = this._collection.insert({
       _id,
       title,
@@ -56,6 +58,8 @@ class SessionCollection extends BaseCollection {
       endTime,
       location,
       owner,
+      lat,
+      lng,
     });
     return docID;
   }
@@ -63,7 +67,7 @@ class SessionCollection extends BaseCollection {
   /**
    * Updates the given document.
    */
-  update(docID, { title, summary, type, difficulty, tags, date, startTime, endTime, location, owner }) {
+  update(docID, { title, summary, type, difficulty, tags, date, startTime, endTime, location, owner, lat, lng }) {
     const updateData = {};
     if (title) {
       updateData.title = title;
@@ -94,6 +98,12 @@ class SessionCollection extends BaseCollection {
     }
     if (owner) {
       updateData.owner = owner;
+    }
+    if (lat) {
+      updateData.lat = lat;
+    }
+    if (lng) {
+      updateData.lng = lng;
     }
 
     this._collection.update(docID, { $set: updateData });
@@ -154,7 +164,9 @@ class SessionCollection extends BaseCollection {
     const endTime = doc.endTime;
     const location = doc.location;
     const owner = doc.owner;
-    return { title, summary, type, tags, difficulty, date, startTime, endTime, location, owner };
+    const lat = doc.lat;
+    const lng = doc.lng;
+    return { title, summary, type, tags, difficulty, date, startTime, endTime, location, owner, lat, lng };
   }
 }
 

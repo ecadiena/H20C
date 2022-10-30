@@ -8,23 +8,35 @@ import { AdminProfiles } from '../../api/user/AdminProfileCollection';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
 import AccountListItem from '../components/accountList/AccountListItem';
+import { SubmittedQuizzes } from '../../api/submittedQuiz/SubmittedQuizCollection';
+import { Lessons } from '../../api/lesson/LessonCollection';
+import { Sessions } from '../../api/session/SessionCollection';
 
 const AccountList = () => {
   const [search, setSearch] = useState('');
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { ready, accounts } = useTracker(() => {
+  const { ready, accounts, sessions, submittedQuizzes, lessons } = useTracker(() => {
     const userProfileSubscription = UserProfiles.subscribe();
     const adminProfileSubscription = AdminProfiles.subscribe();
-    const rdy = userProfileSubscription.ready() && adminProfileSubscription.ready();
+    const sessionsSubscription = Sessions.subscribeSession();
+    const submittedQuizSubscription = SubmittedQuizzes.subscribeSubmittedQuizAdmin();
+    const lessonsSubscription = Lessons.subscribeLesson();
+    const rdy = userProfileSubscription.ready() && adminProfileSubscription.ready() && sessionsSubscription.ready() && submittedQuizSubscription.ready() && lessonsSubscription.ready();
 
     const user = UserProfiles.find({}, { sort: { username: 1 } }).fetch();
     const admin = AdminProfiles.find({}, { sort: { username: 1 } }).fetch();
+    const sessionss = Sessions.find({ type: 'Course' }, {}).fetch();
+    const submittedQuiz = SubmittedQuizzes.find({}, {}).fetch();
+    const lssns = Lessons.find({}, {}).fetch();
 
     const users = _.sortBy(user.concat(admin), (obj) => obj.lastName);
     return {
       accounts: users,
+      sessions: sessionss,
+      submittedQuizzes: submittedQuiz,
+      lessons: lssns,
       ready: rdy,
     };
   }, []);
@@ -135,7 +147,36 @@ const AccountList = () => {
               <Col xs={1} />
             </Row>
             <Accordion>
-              {getFilteredProfiles().map((account, index) => <AccountListItem key={index} eventKey={index} account={account} />)}
+              {getFilteredProfiles().map((account, index) => {
+                const completed = { courses: 0, lessons: 0, quizPercentage: 0 };
+                const userFirstSubmittedQuizzes = _.where(submittedQuizzes, { owner: account.email, firstAttempt: true });
+                const allSubmittedQuizzes = _.where(submittedQuizzes, { owner: account.email });
+                const groupSubmittedQuizzes = _.groupBy(allSubmittedQuizzes, quiz => quiz.lessonID);
+                const bestSubmittedQuizzes = [];
+                _.each(groupSubmittedQuizzes, lessonGroup => {
+                  const bestQuiz = _.max(lessonGroup, quiz => quiz.numCorrect);
+                  bestSubmittedQuizzes.push(bestQuiz);
+                });
+                sessions.forEach(session => {
+                  const thisLessons = _.where(lessons, { sessionID: session._id });
+                  let thisLessonsCompleted = 0;
+                  thisLessons.forEach(lesson => {
+                    const completedLesson = _.where(userFirstSubmittedQuizzes, { lessonID: lesson._id });
+                    if (completedLesson.length > 0) {
+                      thisLessonsCompleted++;
+                    }
+                  });
+                  if (thisLessons.length === thisLessonsCompleted) {
+                    completed.courses++;
+                  }
+                  completed.lessons += thisLessonsCompleted;
+                });
+                bestSubmittedQuizzes.forEach(quiz => {
+                  completed.quizPercentage += (quiz.numCorrect / quiz.answers.length) * 100;
+                });
+                completed.quizPercentage /= bestSubmittedQuizzes.length;
+                return <AccountListItem key={index} eventKey={`${index}`} account={account} completed={completed} />;
+              })}
             </Accordion>
           </ListGroup.Item>
           <ListGroup.Item>

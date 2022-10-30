@@ -5,8 +5,9 @@ import { Accordion, Button, Card, Col, Row, Badge } from 'react-bootstrap';
 import SummaryText from './SummaryText';
 import { UserLessons } from '../../../api/user/UserLessonCollection';
 import RegisterSession from './RegisterSession';
+import { DisplayEventMaps } from '../maps/DisplayEventMaps';
 
-const ClassesEventItem = ({ eventKey, session }) => {
+const ClassesEventItem = ({ eventKey, session, keys }) => {
   const [registerModal, setRegisterModal] = useState(false);
 
   const { ready, registered } = useTracker(() => {
@@ -56,9 +57,16 @@ const ClassesEventItem = ({ eventKey, session }) => {
             ))}
           </Col>
           <Col className="text-end">
-            { !registered ? (
-              <Button variant="outline-success" type="button" onClick={() => setRegisterModal(true)}>Register for Event</Button>
-            ) : <Button disabled variant="outline-success" type="button">Registered!</Button> }
+            <Row>
+              <Col>
+                { (session.location !== 'virtual') ? <DisplayEventMaps keys={keys} lng={session.lng} lat={session.lat} location={session.location} /> : ' ' }
+              </Col>
+              <Col xs={4}>
+                { !registered ? (
+                  <Button variant="outline-success" type="button" onClick={() => setRegisterModal(true)}>Register for Event</Button>
+                ) : <Button disabled variant="outline-success" type="button">Registered!</Button> }
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Card.Body>
@@ -76,6 +84,7 @@ const ClassesEventItem = ({ eventKey, session }) => {
 ClassesEventItem.propTypes = {
   eventKey: PropTypes.number.isRequired,
   session: PropTypes.shape.isRequired,
+  keys: PropTypes.string.isRequired,
 };
 
 export default ClassesEventItem;

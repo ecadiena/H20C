@@ -5,6 +5,7 @@ import { Lessons } from '../../api/lesson/LessonCollection';
 import { UserLessons } from '../../api/user/UserLessonCollection';
 import { SubmittedQuizzes } from '../../api/submittedQuiz/SubmittedQuizCollection';
 import { Keys } from '../../api/key/KeyCollection';
+import { Surveys } from '../../api/survey/SurveyCollection';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
@@ -26,6 +27,11 @@ const addSession = (data) => {
 const addLesson = (data) => {
   console.log(`  Adding: ${data.title} (${data.owner})`);
   Lessons.define(data);
+};
+
+const addSurveys = (data) => {
+  console.log(`  Adding Survey: ${data.user}`);
+  Surveys.define(data);
 };
 
 const addUserLesson = (data) => {
@@ -81,5 +87,12 @@ if (Keys.count() === 0) {
   if (Meteor.settings.defaultKey) {
     console.log('Creating API Key.');
     Meteor.settings.defaultKey.map(data => addKey(data));
+  }
+}
+
+if (Surveys.count() === 0) {
+  if (Meteor.settings.defaultSurveys) {
+    console.log('Creating default Surveys.');
+    Meteor.settings.defaultSurveys.map(data => addSurveys(data));
   }
 }

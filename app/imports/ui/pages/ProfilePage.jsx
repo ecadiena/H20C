@@ -11,6 +11,7 @@ import { UserProfiles } from '../../api/user/UserProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { UserLessons } from '../../api/user/UserLessonCollection';
 import { Lessons } from '../../api/lesson/LessonCollection';
+import AccountListItem from '../components/accountList/AccountListItem';
 
 /* A simple static component to render some text for the landing page. */
 const ProfilePage = () => {
@@ -26,7 +27,6 @@ const ProfilePage = () => {
     const usr = UserProfiles.findOne({ email: currentUser }, {});
     const usrLessons = UserLessons.find({ registeredUser: currentUser }, {}).fetch();
     const lessonData = Lessons.find({ }, {}).fetch();
-
     return {
       user: usr,
       ready: rdy,
@@ -34,15 +34,19 @@ const ProfilePage = () => {
       lessons: lessonData,
     };
   }, []);
-  console.log(data);
-  console.log(lessons);
+
+  const findLesson = (lessonID) => lessons.find((lesson) => lesson._id === lessonID);
 
   const userLessons = data.map((d) => (
     <Row>
       <Card style={{ width: '18rem', height: '12rem', margin: 10 }}>
-        <Link as={NavLink} to={`/lesson/${d.lessonID}`}>
-          <Card.Body>TEST</Card.Body>
-        </Link>
+        <Card.Title>{findLesson(d.lessonID).title}</Card.Title>
+        <Card.Text>
+          {findLesson(d.lessonID).summary}
+          <Link as={NavLink} to={`/lesson/${d.lessonID}`}>
+            <Card.Body>TEST</Card.Body>
+          </Link>
+        </Card.Text>
       </Card>
     </Row>
   ));

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Container, Card, Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-// import { _ } from 'underscore';
 import { Link, NavLink } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import Account from '../components/2FA';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
@@ -11,7 +11,6 @@ import { UserProfiles } from '../../api/user/UserProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { UserLessons } from '../../api/user/UserLessonCollection';
 import { Lessons } from '../../api/lesson/LessonCollection';
-import AccountListItem from '../components/accountList/AccountListItem';
 
 /* A simple static component to render some text for the landing page. */
 const ProfilePage = () => {
@@ -35,31 +34,37 @@ const ProfilePage = () => {
     };
   }, []);
 
+  const cardStyle = { height: '55vh', marginBottom: 10 };
+  const divStyle = { marginTop: 40, marginBottom: 40 };
+  const lessonStyle = { padding: 0, margin: 10 };
+  const headerStyle = { fontWeight: 'bold' };
+
   const findLesson = (lessonID) => lessons.find((lesson) => lesson._id === lessonID);
+  const maxChars = 300;
 
   const userLessons = data.map((d) => (
-    <Row>
-      <Card style={{ width: '18rem', height: '12rem', margin: 10 }}>
-        <Card.Title>{findLesson(d.lessonID).title}</Card.Title>
+    <Card style={lessonStyle}>
+      <Card.Body style={{ marginBottom: 10 }}>
+        <Card.Title>
+          {findLesson(d.lessonID).title.length > 65 ?
+            `${findLesson(d.lessonID).title.substring(0, 65)} ... ` :
+            findLesson(d.lessonID).title.substring(0, 65)}
+        </Card.Title>
         <Card.Text>
-          {findLesson(d.lessonID).summary}
-          <Link as={NavLink} to={`/lesson/${d.lessonID}`}>
-            <Card.Body>TEST</Card.Body>
+          {findLesson(d.lessonID).summary.length > maxChars ?
+            `${findLesson(d.lessonID).summary.substring(0, maxChars)} .... ` :
+            findLesson(d.lessonID).summary.substring(0, maxChars)}
+        </Card.Text>
+      </Card.Body>
+      <Card.Footer style={{ paddingRight: 0, paddingLeft: 0 }}>
+        <Button variant="primary">
+          <Link as={NavLink} to={`/lesson/${d.lessonID}`} style={{ textDecoration: 'none', color: 'white' }}>
+            Go to Lesson
           </Link>
-        </Card.Text>
-      </Card>
-    </Row>
+        </Button>
+      </Card.Footer>
+    </Card>
   ));
-  // const userSessions = data.map((d) => d.sessionID);
-  /*
-  <Card.Title>{_.find(lessons, { _id: d.lessonID }).title}</Card.Title>
-        <Card.Text>
-          {_.find(lessons, { _id: d.lessonID }).description}
-        </Card.Text>
-   */
-
-  const cardStyle = { height: '60vh', marginBottom: 10 };
-  const headerStyle = { fontWeight: 'bold' };
 
   return ready ? (
     <Container id={PAGE_IDS.PROFILE_PAGE}>
@@ -67,7 +72,7 @@ const ProfilePage = () => {
         <Row>
           <Col>
             <Card style={cardStyle}>
-              <div style={{ marginTop: 40, marginBottom: 40 }}>
+              <div style={divStyle}>
                 <Row style={{ marginBottom: 20 }}>
                   <h2 id={COMPONENT_IDS.PROFILE_NAME}>{user.firstName} {user.lastName}</h2>
                   <hr
@@ -130,8 +135,8 @@ const ProfilePage = () => {
           </Col>
           <Col>
             <Card style={cardStyle}>
-              <div style={{ marginTop: 40, marginBottom: 40 }}>
-                <Row style={{ textAlign: 'center', marginBottom: 20 }}>
+              <div style={divStyle}>
+                <Row style={{ marginBottom: 20 }}>
                   <h2>Your Dashboard</h2>
                   <hr
                     style={{
@@ -143,10 +148,9 @@ const ProfilePage = () => {
                       height: '1px',
                     }}
                   />
-                  <Row>
+                  <Row style={{ marginTop: 10 }}>
                     <Col style={{ textAlign: 'center' }}>
-                      <h4 style={{ marginTop: 10 }}>Statistics</h4>
-                      <Row style={{ marginBottom: 10 }}>
+                      <Row style={{ marginBottom: 10, marginTop: 10 }}>
                         <Col id={COMPONENT_IDS.PROFILE_DASH_POINTS}>
                           <h6 style={headerStyle}>Total Points</h6>
                           <h7>{user.totalPoints}</h7>
@@ -174,13 +178,24 @@ const ProfilePage = () => {
           </Col>
         </Row>
         <Row>
-          <Container style={{ height: '40vh', marginBottom: 5 }}>
-            <Card style={{ height: '40vh', paddingBottom: 20, overflowY: 'scroll' }}>
-              <h2 style={{ marginBottom: 20, marginTop: 20 }}>Registered Lessons</h2>
-              {userLessons.length === 0 ?
-                <h6>No registered lessons</h6> : userLessons}
-            </Card>
-          </Container>
+          {userLessons.length === 0 ? (
+            <Alert variant="info">
+              <Alert.Heading>No Registered Lessons</Alert.Heading>
+              <p>
+                {'Looks like you haven\'t registered for any of our classes. If you\'d like to register for a class, you can find a list of all the classes we offer '}
+                <Alert.Link href="/classes/">here</Alert.Link>.
+                {' Once you register for a class, it will show up here so you can refer back to it.'}
+              </p>
+            </Alert>
+          ) : (
+            <Container>
+              <Card style={{ marginBottom: 10, overflowY: 'scroll', justifyContent: 'center' }}>
+                <Card.Body>
+                  {userLessons}
+                </Card.Body>
+              </Card>
+            </Container>
+          )}
         </Row>
       </Row>
       { show ? (

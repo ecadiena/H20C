@@ -62,7 +62,8 @@ const LessonItem = ({ eventKey, lesson }) => {
 
 LessonItem.propTypes = {
   eventKey: PropTypes.number.isRequired,
-  lesson: PropTypes.shape.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  lesson: PropTypes.any.isRequired,
 };
 
 export default LessonItem;

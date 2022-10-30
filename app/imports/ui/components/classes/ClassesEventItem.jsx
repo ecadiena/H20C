@@ -83,7 +83,8 @@ const ClassesEventItem = ({ eventKey, session, keys }) => {
 
 ClassesEventItem.propTypes = {
   eventKey: PropTypes.number.isRequired,
-  session: PropTypes.shape.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  session: PropTypes.any.isRequired,
   keys: PropTypes.string.isRequired,
 };
 

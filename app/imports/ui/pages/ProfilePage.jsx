@@ -10,31 +10,51 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { UserLessons } from '../../api/user/UserLessonCollection';
+import { Lessons } from '../../api/lesson/LessonCollection';
 
 /* A simple static component to render some text for the landing page. */
 const ProfilePage = () => {
   const [show, setShow] = useState(false);
 
-  const { ready, user, data } = useTracker(() => {
+  const { ready, user, data, lessons } = useTracker(() => {
     const userProfileSubscription = UserProfiles.subscribe();
     const userLessonSubscription = UserLessons.subscribeUserLesson();
-    const rdy = userProfileSubscription.ready() && userLessonSubscription.ready();
+    const lessonSubscription = Lessons.subscribeLesson();
+    const rdy = userProfileSubscription.ready() && userLessonSubscription.ready() && lessonSubscription.ready();
 
     const currentUser = Meteor.user() ? Meteor.user().username : '';
     const usr = UserProfiles.findOne({ email: currentUser }, {});
     const usrLessons = UserLessons.find({ registeredUser: currentUser }, {}).fetch();
+    const lessonData = Lessons.find({ }, {}).fetch();
 
     return {
       user: usr,
       ready: rdy,
       data: usrLessons,
+      lessons: lessonData,
     };
   }, []);
   console.log(data);
+  console.log(lessons);
 
-  const map = data.map((d) => <Link as={NavLink} to={`/lesson/${d.lessonID}`}>Link to Lesson</Link>);
+  const userLessons = data.map((d) => (
+    <Row>
+      <Card style={{ width: '18rem', height: '12rem', margin: 10 }}>
+        <Link as={NavLink} to={`/lesson/${d.lessonID}`}>
+          <Card.Body>TEST</Card.Body>
+        </Link>
+      </Card>
+    </Row>
+  ));
+  // const userSessions = data.map((d) => d.sessionID);
+  /*
+  <Card.Title>{_.find(lessons, { _id: d.lessonID }).title}</Card.Title>
+        <Card.Text>
+          {_.find(lessons, { _id: d.lessonID }).description}
+        </Card.Text>
+   */
 
-  const cardStyle = { height: '80vh', marginBottom: 10 };
+  const cardStyle = { height: '60vh', marginBottom: 10 };
   const headerStyle = { fontWeight: 'bold' };
 
   return ready ? (
@@ -142,19 +162,21 @@ const ProfilePage = () => {
                           <h7>2</h7>
                         </Col>
                       </Row>
-                      <Row>
-                        <h4 style={{ marginTop: 10 }}>Registered Classes</h4>
-                        {map}
-                      </Row>
-                      <Row>
-                        <h4 style={{ marginTop: 10 }}>Registered Sessions</h4>
-                      </Row>
                     </Col>
                   </Row>
                 </Row>
               </div>
             </Card>
           </Col>
+        </Row>
+        <Row>
+          <Container style={{ height: '40vh', marginBottom: 5 }}>
+            <Card style={{ height: '40vh', paddingBottom: 20, overflowY: 'scroll' }}>
+              <h2 style={{ marginBottom: 20, marginTop: 20 }}>Registered Lessons</h2>
+              {userLessons.length === 0 ?
+                <h6>No registered lessons</h6> : userLessons}
+            </Card>
+          </Container>
         </Row>
       </Row>
       { show ? (

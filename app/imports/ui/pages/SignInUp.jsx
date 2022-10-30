@@ -15,6 +15,7 @@ import { defineMethod } from '../../api/base/BaseCollection.methods';
 const SignInUp = () => {
   const [redirect, setRedirect] = useState(false);
   const [input2FA, setInput2FA] = useState(false);
+  const [waiver, setWaiver] = useState(false);
 
   const signIn = (e) => {
     e.preventDefault();
@@ -168,7 +169,7 @@ const SignInUp = () => {
                     <h2>Sign Up</h2>
                     <h6>Don&apos;t have an account? Sign up here.</h6>
                   </Col>
-                  <Form onSubmit={(event) => signUp(event)}>
+                  <Form>
                     <Row style={{ paddingBottom: 20 }}>
                       <Col>
                         <Form.Group style={{ marginLeft: 10 }}>
@@ -238,9 +239,20 @@ const SignInUp = () => {
                         </Form.Group>
                       </Col>
                     </Row>
-                    <Button variant="primary" type="submit" style={{ position: 'absolute', bottom: 20, marginLeft: 10 }} onClick={(event) => signUp(event)}>
+                    <Button variant="primary" style={{ position: 'absolute', bottom: 20, marginLeft: 10 }} onClick={() => setWaiver(true)}>
                       Sign Up
                     </Button>
+                    <Modal show={waiver} backdrop="static" centered>
+                      <Modal.Body>
+                        By creating an account you consent to the following terms and conditions:
+                        the collection of your personal data and performance results on examinations
+                        will be used for data analysis by our team. Do you want to proceed?
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="danger" onClick={() => setRedirect(true)}>No, I do not consent.</Button>
+                        <Button variant="success" type="submit" onClick={(event) => signUp(event)}>Yes, I consent.</Button>
+                      </Modal.Footer>
+                    </Modal>
                   </Form>
                 </Col>
               </Row>

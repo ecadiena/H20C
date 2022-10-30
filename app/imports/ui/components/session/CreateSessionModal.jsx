@@ -35,6 +35,7 @@ const CreateSessionModal = ({ modal }) => {
   selectFormSetup(tagsOptions, tagType);
 
   const [eventDropdown, setEventDropdown] = useState(false);
+  const [virtual, setVirtual] = useState(false);
 
   const updateSession = (event, property) => {
     setSession(prevSession => ({ ...prevSession, [property]: event }));
@@ -43,9 +44,15 @@ const CreateSessionModal = ({ modal }) => {
     }
   };
 
+  const updateVirtualSession = () => {
+    updateSession('virtual', 'location');
+
+    setVirtual(!virtual);
+  };
+
   const submit = () => {
     console.log(session);
-    const { title, summary, typeAdapt, difficultyAdapt, tagsAdapt, location, date, startTimeAdapt, endTimeAdapt } = session;
+    const { title, summary, typeAdapt, difficultyAdapt, tagsAdapt, location, date, startTimeAdapt, endTimeAdapt, lat, lng } = session;
     const startTime = moment(startTimeAdapt).format('hh:mm a');
     const endTime = moment(endTimeAdapt).format('hh:mm a');
     const tags = tagsAdapt.map(tag => tag.value);
@@ -57,8 +64,12 @@ const CreateSessionModal = ({ modal }) => {
       swal('Error', 'Please complete all required fields', 'error');
       return;
     }
-    if (type === 'Event' && (location === '' || date === '' || startTimeAdapt === '' || endTimeAdapt === '')) {
+    if (type === 'Event' && virtual && (location === '' || date === '' || startTimeAdapt === '' || endTimeAdapt === '')) {
       swal('Error', 'Please complete all required fields', 'error');
+      return;
+    }
+    if (type === 'Event' && !virtual && (location === '' || lat === null || lng === null || date === '' || startTimeAdapt === '' || endTimeAdapt === '')) {
+      swal('Error', 'Please enter a location and place a marker on the map', 'error');
       return;
     }
     if (type === 'Event' && startTimeAdapt > endTimeAdapt) {
@@ -67,11 +78,12 @@ const CreateSessionModal = ({ modal }) => {
     }
 
     const collectionName = Sessions.getCollectionName();
-    const definitionData = { title, summary, type, difficulty, date, startTime, endTime, tags, location, owner };
+    const definitionData = { title, summary, type, difficulty, date, startTime, endTime, tags, location, owner, lat, lng };
     defineMethod.callPromise({ collectionName, definitionData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => {
         setEventDropdown(false);
+        setVirtual(false);
         setSession({ title: '', summary: '', typeAdapt: '', difficultyAdapt: '', tagsAdapt: [], location: '', date: new Date(), startTimeAdapt: '', endTimeAdapt: '', lng: null, lat: null });
         swal('Success', 'Session added successfully', 'success');
         modal.setShow(false);
@@ -109,6 +121,10 @@ const CreateSessionModal = ({ modal }) => {
             <Form.Label>Type: *</Form.Label>
             <Select value={session.typeAdapt} options={typeOptions} onChange={(e) => updateSession(e, 'typeAdapt')} />
           </Form.Group>
+          <Form.Group style={formGroupStyle}>
+            <Form.Label>Summary: *</Form.Label>
+            <Form.Control as="textarea" value={session.summary} type="summary" placeholder="" onChange={(e) => updateSession(e.target.value, 'summary')} />
+          </Form.Group>
           { eventDropdown ? (
             <div style={formGroupStyle}>
               <h5>Event Details</h5>
@@ -121,6 +137,7 @@ const CreateSessionModal = ({ modal }) => {
                       selected={session.date}
                       minDate={new Date()}
                       onChange={(e) => updateSession(e, 'date')}
+                      className="form-view"
                     />
                   </Col>
                   <Col>
@@ -134,6 +151,7 @@ const CreateSessionModal = ({ modal }) => {
                       timeIntervals={30}
                       timeCaption="time"
                       dateFormat="h:mm aa"
+                      className="form-view"
                     />
                   </Col>
                   <Col>
@@ -147,19 +165,22 @@ const CreateSessionModal = ({ modal }) => {
                       timeIntervals={30}
                       timeCaption="time"
                       dateFormat="h:mm aa"
+                      className="form-view"
                     />
                   </Col>
                 </Row>
               </Form.Group>
               <Form.Group>
-                { key_ready ? <CreateSessionMaps keys={keys[0].key} setSession={setSession} /> : ' ' }
+                <br />
+                <Form.Check
+                  type="checkbox"
+                  label="Virtual"
+                  onClick={updateVirtualSession}
+                />
+                { (key_ready && !virtual) ? <CreateSessionMaps keys={keys[0].key} setSession={setSession} /> : ' ' }
               </Form.Group>
             </div>
           ) : ''}
-          <Form.Group style={formGroupStyle}>
-            <Form.Label>Summary: *</Form.Label>
-            <Form.Control as="textarea" value={session.summary} type="summary" placeholder="" onChange={(e) => updateSession(e.target.value, 'summary')} />
-          </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>

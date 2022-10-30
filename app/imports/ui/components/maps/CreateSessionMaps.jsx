@@ -21,11 +21,13 @@ import mapStyles from './mapStyles';
 
 const libraries = ['places'];
 const mapContainerStyle = {
-  width: '80%',
-  height: '500px',
+  width: '100%',
+  height: '450px',
+  border: '1px solid black',
 };
 const options = {
   styles: mapStyles,
+  scrollwheel: false,
 };
 
 export const CreateSessionMaps = ({ keys, setSession }) => {
@@ -38,7 +40,7 @@ export const CreateSessionMaps = ({ keys, setSession }) => {
     googleMapsApiKey: keys,
     libraries,
   });
-  const [marker, setMarker] = useState({});
+  const [marker, setMarker] = useState({ lat: 0, lng: 0 });
   const [zoom, setZoom] = useState(8);
   const [center, setCenter] = useState({ lat: 21.432423, lng: -157.404107 });
 
@@ -59,7 +61,7 @@ export const CreateSessionMaps = ({ keys, setSession }) => {
   const panTo = React.useCallback(({ lat, lng }) => {
     setCenter({ lat: lat, lng: lng });
     // mapRef.current.panTo({ lat, lng });
-    setZoom(16);
+    setZoom(17);
   }, []);
 
   if (loadError) return 'Error loading maps';
@@ -69,7 +71,10 @@ export const CreateSessionMaps = ({ keys, setSession }) => {
     <div>
       { isLoaded ? (
         <div>
-
+          <br />
+          <span>Location: *</span>
+          <Search panTo={panTo} setSession={setSession} />
+          <br />
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             zoom={zoom}
@@ -82,7 +87,6 @@ export const CreateSessionMaps = ({ keys, setSession }) => {
               position={{ lat: marker.lat, lng: marker.lng }}
             />
           </GoogleMap>
-          <Search panTo={panTo} setSession={setSession} />
         </div>
       ) : ' '}
     </div>
@@ -108,31 +112,36 @@ const Search = ({ panTo, setSession }) => {
   });
 
   return (
-    <Combobox onSelect={async (address) => {
-      setValue(address, false);
-      clearSuggestions();
-      try {
-        const results = await getGeocode({ address });
-        const { lat, lng } = await getLatLng(results[0]);
-        panTo({ lat, lng });
-      } catch (error) {
-        console.log(`error: ${error}`);
-      }
-    }}
+    <Combobox
+      openOnFocus
+      style={{ width: '100%' }}
+      onSelect={async (address) => {
+        setValue(address, false);
+        clearSuggestions();
+        try {
+          const results = await getGeocode({ address });
+          const { lat, lng } = await getLatLng(results[0]);
+          panTo({ lat, lng });
+        } catch (error) {
+          console.log(`error: ${error}`);
+        }
+      }}
     >
       <ComboboxInput
         value={value}
+        style={{ width: '100%' }}
+        className="form-view"
         onChange={(e) => {
           setValue(e.target.value);
-          updateSession(e.target.value, 'location');
+          updateSession(value, 'location');
         }}
         disabled={!ready}
         placeholder="Enter an address"
       />
-      <ComboboxPopover>
+      <ComboboxPopover portal={false}>
         <ComboboxList>
           {status === 'OK' && data.map(({ id, description }) => (
-            <ComboboxOption key={id} value={description} />
+            <ComboboxOption key={id} value={description} onClick={() => updateSession(description, 'location')} />
           ))}
         </ComboboxList>
       </ComboboxPopover>

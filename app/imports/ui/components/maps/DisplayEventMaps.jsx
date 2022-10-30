@@ -18,6 +18,8 @@ const options = {
   styles: mapStyles,
 };
 
+// Reference for Google Maps Implementation (Leigh Halliday)
+// https://www.youtube.com/watch?v=WZcxJGmLbSo&ab_channel=LeighHalliday
 export const DisplayEventMaps = ({ keys, lat, lng, location }) => {
 
   const { isLoaded, loadError } = useLoadScript({

@@ -30,6 +30,8 @@ const options = {
   scrollwheel: false,
 };
 
+// Reference for Google Maps Implementation (Leigh Halliday)
+// https://www.youtube.com/watch?v=WZcxJGmLbSo&ab_channel=LeighHalliday
 export const CreateSessionMaps = ({ keys, setSession }) => {
 
   const updateSession = (event, property) => {

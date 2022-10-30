@@ -4,7 +4,7 @@ import { Accordion, Button, Card, Col, Row } from 'react-bootstrap';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 import { CaretDown } from 'react-bootstrap-icons';
 
-const AccountListItem = ({ eventKey, account }) => {
+const AccountListItem = ({ eventKey, account, completed }) => {
   const decoratedOnClick = useAccordionButton(eventKey);
 
   return (
@@ -35,9 +35,9 @@ const AccountListItem = ({ eventKey, account }) => {
           </Row>
           <Row className="row-cols-2 row-cols-md-4">
             <Col md={2}><b>Total Points:</b><br />{account.totalPoints}</Col>
-            <Col><b>Completed Classes:</b><br />20</Col>
-            <Col><b>Completed Curriculums:</b><br />5</Col>
-            <Col><b>Average Quiz Percentage:</b><br />98%</Col>
+            <Col><b>Completed Courses:</b><br />{completed.courses}</Col>
+            <Col><b>Completed Lessons:</b><br />{completed.lessons}</Col>
+            <Col><b>Average Quiz Percentage:</b><br />{completed.lessons > 0 ? `${completed.quizPercentage}%` : ''}</Col>
           </Row>
         </Card.Body>
       </Accordion.Collapse>
@@ -48,6 +48,7 @@ const AccountListItem = ({ eventKey, account }) => {
 AccountListItem.propTypes = {
   eventKey: PropTypes.string.isRequired,
   account: PropTypes.shape.isRequired,
+  completed: PropTypes.shape.isRequired,
 };
 
 export default AccountListItem;

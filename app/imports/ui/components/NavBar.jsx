@@ -31,6 +31,7 @@ const NavBar = () => {
       surveySubmitted: srvy !== undefined,
     };
   }, []);
+  console.log(currentUser);
   const menuStyle = { paddingTop: '10px', paddingBottom: '10px', marginBottom: '10px', borderBottom: '0.1px solid #D6D8DA', position: 'relative' };
   const itemStyle = { paddingRight: '30px', color: '#1762A7', fontWeight: 'bold', fontSize: '14px' };
   const rightItemStyle = { color: '#1762A7', fontWeight: 'bold', fontSize: '14px' };

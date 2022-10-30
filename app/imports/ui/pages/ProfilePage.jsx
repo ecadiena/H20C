@@ -52,14 +52,14 @@ const ProfilePage = () => {
     <Card style={lessonStyle}>
       <Card.Body style={{ marginBottom: 10 }}>
         <Card.Title>
-          {findLesson(d.lessonID).title.length > 65 ?
-            `${findLesson(d.lessonID).title.substring(0, 65)} ... ` :
-            findLesson(d.lessonID).title.substring(0, 65)}
+          {findLesson(d.lessonID).title?.length > 65 ?
+            `${findLesson(d.lessonID).title?.substring(0, 65)} ... ` :
+            findLesson(d.lessonID).title?.substring(0, 65)}
         </Card.Title>
         <Card.Text>
-          {findLesson(d.lessonID).summary.length > maxChars ?
-            `${findLesson(d.lessonID).summary.substring(0, maxChars)} .... ` :
-            findLesson(d.lessonID).summary.substring(0, maxChars)}
+          {findLesson(d.lessonID).summary?.length > maxChars ?
+            `${findLesson(d.lessonID).summary?.substring(0, maxChars)} .... ` :
+            findLesson(d.lessonID).summary?.substring(0, maxChars)}
         </Card.Text>
       </Card.Body>
       <Card.Footer style={{ paddingRight: 0, paddingLeft: 0 }}>

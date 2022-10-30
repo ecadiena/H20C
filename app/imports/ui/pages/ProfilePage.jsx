@@ -63,7 +63,11 @@ const ProfilePage = () => {
   const eduList = ['Grade K - 6', 'Grade 7 - 8', 'High School', 'Some College', 'College'];
   const ethList = ['American Indian or Alaska Native', 'Asian', 'Black or African American', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander', 'White', 'Other'];
 
-  const findLesson = (lessonID) => lessons.find((lesson) => lesson._id === lessonID);
+  const findLesson = (lessonID) => {
+    const ret = lessons.find((lesson) => lesson._id === lessonID);
+    if (ret === undefined) return {};
+    return ret;
+  };
   const maxChars = 300;
 
   const completed = { courses: 0, lessons: 0, quizPercentage: 0 };
@@ -93,8 +97,8 @@ const ProfilePage = () => {
   });
   completed.quizPercentage /= bestSubmittedQuizzes.length;
 
-  const userLessons = data.map((d) => (
-    <Card style={lessonStyle}>
+  const userLessons = data.map((d, index) => (
+    <Card style={lessonStyle} key={index}>
       <Card.Body style={{ marginBottom: 10 }}>
         <Card.Title>
           {findLesson(d.lessonID).title?.length > 65 ?
@@ -164,11 +168,11 @@ const ProfilePage = () => {
                   <Row style={{ marginTop: 20 }}>
                     <Col id={COMPONENT_IDS.PROFILE_EMAIL}>
                       <h6 style={headerStyle}>Email Address</h6>
-                      <h7>{user.email}</h7>
+                      <p>{user.email}</p>
                     </Col>
                     <Col id={COMPONENT_IDS.PROFILE_ZIPCODE}>
                       <h6 style={headerStyle}>Zipcode</h6>
-                      <h7>{user.zipcode}</h7>
+                      <p>{user.zipcode}</p>
                     </Col>
                   </Row>
                   <Row>
@@ -176,21 +180,21 @@ const ProfilePage = () => {
                       <Row style={{ marginBottom: 10, marginTop: 20 }}>
                         <Col id={COMPONENT_IDS.PROFILE_GENDER}>
                           <h6 style={headerStyle}>Gender</h6>
-                          <h7>{user.gender}</h7>
+                          <p>{user.gender}</p>
                         </Col>
                         <Col id={COMPONENT_IDS.PROFILE_AGE}>
                           <h6 style={headerStyle}>Age</h6>
-                          <h7>{user.age}</h7>
+                          <p>{user.age}</p>
                         </Col>
                       </Row>
                       <Row style={{ marginBottom: 10 }}>
                         <Col id={COMPONENT_IDS.PROFILE_ETHNICITY}>
                           <h6 style={headerStyle}>Ethnicity</h6>
-                          <h7>{user.ethnicity}</h7>
+                          <p>{user.ethnicity}</p>
                         </Col>
                         <Col id={COMPONENT_IDS.PROFILE_EDUCATION}>
                           <h6 style={headerStyle}>Education Level</h6>
-                          <h7>{user.education}</h7>
+                          <p>{user.education}</p>
                         </Col>
                       </Row>
                     </Col>
@@ -229,21 +233,21 @@ const ProfilePage = () => {
                       <Row style={{ marginBottom: 10, marginTop: 10 }}>
                         <Col id={COMPONENT_IDS.PROFILE_DASH_POINTS}>
                           <h6 style={headerStyle}>Total Points</h6>
-                          <h7>{user.totalPoints}</h7>
+                          <p>{user.totalPoints}</p>
                         </Col>
                         <Col id={COMPONENT_IDS.PROFILE_DASH_AVG_PERCENT}>
                           <h6 style={headerStyle}>Average Quiz Percentage</h6>
-                          <h7>{completed.lessons > 0 ? `${completed.quizPercentage}%` : ''}</h7>
+                          <p>{completed.lessons > 0 ? `${completed.quizPercentage}%` : ''}</p>
                         </Col>
                       </Row>
                       <Row style={{ marginBottom: 10 }}>
                         <Col id={COMPONENT_IDS.PROFILE_DASH_COMP_CLASS}>
                           <h6 style={headerStyle}>Completed Courses</h6>
-                          <h7>{completed.courses}</h7>
+                          <p>{completed.courses}</p>
                         </Col>
                         <Col id={COMPONENT_IDS.PROFILE_DASH_COMP_CURR}>
                           <h6 style={headerStyle}>Completed Lessons</h6>
-                          <h7>{completed.lessons}</h7>
+                          <p>{completed.lessons}</p>
                         </Col>
                       </Row>
                     </Col>
@@ -312,8 +316,8 @@ const ProfilePage = () => {
                     Gender *
                     <Form.Select id={COMPONENT_IDS.EDIT_PROFILE_GENDER} placeholder="Enter your gender" options={genderList} style={{ marginBottom: 5 }}>
                       <option disabled>Select</option>
-                      {genderList.map((name) => (
-                        <option value={name}>{name}</option>
+                      {genderList.map((name, index) => (
+                        <option value={name} key={index}>{name}</option>
                       ))}
                     </Form.Select>
                   </Form.Group>
@@ -321,8 +325,8 @@ const ProfilePage = () => {
                     Ethnicity *
                     <Form.Select id={COMPONENT_IDS.EDIT_PROFILE_ETHNICITY} options={ethList}>
                       <option disabled>Select</option>
-                      {ethList.map((eth) => (
-                        <option value={eth}>{eth}</option>
+                      {ethList.map((eth, index) => (
+                        <option value={eth} key={index}>{eth}</option>
                       ))}
                     </Form.Select>
                   </Form.Group>
@@ -330,8 +334,8 @@ const ProfilePage = () => {
                     Education Level *
                     <Form.Select id={COMPONENT_IDS.EDIT_PROFILE_EDUCATION} options={eduList}>
                       <option disabled>Select</option>
-                      {eduList.map((edu) => (
-                        <option value={edu}>{edu}</option>
+                      {eduList.map((edu, index) => (
+                        <option value={edu} key={index}>{edu}</option>
                       ))}
                     </Form.Select>
                   </Form.Group>

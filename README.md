@@ -30,10 +30,10 @@ For developers to activated the deployed version of this application, they will 
 5. Open http://localhost:3000 to view the running local application 
 
 ### Important Links
-Github Repository URL: https://github.com/HACC2022/Chipmunks
-Deployed website: https://hawaiibroadband.xyz/
-DevPost: https://devpost.com/software/chipmunks
-Function Evaluation Video: https://youtu.be/ICR5q8FrtbE 
+- Github Repository URL: https://github.com/HACC2022/Chipmunks
+- Deployed website: https://hawaiibroadband.xyz/
+- DevPost: https://devpost.com/software/chipmunks
+- Function Evaluation Video: https://youtu.be/ICR5q8FrtbE 
 
 Template: [Meteor-Application-Template-Production](https://github.com/ics-software-engineering/meteor-application-template-production)
 

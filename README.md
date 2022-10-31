@@ -7,7 +7,7 @@ Status of BroadBand for Hawaii.
 
 ### Deployed Version: 
 
-To visit the demo of the app, the user may use any device with a web browser to go to the (website)[https://hawaiibroadband.xyz/] to access the application.
+To visit the demo of the app, the user may use any device with a web browser to go to the [website](https://hawaiibroadband.xyz/) to access the application.
 
 To test the application as a general public user (i.e, user does not have an account), they can explore several pages: Classes, About, and Resources. These are all located in the left corner of the Nav Bar.
 
@@ -21,11 +21,11 @@ To test the application as an admin, first login using the admin credentials. Ad
 
 For developers to activated the deployed version of this application, they will need to install Meteor 2.7.3, Node.js and get an Google API key. 
 
-Clone the repository to download the GitHub repo to your local computer. 
-Change directory (cd) into the app/ directory, and install third party libraries with: ```meteor npm install```
-Make a copy the settings.development.json file from config/ directory, and rename it to settings.production.json in the same directory. Place your Google API key in the “defaultKey” section under “key” property with a title “Google API”. The .gitignore file contains settings.production.json so it will not appear on GitHub when you commit.  
-In your terminal, change directory (cd) into the app/ directory and run the command: ```meteor npm run start```
-Open http://localhost:3000 to view the running local application 
+1. Clone the repository to download the GitHub repo to your local computer. 
+2. Change directory (cd) into the app/ directory, and install third party libraries with: ```meteor npm install```
+3. Make a copy the settings.development.json file from config/ directory, and rename it to settings.production.json in the same directory. Place your Google API key in the “defaultKey” section under “key” property with a title “Google API”. The .gitignore file contains settings.production.json so it will not appear on GitHub when you commit.  
+4. In your terminal, change directory (cd) into the app/ directory and run the command: ```meteor npm run start```
+5. Open http://localhost:3000 to view the running local application 
 
-Template: Meteor-Application-Template-Production (https://github.com/ics-software-engineering/meteor-application-template-production)
+Template: [Meteor-Application-Template-Production](https://github.com/ics-software-engineering/meteor-application-template-production)
 

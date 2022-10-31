@@ -1,7 +1,7 @@
 ## Hawaii Broadband
 
-Status of BroadBand for Hawaii. 
-[![ci-broadband-for-hawaii](https://github.com/HACC2022/Chipmunks/actions/workflows/ci.yml/badge.svg)](https://github.com/HACC2022/Chipmunks/actions/workflows/ci.yml/badge.svg)
+Status of Hawaii Broadband 
+[![ci-hawaii-broadband](https://github.com/HACC2022/Chipmunks/actions/workflows/ci.yml/badge.svg)](https://github.com/HACC2022/Chipmunks/actions/workflows/ci.yml/badge.svg)
 
 Broadband for Hawaii is an interactive website application that helps build digital equity for residents of Hawaii. 
  

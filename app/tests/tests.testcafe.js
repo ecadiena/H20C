@@ -4,7 +4,7 @@
 // import { signUpPage } from './signup.page';
 // import { navBar } from './navbar.component';
 // import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
-// import { landingPage } from './landing.page';
+import { landingPage } from './landing.page';
 
 // eslint-disable-next-line no-unused-vars
 /* global fixture:false, test:false */
@@ -17,6 +17,6 @@
 fixture('meteor-application-template-production localhost test with default db')
   .page('http://localhost:3000');
 
-// test('Test that landing page shows up', async () => {
-//   await landingPage.isDisplayed();
-// });
+test('Test that landing page shows up', async () => {
+  await landingPage.isDisplayed();
+});

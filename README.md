@@ -3,19 +3,23 @@
 Status of BroadBand for Hawaii. 
 [![ci-broadband-for-hawaii](https://github.com/HACC2022/Chipmunks/actions/workflows/ci.yml/badge.svg)](https://github.com/HACC2022/Chipmunks/actions/workflows/ci.yml/badge.svg)
 
+Broadband for Hawaii is an interactive website application that helps build digital equity for residents of Hawaii. 
+ 
+Hawaiʻi citizens living in rural communities do not have the same access to the Internet as those who live in areas with higher broadband usage. Access to the internet alone does not guarantee that the person knows how the internet works or why it's important. With modern technologies relying heavily on staying connected, providing quality broadband to all Hawai’i citizens is essential to decreasing the academic disparity on these topics. This disparity ties in with those also experiencing economic hardship due to a lack of knowledge, access, and much more. 
+ 
+Individuals who may be experiencing a lack of access to the Internet may be in financially challenged communities that don’t have the funds to enhance their broadband, lack the knowledge and or experience to use these newer technologies, and those who were never given the proper resources to educate themselves on these topics.
+ 
+Everything relies on the internet, and we need to make sure people have access to the Internet and knowledge of how to use it. We depend on computers and the Internet to facilitate our daily activities. They are an essential part of communication, transportation, retail, financing, and health care. In order for us as a community to decrease this social and economic divide, we must find a solution to bring the Internet to all.
+
 ## How to use Hawaii Broadband
 
 ### Deployed Version: 
 
 To visit the demo of the app, the user may use any device with a web browser to go to the [website](https://hawaiibroadband.xyz/) to access the application.
 
-To test the application as a general public user (i.e, user does not have an account), they can explore several pages: Classes, About, and Resources. These are all located in the left corner of the Nav Bar.
-
-To test the application as an existing user, first login using the user credentials. Users will be able to register for classes and sessions, edit their personal profile, and accumulate points. They are enabled to view lessons and then test their knowledge by taking quizzes that provide feedback when completed.
-
-To test the application as a new user, create an account by filling out the information on prompted on the sign up form. New users will need to agree to a data collection form prior to accessing the application. They will be able to edit their personal profile, enable two factor authentication, register for sessions and events, and accumulate points. They are enabled to view lessons and then test their knowledge by taking quizzes that provide feedback when completed.
-
-To test the application as an admin, first login using the admin credentials. Admins will be able to create classes (including courses and events), lessons, and quizzes. Admins can explore other pages: Account List and Data Analytics. These are located in the top right of the Nav Bar under the Admin dropdown. 
+- To test the application as a general public user (i.e, user does not have an account), they can explore several pages: Classes, About, and Resources. These are all located in the left corner of the Nav Bar.
+- To test the application as a new user, login or create an account by filling out the information on prompted on the sign up form. New users will need to agree to a data collection form prior to accessing the application. They will be able to edit their personal profile, enable two factor authentication, register for sessions and events, and accumulate points. They are enabled to view lessons and then test their knowledge by taking quizzes that provide feedback when completed.
+- To test the application as an admin, first login using the admin credentials. Admins will be able to create classes (including courses and events), lessons, and quizzes. Admins can explore other pages: Account List and Data Analytics. These are located in the top right of the Nav Bar under the Admin dropdown. 
 
 ### From the source code: 
 

@@ -32,7 +32,7 @@ class BaseProfileCollection extends BaseCollection {
       },
       age: { type: Number, defaultValue: 0 },
       zipcode: { type: Number, defaultValue: 0 },
-      ethnicity: { type: String, defaultValue: 'None' },
+      ethnicity: { type: String, defaultValue: 'Other' },
       education: {
         type: String,
         allowedValues: educationValues,

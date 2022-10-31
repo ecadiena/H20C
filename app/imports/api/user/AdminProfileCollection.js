@@ -43,10 +43,17 @@ class AdminProfileCollection extends BaseProfileCollection {
   /**
    * Updates the AdminProfile. You cannot change the email or role.
    * @param docID the id of the AdminProfile
+   * @param email
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
+   * @param age
+   * @param zipcode
+   * @param ethnicity
+   * @param education
+   * @param totalPoints
+   * @param gender
    */
-  update(docID, { firstName, lastName, totalPoints }) {
+  update(docID, { email, firstName, lastName, age, zipcode, ethnicity, education, totalPoints, gender }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -54,6 +61,24 @@ class AdminProfileCollection extends BaseProfileCollection {
     }
     if (lastName) {
       updateData.lastName = lastName;
+    }
+    if (email) {
+      updateData.email = email;
+    }
+    if (age) {
+      updateData.age = age;
+    }
+    if (zipcode) {
+      updateData.zipcode = zipcode;
+    }
+    if (ethnicity) {
+      updateData.ethicity = ethnicity;
+    }
+    if (education) {
+      updateData.education = education;
+    }
+    if (gender) {
+      updateData.gender = gender;
     }
     if (totalPoints) {
       updateData.totalPoints = totalPoints;

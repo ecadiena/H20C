@@ -41,8 +41,15 @@ class UserProfileCollection extends BaseProfileCollection {
   /**
    * Updates the UserProfile. You cannot change the email or role.
    * @param docID the id of the UserProfile
+   * @param email
    * @param firstName new first name (optional).
    * @param lastName new last name (optional).
+   * @param age
+   * @param zipcode
+   * @param ethnicity
+   * @param education
+   * @param totalPoints
+   * @param gender
    */
   update(docID, { email, firstName, lastName, age, zipcode, ethnicity, education, totalPoints, gender }) {
     this.assertDefined(docID);

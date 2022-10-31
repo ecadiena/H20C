@@ -4,7 +4,7 @@ import Joyride, { ACTIONS, EVENTS, STATUS } from 'react-joyride';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
 /* A simple static component to render some text for the landing page. */
-export class Landing extends React.Component {
+class Landing extends React.Component {
   // eslint-disable-next-line react/state-in-constructor
   state = {
     steps: [

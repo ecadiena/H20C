@@ -5,9 +5,7 @@ Status of Hawaii Broadband
 
 Broadband for Hawaii is an interactive website application that helps build digital equity for residents of Hawaii. 
  
-Hawaiʻi citizens living in rural communities do not have the same access to the Internet as those who live in areas with higher broadband usage. Access to the internet alone does not guarantee that the person knows how the internet works or why it's important. With modern technologies relying heavily on staying connected, providing quality broadband to all Hawai’i citizens is essential to decreasing the academic disparity on these topics. This disparity ties in with those also experiencing economic hardship due to a lack of knowledge, access, and much more. 
- 
-Individuals who may be experiencing a lack of access to the Internet may be in financially challenged communities that don’t have the funds to enhance their broadband, lack the knowledge and or experience to use these newer technologies, and those who were never given the proper resources to educate themselves on these topics.
+Hawaiʻi citizens living in rural communities do not have the same access to the Internet as those who live in areas with higher broadband usage. Access to the internet alone does not guarantee that the person knows how the internet works or why it's important. With modern technologies relying heavily on staying connected, providing quality broadband to all Hawai’i citizens is essential to decreasing the academic disparity on these topics. This problem prevents those individuals who lack access to the internet or those who are unfamiliar with technology from experiencing all that the internet has to offer. 
  
 Everything relies on the internet, and we need to make sure people have access to the Internet and knowledge of how to use it. We depend on computers and the Internet to facilitate our daily activities. They are an essential part of communication, transportation, retail, financing, and health care. In order for us as a community to decrease this social and economic divide, we must find a solution to bring the Internet to all.
 
@@ -30,6 +28,12 @@ For developers to activated the deployed version of this application, they will 
 3. Make a copy the settings.development.json file from config/ directory, and rename it to settings.production.json in the same directory. Place your Google API key in the “defaultKey” section under “key” property with a title “Google API”. The .gitignore file contains settings.production.json so it will not appear on GitHub when you commit.  
 4. In your terminal, change directory (cd) into the app/ directory and run the command: ```meteor npm run start```
 5. Open http://localhost:3000 to view the running local application 
+
+### Important Links
+Github Repository URL: https://github.com/HACC2022/Chipmunks
+Deployed website: https://hawaiibroadband.xyz/
+DevPost: https://devpost.com/software/chipmunks
+Function Evaluation Video: https://youtu.be/ICR5q8FrtbE 
 
 Template: [Meteor-Application-Template-Production](https://github.com/ics-software-engineering/meteor-application-template-production)
 

@@ -288,7 +288,7 @@ export const surveyMultiSelectGroupGenerator = (surveys, type, title) => {
   return [keys, title, values];
 };
 
-export const formatQuizzes = (quizzes, lessons) => {
+export const formatQuizzes = (quizzes, lessons, sessions) => {
   const results = [];
   const userFirstSubmittedQuizzes = _.where(quizzes, { firstAttempt: true });
   const groupSubmittedQuizzes = _.groupBy(userFirstSubmittedQuizzes, quiz => quiz.lessonID);
@@ -301,7 +301,8 @@ export const formatQuizzes = (quizzes, lessons) => {
     });
     totalAverage = Math.round(totalAverage / quiz.length);
     const lessonName = _.where(lessons, { _id: quiz[0].lessonID });
-    results.push([lessonName[0].title, totalQuizzes, totalAverage]);
+    const SessionName = _.where(sessions, { _id: lessonName[0].sessionID });
+    results.push([SessionName[0].title, lessonName[0].title, totalQuizzes, totalAverage]);
   });
   return results;
 };

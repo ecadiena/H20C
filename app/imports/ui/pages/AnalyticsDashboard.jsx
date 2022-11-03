@@ -6,6 +6,7 @@ import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { Surveys } from '../../api/survey/SurveyCollection';
 import { SubmittedQuizzes } from '../../api/submittedQuiz/SubmittedQuizCollection';
 import { Lessons } from '../../api/lesson/LessonCollection';
+import { Sessions } from '../../api/session/SessionCollection';
 import {
   ChartSetup,
   staticGenerator,
@@ -27,11 +28,13 @@ const AnalyticsDashBoard = () => {
     const surveySubscription = Surveys.subscribeSurveyAdmin();
     const quizzesSubscription = SubmittedQuizzes.subscribeSubmittedQuizAdmin();
     const lessonSubscription = Lessons.subscribeLesson();
-    const rdy = userSubscription.ready() && surveySubscription.ready() && quizzesSubscription.ready() && lessonSubscription.ready();
+    const sessionSubscription = Sessions.subscribeSession();
+    const rdy = userSubscription.ready() && surveySubscription.ready() && quizzesSubscription.ready() && lessonSubscription.ready() && sessionSubscription.ready();
 
     const quizzes = SubmittedQuizzes.find({}, {}).fetch();
     const lessons = Lessons.find({}, {}).fetch();
-    const groupQuizzes = formatQuizzes(quizzes, lessons);
+    const sessions = Sessions.find({}, {}).fetch();
+    const groupQuizzes = formatQuizzes(quizzes, lessons, sessions);
     const users = UserProfiles.find({}, { sort: { username: 1 } }).fetch();
     const surveys = Surveys.find({}, {}).fetch();
     const usersGender = staticGenerator(users, 'gender', '# of users by gender');
@@ -175,6 +178,7 @@ const AnalyticsDashBoard = () => {
             <Table striped bordered>
               <thead>
                 <tr>
+                  <th>Session Name</th>
                   <th>Lesson Name</th>
                   <th># of Quiz Attempts</th>
                   <th>Average Score (%)</th>
@@ -182,10 +186,11 @@ const AnalyticsDashBoard = () => {
               </thead>
               <tbody>
                 {quizzesSetup.map((quiz) => (
-                  <tr id={quiz[0]}>
+                  <tr id={quiz[1]}>
                     <td>{quiz[0]}</td>
                     <td>{quiz[1]}</td>
                     <td>{quiz[2]}</td>
+                    <td>{quiz[3]}</td>
                   </tr>
                 ))}
               </tbody>

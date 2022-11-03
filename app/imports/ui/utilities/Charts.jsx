@@ -263,7 +263,7 @@ export const userAccGenerator = (users) => {
   const rate = monthlyGrowth ? (((currentTotalUsers - lastTotalUsers) / lastTotalUsers) * 100) : (((lastTotalUsers - currentTotalUsers) / currentTotalUsers) * 100);
   const monthlyGrowthRate = rate === Infinity ? 0 : rate;
   // return [# total users, # users for this month, true/false growth better than previous month, percentage growth
-  const result = [users.length, currentMonthData.length, monthlyGrowth, monthlyGrowthRate];
+  const result = [users.length, currentMonthData.length, monthlyGrowth, Math.round(monthlyGrowthRate)];
   return result;
 };
 

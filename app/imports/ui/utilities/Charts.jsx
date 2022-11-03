@@ -287,3 +287,21 @@ export const surveyMultiSelectGroupGenerator = (surveys, type, title) => {
   });
   return [keys, title, values];
 };
+
+export const formatQuizzes = (quizzes, lessons) => {
+  const results = [];
+  const userFirstSubmittedQuizzes = _.where(quizzes, { firstAttempt: true });
+  const groupSubmittedQuizzes = _.groupBy(userFirstSubmittedQuizzes, quiz => quiz.lessonID);
+  _.map(groupSubmittedQuizzes, (quiz) => {
+    const totalQuizzes = quiz.length;
+    let totalAverage = 0;
+    _.map(quiz, (q) => {
+      const quizAverage = q.numCorrect / q.answers.length;
+      totalAverage += (quizAverage * 100);
+    });
+    totalAverage = Math.round(totalAverage / quiz.length);
+    const lessonName = _.where(lessons, { _id: quiz[0].lessonID });
+    results.push([lessonName[0].title, totalQuizzes, totalAverage]);
+  });
+  return results;
+};

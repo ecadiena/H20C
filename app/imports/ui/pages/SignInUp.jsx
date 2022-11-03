@@ -72,6 +72,7 @@ const SignInUp = () => {
     const zipcode = document.getElementById(COMPONENT_IDS.SIGN_UP_FORM_ZIPCODE).value;
     const ethnicity = document.getElementById(COMPONENT_IDS.SIGN_UP_FORM_ETHNICITY).value;
     const education = document.getElementById(COMPONENT_IDS.SIGN_UP_FORM_EDUCATION).value;
+    const gender = document.getElementById(COMPONENT_IDS.SIGN_UP_GENDER).value;
 
     let missingFields = '';
     if (email === '') {
@@ -95,6 +96,9 @@ const SignInUp = () => {
     if (education === 'Select') {
       missingFields = missingFields.concat('education, ');
     }
+    if (gender === 'Select') {
+      missingFields = missingFields.concat('gender, ');
+    }
     if (missingFields.length > 0) {
       swal('Sign up unsuccessful', `Missing Fields: ${missingFields.substring(0, missingFields.length - 2)}`, 'error');
       return;
@@ -110,6 +114,7 @@ const SignInUp = () => {
       zipcode: zipcode,
       ethnicity: ethnicity,
       education: education,
+      gender: gender,
     };
     defineMethod.callPromise({ collectionName, definitionData })
       .then(() => {
@@ -205,7 +210,7 @@ const SignInUp = () => {
                         <Form.Group>
                           Gender *
                           <Form.Select id={COMPONENT_IDS.SIGN_UP_GENDER} placeholder="Enter your gender" style={{ marginBottom: 5 }}>
-                            <option disabled>Select</option>
+                            <option selected disabled>Select</option>
                             <option>Male</option>
                             <option>Female</option>
                             <option>Transgender</option>
@@ -216,7 +221,7 @@ const SignInUp = () => {
                         <Form.Group>
                           Ethnicity *
                           <Form.Select id={COMPONENT_IDS.SIGN_UP_FORM_ETHNICITY}>
-                            <option disabled>Select</option>
+                            <option selected disabled>Select</option>
                             <option>American Indian or Alaska Native</option>
                             <option>Asian</option>
                             <option>Black or African American</option>
@@ -229,7 +234,7 @@ const SignInUp = () => {
                         <Form.Group style={{ marginTop: 5, marginBottom: 30 }}>
                           Education Level *
                           <Form.Select id={COMPONENT_IDS.SIGN_UP_FORM_EDUCATION}>
-                            <option disabled>Select</option>
+                            <option selected disabled>Select</option>
                             <option>Grade K - 6</option>
                             <option>Grade 7 - 8</option>
                             <option>High School</option>
@@ -242,7 +247,7 @@ const SignInUp = () => {
                     <Button variant="primary" style={{ position: 'absolute', bottom: 20, marginLeft: 10 }} onClick={() => setWaiver(true)}>
                       Sign Up
                     </Button>
-                    <Modal show={waiver} backdrop="static" centered>
+                    <Modal show={waiver} onHide={() => setWaiver(false)} centered>
                       <Modal.Body>
                         By creating an account you consent to the following terms and conditions:
                         the collection of your personal data and performance results on examinations

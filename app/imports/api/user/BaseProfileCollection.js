@@ -9,7 +9,7 @@ const rolesToCollectionNames = {};
 rolesToCollectionNames[ROLE.ADMIN] = 'AdminProfileCollection';
 rolesToCollectionNames[ROLE.USER] = 'UserProfileCollection';
 
-export const genderValues = ['Male', 'Female', 'Other'];
+export const genderValues = ['Male', 'Female', 'Transgender', 'Non-binary', 'Prefer not to say'];
 export const educationValues = ['Grade K - 6', 'Grade 7 - 8', 'High School', 'Some College', 'College'];
 export const ethnicityValues = ['American Indian or Alaska Native', 'Asian', 'Black or African American', 'Hispanic or Latino', 'Native Hawaiian or Other Pacific Islander', 'White', 'Other'];
 
@@ -24,7 +24,7 @@ class BaseProfileCollection extends BaseCollection {
       gender: {
         type: String,
         allowedValues: genderValues,
-        defaultValue: 'Other',
+        defaultValue: 'Prefer not to say',
       },
       joined: {
         type: Date,

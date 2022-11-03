@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { _ } from 'meteor/underscore';
-import { Container, Card, Row, Col, Button, Modal, Form } from 'react-bootstrap';
+import { Container, Card, Row, Col, Button, Modal, Form, Tooltip, OverlayTrigger, Image } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Link, NavLink } from 'react-router-dom';
@@ -149,7 +149,7 @@ const ProfilePage = () => {
   return ready ? (
     <Container id={PAGE_IDS.PROFILE_PAGE}>
       <Row style={{ margin: 'auto', textAlign: 'center' }}>
-        <Row>
+        <Row className="row-cols-1 row-cols-lg-2">
           <Col>
             <Card style={cardStyle}>
               <div style={divStyle}>
@@ -252,6 +252,53 @@ const ProfilePage = () => {
                       </Row>
                     </Col>
                   </Row>
+                </Row>
+                <Row className="row-cols-3">
+                  {user.totalPoints >= 100 ? (
+                    <Col className="px-5">
+                      <OverlayTrigger
+                        overlay={(
+                          <Tooltip className="text-center">
+                            <h6>Achievement Unlocked!</h6>
+                            <span>Earned a total of 100 points!</span>
+                          </Tooltip>
+                        )}
+                      >
+                        <Image fluid src="images/badge-1.png" alt="Badge 1" />
+                      </OverlayTrigger>
+                    </Col>
+                  )
+                    : ''}
+                  {user.totalPoints >= 1000 ? (
+                    <Col className="px-5">
+                      <OverlayTrigger
+                        overlay={(
+                          <Tooltip className="text-center">
+                            <h6>Achievement Unlocked!</h6>
+                            <span>Earned a total of 1000 points!</span>
+                          </Tooltip>
+                        )}
+                      >
+                        <Image fluid src="images/badge-2.png" alt="Badge 2" />
+                      </OverlayTrigger>
+                    </Col>
+                  )
+                    : ''}
+                  {user.totalPoints >= 10000 ? (
+                    <Col className="px-5">
+                      <OverlayTrigger
+                        overlay={(
+                          <Tooltip className="text-center">
+                            <h6>Achievement Unlocked!</h6>
+                            <span>Earned a total of 10000 points!</span>
+                          </Tooltip>
+                        )}
+                      >
+                        <Image fluid src="images/badge-3.png" alt="Badge 3" />
+                      </OverlayTrigger>
+                    </Col>
+                  )
+                    : ''}
                 </Row>
               </div>
             </Card>

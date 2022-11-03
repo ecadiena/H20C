@@ -239,9 +239,11 @@ export const userAccGenerator = (users) => {
   const currentTotalUsers = currentMonthData.length;
   const lastTotalUsers = lastMonthData.length;
   const monthlyGrowth = currentTotalUsers > lastTotalUsers;
-  const monthlyGrowthRate = monthlyGrowth ? (((currentTotalUsers - lastTotalUsers) / lastTotalUsers) * 100) : (((lastTotalUsers - currentTotalUsers) / currentTotalUsers) * 100);
-  // return [# total users, # users for this month, true/false growth better than previous month, percentage growth]
-  return [users.length, currentMonthData.length, monthlyGrowth, monthlyGrowthRate];
+  const rate = monthlyGrowth ? (((currentTotalUsers - lastTotalUsers) / lastTotalUsers) * 100) : (((lastTotalUsers - currentTotalUsers) / currentTotalUsers) * 100);
+  const monthlyGrowthRate = rate === Infinity ? 0 : rate;
+  // return [# total users, # users for this month, true/false growth better than previous month, percentage growth
+  const result = [users.length, currentMonthData.length, monthlyGrowth, monthlyGrowthRate];
+  return result;
 };
 
 export const surveyMultiSelectGroupGenerator = (surveys, type, title) => {

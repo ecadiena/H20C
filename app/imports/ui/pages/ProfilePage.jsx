@@ -98,7 +98,6 @@ const ProfilePage = () => {
   completed.quizPercentage /= bestSubmittedQuizzes.length;
 
   const userFilterLesson = data.filter((les) => les.lessonID);
-  console.log(userFilterLesson);
   const userLessons = userFilterLesson.map((d, index) => (
     <Card style={lessonStyle} key={index}>
       <Card.Body style={{ marginBottom: 10 }}>

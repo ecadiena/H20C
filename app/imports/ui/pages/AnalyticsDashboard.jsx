@@ -1,9 +1,12 @@
 import React from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Pie, Line, Bar } from 'react-chartjs-2';
-import { Container, Row, Col, Card, Nav, Tab } from 'react-bootstrap';
+import { Container, Row, Col, Card, Nav, Tab, Table } from 'react-bootstrap';
 import { UserProfiles } from '../../api/user/UserProfileCollection';
 import { Surveys } from '../../api/survey/SurveyCollection';
+import { SubmittedQuizzes } from '../../api/submittedQuiz/SubmittedQuizCollection';
+import { Lessons } from '../../api/lesson/LessonCollection';
+import { Sessions } from '../../api/session/SessionCollection';
 import {
   ChartSetup,
   staticGenerator,
@@ -15,15 +18,23 @@ import {
   ageGroupGenerator,
   BarOptions,
   surveyMultiSelectGroupGenerator,
+  formatQuizzes,
 } from '../utilities/Charts';
 
 const AnalyticsDashBoard = () => {
   const { ready, genderSetup, zipcodeSetup, educationSetup, totalUsers, genderLineSetup, educationLineSetup, ethnicitySetup, ageSetup,
-    familiarSetup, introducedSetup, safeSetup, reliableSetup, internetAdoptionSetup, devicesSetup } = useTracker(() => {
+    familiarSetup, introducedSetup, safeSetup, reliableSetup, internetAdoptionSetup, devicesSetup, quizzesSetup } = useTracker(() => {
     const userSubscription = UserProfiles.subscribe();
     const surveySubscription = Surveys.subscribeSurveyAdmin();
-    const rdy = userSubscription.ready() && surveySubscription.ready();
+    const quizzesSubscription = SubmittedQuizzes.subscribeSubmittedQuizAdmin();
+    const lessonSubscription = Lessons.subscribeLesson();
+    const sessionSubscription = Sessions.subscribeSession();
+    const rdy = userSubscription.ready() && surveySubscription.ready() && quizzesSubscription.ready() && lessonSubscription.ready() && sessionSubscription.ready();
 
+    const quizzes = SubmittedQuizzes.find({}, {}).fetch();
+    const lessons = Lessons.find({}, {}).fetch();
+    const sessions = Sessions.find({}, {}).fetch();
+    const groupQuizzes = formatQuizzes(quizzes, lessons, sessions);
     const users = UserProfiles.find({}, { sort: { username: 1 } }).fetch();
     const surveys = Surveys.find({}, {}).fetch();
     const usersGender = staticGenerator(users, 'gender', '# of users by gender');
@@ -58,6 +69,7 @@ const AnalyticsDashBoard = () => {
       reliableSetup: surveyReliable,
       internetAdoptionSetup: surveyInternetAdoption,
       devicesSetup: surveyDevices,
+      quizzesSetup: groupQuizzes,
     };
   }, []);
   const genderPieChart = ChartSetup(genderSetup);
@@ -157,6 +169,34 @@ const AnalyticsDashBoard = () => {
             </Row>
           </Tab.Container>
         </Card>
+      </Row>
+      <br />
+      <Row>
+        <Col sm={12}>
+          <Card style={{ padding: '10px' }}>
+            <h3>All Users&apos; Quiz Results (First Attempt)</h3>
+            <Table striped bordered>
+              <thead>
+                <tr>
+                  <th>Session Name</th>
+                  <th>Lesson Name</th>
+                  <th># of Quiz Attempts</th>
+                  <th>Average Score (%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {quizzesSetup.map((quiz) => (
+                  <tr id={quiz[1]}>
+                    <td>{quiz[0]}</td>
+                    <td>{quiz[1]}</td>
+                    <td>{quiz[2]}</td>
+                    <td>{quiz[3]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Card>
+        </Col>
       </Row>
       <br />
       <Row>

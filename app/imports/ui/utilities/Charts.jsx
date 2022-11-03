@@ -85,10 +85,22 @@ export const genderLineGraphSetup = (data) => {
         borderColor: 'rgba(2, 2, 86, 1)',
       },
       {
-        label: 'Other',
+        label: 'Transgender',
         data: data[2],
         fill: false,
         borderColor: 'rgba(255, 159, 64, 1)',
+      },
+      {
+        label: 'Non-binary',
+        data: data[3],
+        fill: false,
+        borderColor: 'rgba(255, 0, 64, 1)',
+      },
+      {
+        label: 'Prefer not to say',
+        data: data[4],
+        fill: false,
+        borderColor: 'rgba(75, 122, 49, 1)',
       },
     ],
   };
@@ -178,8 +190,10 @@ export const genderLineGenerator = (users) => {
   const usersType = lineStartUp(users);
   const maleTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
   const femaleTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
-  const otherTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
-  _.each(otherTemplate, (key, value) => {
+  const transgenderTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
+  const nonBinaryTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
+  const preferNotToSayTemplate = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
+  _.each(transgenderTemplate, (key, value) => {
     if (usersType[value] !== undefined) {
       const temp = _.countBy(usersType[value], 'gender');
       if (_.contains(_.keys(temp), 'Male')) {
@@ -188,12 +202,19 @@ export const genderLineGenerator = (users) => {
       if (_.contains(_.keys(temp), 'Female')) {
         femaleTemplate[value] = temp.Female;
       }
-      if (_.contains(_.keys(temp), 'Other')) {
-        otherTemplate[value] = temp.Other;
+      if (_.contains(_.keys(temp), 'Transgender')) {
+        transgenderTemplate[value] = temp.Transgender;
+      }
+      if (_.contains(_.keys(temp), 'Non-binary')) {
+        nonBinaryTemplate[value] = temp['Non-binary'];
+      }
+      if (_.contains(_.keys(temp), 'Prefer not to say')) {
+        // eslint-disable-next-line no-undef
+        preferNotToSayTemplate[value] = temp['Prefer not to say'];
       }
     }
   });
-  const result = [_.values(maleTemplate), _.values(femaleTemplate), _.values(otherTemplate)];
+  const result = [_.values(maleTemplate), _.values(femaleTemplate), _.values(transgenderTemplate), _.values(nonBinaryTemplate), _.values(preferNotToSayTemplate)];
   return result;
 };
 
@@ -242,7 +263,7 @@ export const userAccGenerator = (users) => {
   const rate = monthlyGrowth ? (((currentTotalUsers - lastTotalUsers) / lastTotalUsers) * 100) : (((lastTotalUsers - currentTotalUsers) / currentTotalUsers) * 100);
   const monthlyGrowthRate = rate === Infinity ? 0 : rate;
   // return [# total users, # users for this month, true/false growth better than previous month, percentage growth
-  const result = [users.length, currentMonthData.length, monthlyGrowth, monthlyGrowthRate];
+  const result = [users.length, currentMonthData.length, monthlyGrowth, Math.round(monthlyGrowthRate)];
   return result;
 };
 
@@ -265,4 +286,23 @@ export const surveyMultiSelectGroupGenerator = (surveys, type, title) => {
     });
   });
   return [keys, title, values];
+};
+
+export const formatQuizzes = (quizzes, lessons, sessions) => {
+  const results = [];
+  const userFirstSubmittedQuizzes = _.where(quizzes, { firstAttempt: true });
+  const groupSubmittedQuizzes = _.groupBy(userFirstSubmittedQuizzes, quiz => quiz.lessonID);
+  _.map(groupSubmittedQuizzes, (quiz) => {
+    const totalQuizzes = quiz.length;
+    let totalAverage = 0;
+    _.map(quiz, (q) => {
+      const quizAverage = q.numCorrect / q.answers.length;
+      totalAverage += (quizAverage * 100);
+    });
+    totalAverage = Math.round(totalAverage / quiz.length);
+    const lessonName = _.where(lessons, { _id: quiz[0].lessonID });
+    const SessionName = _.where(sessions, { _id: lessonName[0].sessionID });
+    results.push([SessionName[0].title, lessonName[0].title, totalQuizzes, totalAverage]);
+  });
+  return results;
 };

@@ -54,8 +54,8 @@ const ProfilePage = () => {
     };
   }, []);
 
-  const cardStyle = { height: '55vh', marginBottom: 10 };
-  const divStyle = { marginTop: 40, marginBottom: 40 };
+  const cardStyle = { height: '60vh', marginBottom: 50 };
+  const divStyle = { marginTop: 40, marginBottom: 50 };
   const lessonStyle = { padding: 0, margin: 10 };
   const headerStyle = { fontWeight: 'bold' };
 
@@ -97,7 +97,8 @@ const ProfilePage = () => {
   });
   completed.quizPercentage /= bestSubmittedQuizzes.length;
 
-  const userLessons = data.map((d, index) => (
+  const userFilterLesson = data.filter((les) => les.lessonID);
+  const userLessons = userFilterLesson.map((d, index) => (
     <Card style={lessonStyle} key={index}>
       <Card.Body style={{ marginBottom: 10 }}>
         <Card.Title>

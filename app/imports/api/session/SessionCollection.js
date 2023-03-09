@@ -3,7 +3,7 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 
-export const sessionType = ['Event', 'Course'];
+export const sessionType = ['Course'];
 export const difficultyType = ['Basic', 'Intermediate', 'Advanced'];
 export const tagType = ['Property Manager', 'Resident Manager', 'Tenant'];
 export const selectFormSetup = (arr, type) => {

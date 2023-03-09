@@ -66,7 +66,7 @@ class Landing extends React.Component {
   };
 
   render() {
-    const buttonStyle = { background: '#1762A7', borderColor: '#1762A7', fontSize: '14px', fontWeight: 600 };
+    const buttonStyle = { background: '#1962c6', borderColor: '#1962c6', fontSize: '14px', fontWeight: 600 };
     const headingStyle = { fontSize: '72px', fontFamily: 'Open Sans', fontWeight: 600 };
     const headingStyle2 = { fontSize: '40px', fontFamily: 'Open Sans', fontWeight: 400 };
     const subheadingStyle = { fontSize: '32px', fontFamily: 'Open Sans', fontWeight: 400 };

@@ -15,7 +15,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: Georgia, serif;
+  font-family: 'Open Sans', serif;
 }
 
 /* Set the SignIn and SignUp alerts background. */
@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .survey-button {
-  --bs-btn-color: #1762A7!important;
+  --bs-btn-color: #1962c6!important;
   --bs-btn-border-color: none!important;
   --bs-btn-hover-color: none!important;
   --bs-btn-hover-bg: none!important;
@@ -79,12 +79,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-link {
-  color: #1762A7 !important;
+  color: #1962c6 !important;
 }
 
 .navbar-dropdown-item {
   padding-right: 40px !important;
-  color: #1762A7 !important;
+  color: #1962c6 !important;
   font-weight: bold !important;
   font-size: 14px !important;
   background-color: white !important;

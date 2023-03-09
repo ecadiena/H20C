@@ -67,11 +67,11 @@ class Landing extends React.Component {
 
   render() {
     const buttonStyle = { background: '#1762A7', borderColor: '#1762A7', fontSize: '14px', fontWeight: 600 };
-    const headingStyle = { fontSize: '72px', fontFamily: 'Georgia, serif', fontWeight: 500 };
-    const headingStyle2 = { fontSize: '64px', fontFamily: 'Georgia, serif', fontWeight: 500 };
-    const subheadingStyle = { fontSize: '32px', fontFamily: 'Georgia, serif', fontWeight: 400 };
-    const largeTextStyle = { fontSize: '24px', fontWeight: 500, lineHeight: 1.2 };
-    const smallTextStyle = { fontSize: '18px' };
+    const headingStyle = { fontSize: '72px', fontFamily: 'Open Sans', fontWeight: 600 };
+    const headingStyle2 = { fontSize: '40px', fontFamily: 'Open Sans', fontWeight: 400 };
+    const subheadingStyle = { fontSize: '32px', fontFamily: 'Open Sans', fontWeight: 400 };
+    const largeTextStyle = { fontSize: '24px', fontWeight: 400, lineHeight: 1.2 };
+    const smallTextStyle = { fontSize: '18px', fontWeight: 400 };
     const { run, steps, stepIndex } = this.state;
 
     return (
@@ -94,11 +94,14 @@ class Landing extends React.Component {
         />
         <Row className="justify-content-center mx-0 p-5">
           <Col md={3}>
-            <Image fluid roundedCircle src="/images/hawaii-seal.png" alt="State of Hawaii Seal" />
+            <Image fluid src="/images/H2OC.png" alt="H2OC Logo" />
           </Col>
           <Col md={6} className="align-self-center">
-            <h1 style={headingStyle}>Broadband for Hawaiʻi</h1>
-            <h2 className="pb-3" style={subheadingStyle}>Connecting everyone, everywhere, <p style={{ textDecoration: 'underline', textDecorationThickness: '2px', textUnderlineOffset: '5px' }}>all the time.</p></h2>
+            <h1 style={headingStyle}>H2OC</h1>
+            <h2 className="pb-3" style={subheadingStyle}>
+              Helping to protect Oahu Condominiums in collaboration with First Insurance Company of Hawaii aims to propose a viable solution to make Oahu’s condos
+              <p style={{ textDecoration: 'underline', textDecorationThickness: '2px', textUnderlineOffset: '5px' }}>affordable and sustainable.</p>
+            </h2>
             <Button className="px-5 py-3" style={buttonStyle} onClick={() => this.setState({ run: true })}>Get started</Button>
           </Col>
         </Row>
@@ -108,26 +111,34 @@ class Landing extends React.Component {
             <Col md={{ span: 3 }}>
               <Image src="images/collaboration.png" alt="Engage Icon" />
               <h2 style={subheadingStyle} className="py-2">Engage</h2>
-              <p style={smallTextStyle}>Explore the tools provided by Broadband for Hawaiʻi, ask questions, and visit the Help section for FAQs.</p>
+              <p style={smallTextStyle}>
+                Explore the tools and resources provided by H2OC, take assessments to test your knowledge, and visit the Help section for FAQs.
+              </p>
             </Col>
             <Col md={{ span: 3 }}>
               <Image src="images/study.png" alt="Educate Icon" />
               <h2 style={subheadingStyle} className="py-2">Educate</h2>
-              <p style={smallTextStyle}>Utilize the Resources and Classes Pages that allows you to learn more about the benefits and uses of the Internet.</p>
+              <p style={smallTextStyle}>
+                Utilize the Resources and Classes Pages that allows you to learn more about the managing and owning a condo.
+              </p>
             </Col>
             <Col md={{ span: 3 }}>
               <Image src="images/account.png" alt="Empower Icon" />
               <h2 style={subheadingStyle} className="py-2">Empower</h2>
-              <p style={smallTextStyle}>Share your experience to others and spread the knowledge you have gathered to grow as a community.</p>
+              <p style={smallTextStyle}>
+                Use your acquired knowledge to make change happen in your homes.
+              </p>
             </Col>
           </Row>
         </Row>
         <Row className="justify-content-center px-5 mx-0 what-is-broadband">
           <Col md={5} className="p-5 align-self-center">
-            <Row><h1 style={headingStyle2}>What is broadband?</h1></Row>
+            <Row>
+              <h1 style={headingStyle2}>What is H2OC?</h1>
+            </Row>
             <Row>
               <p style={largeTextStyle}>
-                Learn more about Broadband for Hawaiʻi and its goal.
+                Learn more about H2OC here.
               </p>
             </Row>
             <a href="/about"><Button className="px-5 py-3" style={buttonStyle} alt="Learn More">Learn more</Button></a>
@@ -150,7 +161,8 @@ class Landing extends React.Component {
             <Row>
               <p style={largeTextStyle}>
                 Want to get more hands-on with learning about the use of the internet?
-                Head into the Classes page where you will get some interactive learning experience with the list of interesting topics related to the uses and benefits of the internet.
+                Head into the Classes page where you will get some interactive learning experience with the list of interesting topics related to the
+                condo maintenance.
               </p>
             </Row>
             <a href="/classes"><Button className="px-5 py-3" style={buttonStyle} alt="View Classes">View classes</Button></a>

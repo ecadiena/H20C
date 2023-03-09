@@ -5,7 +5,7 @@ import BaseCollection from '../base/BaseCollection';
 
 export const sessionType = ['Event', 'Course'];
 export const difficultyType = ['Basic', 'Intermediate', 'Advanced'];
-export const tagType = ['Technology', 'Security', 'Internet'];
+export const tagType = ['Property Manager', 'Resident Manager', 'Tenant'];
 export const selectFormSetup = (arr, type) => {
   type.forEach(item => {
     arr.push({ value: item, label: item });

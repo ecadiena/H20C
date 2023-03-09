@@ -23,103 +23,13 @@
 
   "defaultSession": [
     {
-      "_id" : "EzXHT2BSzTzdpvC5v",
-      "title" : "National Computer Science Week: Day 1",
-      "summary" : "National Computer Science Week is a week-long event promoting technology to the youth. Workshops will be provided by non-profits, sponsors, and leaders around the community. To sign up, please register at our website.",
-      "type" : "Event",
-      "difficulty" : "Basic",
-      "tags" : [
-        "Technology",
-        "Internet"
-      ],
-      "date" : "2022-11-08T08:31:03.000Z",
-      "startTime" : "07:00 am",
-      "endTime" : "10:00 am",
-      "location" : "University of Hawaiʻi at Mānoa, Campus Road, Honolulu, HI, USA",
-      "owner" : "admin@foo.com",
-      "lat" : 21.2994714852921,
-      "lng" : -157.8151500295
-    },
-    {
-      "_id" : "hvrAm7Po3AwbiqQZX",
-      "title" : "National Computer Science Week: Day 2",
-      "summary" : "National Computer Science Week is a week-long event promoting technology to the youth. Workshops will be provided by non-profits, sponsors, and leaders around the community. To sign up, please register at our website.",
-      "type" : "Event",
-      "difficulty" : "Basic",
-      "tags" : [
-        "Technology",
-        "Internet"
-      ],
-      "date" : "2022-11-10T08:34:12.000Z",
-      "startTime" : "07:00 am",
-      "endTime" : "10:00 am",
-      "location" : "University of Hawaiʻi at Mānoa, Campus Road, Honolulu, HI, USA",
-      "owner" : "admin@foo.com",
-      "lat" : 21.2994714852921,
-      "lng" : -157.81517685159
-    },
-    {
-      "_id" : "LH8ZW3nnH8qyCX3dG",
-      "title" : "National Computer Science Week: Day 3",
-      "summary" : "National Computer Science Week is a week-long event promoting technology to the youth. Workshops will be provided by non-profits, sponsors, and leaders around the community. To sign up, please register at our website.",
-      "type" : "Event",
-      "difficulty" : "Basic",
-      "tags" : [
-        "Technology",
-        "Internet"
-      ],
-      "date" : "2022-11-12T08:34:56.000Z",
-      "startTime" : "07:00 am",
-      "endTime" : "10:00 am",
-      "location" : "University of Hawaiʻi at Mānoa, Campus Road, Honolulu, HI, USA",
-      "owner" : "admin@foo.com",
-      "lat" : 21.2993215452398,
-      "lng" : -157.816271192868
-    },
-    {
-      "_id" : "687fJPrGPZ6CkKhf4",
-      "title" : "Fundamentals of Broadband",
-      "summary" : "A one day workshop covering what broadband is and how it impacts our community.",
-      "type" : "Event",
-      "difficulty" : "Basic",
-      "tags" : [
-        "Technology",
-        "Internet"
-      ],
-      "date" : "2022-11-03T08:36:07.747Z",
-      "startTime" : "09:00 am",
-      "endTime" : "10:00 am",
-      "location" : "virtual",
-      "owner" : "admin@foo.com",
-      "lat" : null,
-      "lng" : null
-    },
-    {
-      "_id" : "N6WgmGncEPgwu2erQ",
-      "title" : "What is HTTP?",
-      "summary" : "This course will cover what HTTP is and why is it important. It will also cover small sections of networking and tools to use HTTP without a browser.",
-      "type" : "Course",
-      "difficulty" : "Intermediate",
-      "tags" : [
-        "Technology",
-        "Security",
-        "Internet"
-      ],
-      "date" : "2022-11-03T08:43:01.651Z",
-      "startTime" : "Invalid date",
-      "endTime" : "Invalid date",
-      "owner" : "admin@foo.com",
-      "lat" : null,
-      "lng" : null
-    },
-    {
       "_id" : "JoQGPHQsZ8yfi8W2C",
       "title" : "Intro to Web Development",
       "summary" : "A web development course that introduces the basic languages, tools, and practices to make your own modern websites.",
       "type" : "Course",
       "difficulty" : "Advanced",
       "tags" : [
-        "Technology"
+        "Tenant"
       ],
       "date" : "2022-11-03T09:22:57.277Z",
       "startTime" : "Invalid date",
@@ -131,78 +41,6 @@
   ],
 
   "defaultLesson": [
-    {
-      "_id" : "NWrWh2F39Jabb6LDz",
-      "sessionID" : "N6WgmGncEPgwu2erQ",
-      "title" : "Introduction",
-      "summary" : "Discuss what HTTP stands for and the importance it provides to our day to day lives.",
-      "lessonText" : [
-        {
-          "header" : "Websites Websites Websites",
-          "body" : [
-            "Websites have been integrated into our daily lives and sometimes we take them for granted. With a few clicks and a couple of seconds, we can gain access to vast amounts of knowledge, entertainment, etc. One common way to visit a website is to type the URL or address of the website into your browser. However, have you ever wondered what the HTTP part at the beginning of the URL is? HTTP stands for hypertext transfer protocol, a standard protocol for the web to exchange information. HTTP provides a set of rules to ensure a set of communication between two parties. This relationship is usually between a client like yourself and a server where the website is located. "
-          ]
-        },
-        {
-          "header" : "HTTP methods",
-          "body" : [
-            "HTTP has a ton of methods, the most common HTTP methods are GET, POST, PUT and DELETE. \n\n- The GET method request information from a server\n- The POST method stores information on a server\n- The PUT method update information from a server\n - The DELETE method deletes information from a server\n"
-          ]
-        }
-      ],
-      "quiz" : [
-        {
-          "question" : "What does HTTP stand for?",
-          "options" : [
-            "hypertext transfer protocol",
-            "hypertransfer text protocol",
-            "hypertext transaction protocol",
-            "hypertransaction text protocol"
-          ],
-          "correct" : "0",
-          "feedback" : "Please refer back to the lesson."
-        },
-        {
-          "question" : "What are the 4 common HTTP methods discussed in the lesson?",
-          "options" : [
-            "GET, ADD, UPDATE, DELETE",
-            "GET, POST, REMOVE, DELETE",
-            "GET, POST, PUT, DELETE",
-            "GET, POST, REPORT, COMMENT"
-          ],
-          "correct" : "2",
-          "feedback" : "Please refer back to the lesson."
-        }
-      ],
-      "owner" : "admin@foo.com"
-    },
-    {
-      "_id" : "uBPn6ohvQ8T2PWBwD",
-      "sessionID" : "N6WgmGncEPgwu2erQ",
-      "title" : "How does HTTP work?",
-      "summary" : "Discusses the steps of how HTTP works when we visit a website online.",
-      "lessonText" : [
-        {
-          "header" : "Steps of HTTP connection",
-          "body" : [
-            "Whenever you want to visit a website online, all you have to do is type the name of the website or URL in your browser, and in one click, you will be shown the requested content. To access the website server, you need the address or IP and port number of the server. To get the IP, the browser will go to a separate server through Domain Name Service (DNS) and find the associate IP of the hostname. Then, the browser will send a request to that IP to retrieve the requested content. The browser handles and hides the back-end communication with the website server you are trying to access."
-          ]
-        }
-      ],
-      "quiz" : [
-        {
-          "question" : "What does DNS stand for?",
-          "options" : [
-            "data name service",
-            "domain name service",
-            "data numerical service",
-            "domain numerical service"
-          ],
-          "correct" : "1"
-        }
-      ],
-      "owner" : "admin@foo.com"
-    },
     {
       "_id" : "dPHFwkT4xF8yQrEnY",
       "sessionID" : "JoQGPHQsZ8yfi8W2C",

@@ -5,10 +5,6 @@ import { Roles } from 'meteor/alanning:roles';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
-import ListStuff from '../pages/ListStuff';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
-import AddStuff from '../pages/AddStuff';
-import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import SignUp from '../pages/SignUp';
 import SignOut from '../pages/SignOut';
@@ -45,13 +41,9 @@ const App = () => (
         <Route path="/accounts" element={<AdminProtectedRoute><AccountList /></AdminProtectedRoute>} />
         <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
         <Route path="/profile-page" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
-        <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
-        <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
         <Route path="/quiz/:_id" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
         <Route path="/quiz-results/:_id" element={<ProtectedRoute><QuizResults /></ProtectedRoute>} />
         <Route path="/lesson/:_id" element={<Lesson />} />
-        <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
-        <Route path="/admin" element={<AdminProtectedRoute><ListStuffAdmin /></AdminProtectedRoute>} />
         <Route path="/analytics" element={<AdminProtectedRoute><AnalyticsDashBoard /></AdminProtectedRoute>} />
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="*" element={<NotFound />} />

@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { Stuffs } from '../../api/stuff/StuffCollection';
 import { Sessions } from '../../api/session/SessionCollection';
 import { Lessons } from '../../api/lesson/LessonCollection';
 import { UserLessons } from '../../api/user/UserLessonCollection';
@@ -8,10 +7,6 @@ import { Surveys } from '../../api/survey/SurveyCollection';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
-const addData = (data) => {
-  console.log(`  Adding: ${data.name} (${data.owner})`);
-  Stuffs.define(data);
-};
 
 const addSubmittedQuizzes = (data) => {
   console.log(`  Adding Quiz for lesson: ${data.lessonID} (${data.owner})`);
@@ -37,14 +32,6 @@ const addUserLesson = (data) => {
   console.log(`  Adding: ${data.userID} with SessionID of (${data.sessionID})`);
   UserLessons.define(data);
 };
-
-// Initialize the StuffsCollection if empty.
-if (Stuffs.count() === 0) {
-  if (Meteor.settings.defaultData) {
-    console.log('Creating default data.');
-    Meteor.settings.defaultData.map(data => addData(data));
-  }
-}
 
 // Initialize the SessionsCollection if empty.
 if (Sessions.count() === 0) {

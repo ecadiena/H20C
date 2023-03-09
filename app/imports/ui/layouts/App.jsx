@@ -17,7 +17,6 @@ import ProfilePage from '../pages/ProfilePage';
 import AnalyticsDashBoard from '../pages/AnalyticsDashboard';
 import AccountList from '../pages/AccountList';
 import About from '../pages/About';
-import HelpButton from '../components/HelpButton';
 import Classes from '../pages/Classes';
 import Resources from '../pages/Resources';
 import Quiz from '../pages/Quiz';
@@ -48,7 +47,6 @@ const App = () => (
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <HelpButton />
       <Footer />
     </div>
   </Router>

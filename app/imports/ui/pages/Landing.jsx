@@ -1,7 +1,48 @@
-import React from 'react';
-import { Col, Image, Row, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Col, Image, Row, Button, Modal } from 'react-bootstrap';
 import Joyride, { ACTIONS, EVENTS, STATUS } from 'react-joyride';
+import { QuestionCircle } from 'react-bootstrap-icons';
 import { PAGE_IDS } from '../utilities/PageIDs';
+
+const HelpButton = () => {
+  const buttonStyle = { background: '#E9D777', borderColor: '#E9D777', fontSize: '16px', fontWeight: 600, borderTopLeftRadius: '50px', borderBottomLeftRadius: '50px',
+    borderTopRightRadius: '50px', borderBottomRightRadius: '50px', right: '20px', position: 'fixed', bottom: '20px' };
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+    <>
+      <Button className="py-2 px-4 align-middle align-self-center faq" style={buttonStyle} onClick={handleShow}>
+        <QuestionCircle />  Help
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title><b>Frequently Asked Questions</b></Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h4><b>What is Broadband for Hawaiʻi?</b></h4>
+          <p>Broadband for Hawaiʻi is an accessible and user-friendly educational platform that allows everyone to learn more about the internet and to explore its benefits.
+            <br />
+            Learn more in our <a href="/about">About page</a> and <a href="/resources">Resources page</a>.
+          </p>
+          <h4><b>How do I sign up for a class?</b></h4>
+          <p>To sign up, you must first create an account at the <a href="/sign-in-up">Sign Up page</a>.
+            <br />You can then sign up for a class through the <a href="/classes">Classes page</a>.
+          </p>
+          <h4><b>Any other questions or site not functioning properly?</b></h4>
+          <p>Please send your question or describe the issue by emailing us at <a href="/">sample@email.com</a>
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+};
 
 /* A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
@@ -10,13 +51,13 @@ class Landing extends React.Component {
     steps: [
       {
         target: '.our-mission',
-        content: 'What does Broadband do?',
+        content: 'What does H2OC do?',
         disableBeacon: true,
         placement: 'auto',
       },
       {
-        target: '.what-is-broadband',
-        content: 'Who are we? We are Broadband!',
+        target: '.what-is-h2oc',
+        content: 'Who are we? We are H2OC!',
         placement: 'auto',
       },
       {
@@ -48,6 +89,11 @@ class Landing extends React.Component {
         target: '.signinup',
         content: 'Have an account? Sign in here! Don\'t have an account? Sign up here!',
         placement: 'auto',
+      },
+      {
+        target: '.faq',
+        content: 'Need more help? Check out our FAQ section here!',
+        placement: 'top',
       },
     ],
     run: false,
@@ -131,7 +177,7 @@ class Landing extends React.Component {
             </Col>
           </Row>
         </Row>
-        <Row className="justify-content-center px-5 mx-0 what-is-broadband">
+        <Row className="justify-content-center px-5 mx-0 what-is-h2oc">
           <Col md={5} className="p-5 align-self-center">
             <Row>
               <h1 style={headingStyle2}>What is H2OC?</h1>
@@ -169,6 +215,8 @@ class Landing extends React.Component {
           </Col>
           <Col md={4} className="align-self-center px-5"><Image fluid src="images/class-icon.png" alt="Class Icon" /></Col>
         </Row>
+
+        <HelpButton />
       </div>
     );
   }

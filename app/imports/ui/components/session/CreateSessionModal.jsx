@@ -1,32 +1,20 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { useTracker } from 'meteor/react-meteor-data';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import Select from 'react-select';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import swal from 'sweetalert';
-import { CreateSessionMaps } from '../maps/CreateSessionMaps';
 import { COMPONENT_IDS } from '../../utilities/ComponentIDs';
 import { difficultyType, selectFormSetup, Sessions, sessionType, tagType } from '../../../api/session/SessionCollection';
 import { defineMethod } from '../../../api/base/BaseCollection.methods';
-import { Keys } from '../../../api/key/KeyCollection';
 
 const CreateSessionModal = ({ modal }) => {
-  const { keys, key_ready } = useTracker(() => {
-    const keySubscription = Keys.subscribeKey();
-    const keyOptions = Keys.find({}, {}).fetch();
-    const rdy = keySubscription.ready();
-    return {
-      key_ready: rdy,
-      keys: keyOptions,
-    };
-  }, []);
 
   const formGroupStyle = { marginTop: '20px' };
 
-  const [session, setSession] = useState({ title: '', summary: '', typeAdapt: '', difficultyAdapt: '', tagsAdapt: [], location: '', date: new Date(), startTimeAdapt: '', endTimeAdapt: '', lng: null, lat: null });
+  const [session, setSession] = useState({ title: '', summary: '', typeAdapt: '', difficultyAdapt: '', tagsAdapt: [], date: new Date(), startTimeAdapt: '', endTimeAdapt: '', lng: null, lat: null });
   const typeOptions = [];
   const difficultyOptions = [];
   const tagsOptions = [];
@@ -45,14 +33,13 @@ const CreateSessionModal = ({ modal }) => {
   };
 
   const updateVirtualSession = () => {
-    updateSession('virtual', 'location');
+    updateSession('virtual');
 
     setVirtual(!virtual);
   };
 
   const submit = () => {
-    console.log(session);
-    const { title, summary, typeAdapt, difficultyAdapt, tagsAdapt, location, date, startTimeAdapt, endTimeAdapt, lat, lng } = session;
+    const { title, summary, typeAdapt, difficultyAdapt, tagsAdapt, date, startTimeAdapt, endTimeAdapt, lat, lng } = session;
     const startTime = moment(startTimeAdapt).format('hh:mm a');
     const endTime = moment(endTimeAdapt).format('hh:mm a');
     const tags = tagsAdapt.map(tag => tag.value);
@@ -64,11 +51,11 @@ const CreateSessionModal = ({ modal }) => {
       swal('Error', 'Please complete all required fields', 'error');
       return;
     }
-    if (type === 'Event' && virtual && (location === '' || date === '' || startTimeAdapt === '' || endTimeAdapt === '')) {
+    if (type === 'Event' && virtual && (date === '' || startTimeAdapt === '' || endTimeAdapt === '')) {
       swal('Error', 'Please complete all required fields', 'error');
       return;
     }
-    if (type === 'Event' && !virtual && (location === '' || lat === null || lng === null || date === '' || startTimeAdapt === '' || endTimeAdapt === '')) {
+    if (type === 'Event' && !virtual && (lat === null || lng === null || date === '' || startTimeAdapt === '' || endTimeAdapt === '')) {
       swal('Error', 'Please enter a location and place a marker on the map', 'error');
       return;
     }
@@ -78,13 +65,13 @@ const CreateSessionModal = ({ modal }) => {
     }
 
     const collectionName = Sessions.getCollectionName();
-    const definitionData = { title, summary, type, difficulty, date, startTime, endTime, tags, location, owner, lat, lng };
+    const definitionData = { title, summary, type, difficulty, date, startTime, endTime, tags, owner, lat, lng };
     defineMethod.callPromise({ collectionName, definitionData })
       .catch(error => swal('Error', error.message, 'error'))
       .then(() => {
         setEventDropdown(false);
         setVirtual(false);
-        setSession({ title: '', summary: '', typeAdapt: '', difficultyAdapt: '', tagsAdapt: [], location: '', date: new Date(), startTimeAdapt: '', endTimeAdapt: '', lng: null, lat: null });
+        setSession({ title: '', summary: '', typeAdapt: '', difficultyAdapt: '', tagsAdapt: [], date: new Date(), startTimeAdapt: '', endTimeAdapt: '', lng: null, lat: null });
         swal('Success', 'Session added successfully', 'success');
         modal.setShow(false);
       });
@@ -177,7 +164,6 @@ const CreateSessionModal = ({ modal }) => {
                   label="Virtual"
                   onClick={updateVirtualSession}
                 />
-                { (key_ready && !virtual) ? <CreateSessionMaps keys={keys[0].key} setSession={setSession} /> : ' ' }
               </Form.Group>
             </div>
           ) : ''}

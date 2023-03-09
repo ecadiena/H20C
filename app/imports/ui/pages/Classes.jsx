@@ -8,7 +8,6 @@ import { ChevronDoubleLeft, ChevronDoubleRight, ChevronLeft, ChevronRight, Searc
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { Sessions } from '../../api/session/SessionCollection';
 import { Lessons } from '../../api/lesson/LessonCollection';
-import { Keys } from '../../api/key/KeyCollection';
 import { ROLE } from '../../api/role/Role';
 import CreateSessionModal from '../components/session/CreateSessionModal';
 import CreateLessonModal from '../components/lesson/CreateLessonModal';
@@ -26,19 +25,16 @@ const Classes = () => {
   const [itemsPerEventPage, setItemsPerEventPage] = useState(10);
   const [currentEventPage, setCurrentEventPage] = useState(1);
 
-  const { ready, sessions, lessons, keys } = useTracker(() => {
+  const { ready, sessions, lessons } = useTracker(() => {
     const subscription1 = Sessions.subscribeSession();
     const subscription2 = Lessons.subscribeLesson();
-    const subscription3 = Keys.subscribeKey();
-    const rdy = subscription1.ready() && subscription2.ready() && subscription3.ready();
+    const rdy = subscription1.ready() && subscription2.ready();
 
     const sessionItems = Sessions.find({}, {}).fetch();
     const lessonItems = Lessons.find({}, {}).fetch();
-    const keyItems = Keys.find({}, {}).fetch();
     return {
       sessions: sessionItems,
       lessons: lessonItems,
-      keys: keyItems,
       ready: rdy,
     };
   }, []);
@@ -262,7 +258,7 @@ const Classes = () => {
                 </Accordion>
               </Tab>
               <Tab eventKey="events" title="Events">
-                {getFilteredEvents().map((event, index) => <ClassesEventItem key={index} eventKey={index} session={event} keys={keys[0].key} />)}
+                {getFilteredEvents().map((event, index) => <ClassesEventItem key={index} eventKey={index} session={event} />)}
               </Tab>
             </Tabs>
             <Accordion />

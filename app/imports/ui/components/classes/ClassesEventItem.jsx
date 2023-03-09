@@ -5,9 +5,8 @@ import { Accordion, Button, Card, Col, Row, Badge } from 'react-bootstrap';
 import SummaryText from './SummaryText';
 import { UserLessons } from '../../../api/user/UserLessonCollection';
 import RegisterSession from './RegisterSession';
-import { DisplayEventMaps } from '../maps/DisplayEventMaps';
 
-const ClassesEventItem = ({ eventKey, session, keys }) => {
+const ClassesEventItem = ({ eventKey, session }) => {
   const [registerModal, setRegisterModal] = useState(false);
 
   const { ready, registered } = useTracker(() => {
@@ -59,7 +58,7 @@ const ClassesEventItem = ({ eventKey, session, keys }) => {
           <Col className="text-end">
             <Row>
               <Col>
-                { (session.location !== 'virtual') ? <DisplayEventMaps keys={keys} lng={session.lng} lat={session.lat} location={session.location} /> : ' ' }
+                { (session.location !== 'virtual') ? 'Session is virtual' : '' }
               </Col>
               <Col xs={4}>
                 { !registered ? (
@@ -85,7 +84,6 @@ ClassesEventItem.propTypes = {
   eventKey: PropTypes.number.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   session: PropTypes.any.isRequired,
-  keys: PropTypes.string.isRequired,
 };
 
 export default ClassesEventItem;

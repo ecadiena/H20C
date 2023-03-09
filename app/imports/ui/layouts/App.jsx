@@ -22,6 +22,7 @@ import Resources from '../pages/Resources';
 import Quiz from '../pages/Quiz';
 import QuizResults from '../pages/QuizResults';
 import Lesson from '../pages/Lesson';
+import HelpButton from '../components/HelpButton';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -47,6 +48,7 @@ const App = () => (
         <Route path="/notauthorized" element={<NotAuthorized />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <HelpButton />
       <Footer />
     </div>
   </Router>

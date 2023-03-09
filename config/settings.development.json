@@ -37,107 +37,29 @@
       "owner" : "admin@foo.com",
       "lat" : null,
       "lng" : null
+    },
+    {
+      "_id" : "h2MwW4EEk6qsbSWuN",
+      "title" : "Introduction to Plumbing",
+      "summary" : "Introduction course that goes over the basics of plumbing, systems, terminology, and more!",
+      "type" : "Course",
+      "difficulty" : "Basic",
+      "tags" : [ "Property Manager", "Resident Manager" ],
+      "date" : "2023-03-09T04:53:33.150Z",
+      "startTime" : "Invalid date",
+      "endTime" : "Invalid date",
+      "owner" : "admin@foo.com",
+      "lat" : null,
+      "lng" : null
     }
   ],
 
   "defaultLesson": [
-    {
-      "_id" : "dPHFwkT4xF8yQrEnY",
-      "sessionID" : "JoQGPHQsZ8yfi8W2C",
-      "title" : "The Basics and Intro to HTML",
-      "summary" : "Here we will introduce the basic languages for web development and explore the first language, HTML.",
-      "lessonText" : [
-        {
-          "header" : "Building a Website",
-          "body" : [
-            "A website is a collection of web pages and resources. The content of a page can consist of words, images, videos, and more! Coding allows us to give instructions to the computer to build our website. Computers don't understand regular English, we code websites by using the programming languages Hypertext Markup (HTML), Cascading Stylesheet (CSS), Javascript (JS)."
-          ]
-        },
-        {
-          "header" : "Hypertext Markup Language (HTML)",
-          "body" : [
-            "HTML stands for Hypertext Markup Language. HTML describes the content and structure of information on a web page. "
-          ]
-        }
-      ],
-      "quiz" : [
-        {
-          "question" : "What does HTML stand for?",
-          "options" : [
-            "Cascading Stylesheet",
-            "Javascript",
-            "Hypertext Markup Language",
-            "Word Document"
-          ],
-          "correct" : "2",
-          "feedback" : "Please refer back to the lesson."
-        },
-        {
-          "question" : "You developed a website but there were some spelling errors in the text. Now you have to fix the content of the paragraph. Which file should you change?",
-          "options" : [
-            "index.html",
-            "style.css",
-            "app.js",
-            "website.docx"
-          ],
-          "correct" : "0"
-        }
-      ],
-      "owner" : "admin@foo.com"
-    },
-    {
-      "_id":"zntSp2Mbvu67kAEap",
-      "sessionID":"JoQGPHQsZ8yfi8W2C",
-      "title":"Intro to CSS",
-      "summary":"Learn how to edit and change the style of a webpage.",
-      "lessonText":[
-        {
-          "header":"Cascading Style Sheets (CSS)",
-          "body":[
-            "CSS describes the appearance and layout of information on a web page (as opposed to HTML, which describes the content). CSS files (ending with .css) can be linked to HTML files."
-          ]
-        }
-      ],
-      "quiz":[
-        {
-          "question":"What is the purpose of CSS files?",
-          "options":[
-            "Control the behavior of content on the webpage",
-            "Add content to the webpage",
-            "Change the appearance and layout of a webpage",
-            "Communicate with the user how to use the webpage"
-          ],
-          "correct":"2",
-          "feedback":"Please refer back to the lesson"
-        }
-      ],
-      "owner":"admin@foo.com"
-    },
-    {
-      "_id":"3q4oLBNw2vi7Yd6wK",
-      "sessionID":"JoQGPHQsZ8yfi8W2C",
-      "title":"Intro to JS",
-      "summary":"Now that we know how to add content and styles to a web page, lets explore how to add behavior.",
-      "lessonText":[
-        {
-          "header":"Javascript",
-          "body":[
-            "Javascript (JS) adds functionality and behavior to websites. This could mean inserting dynamic text into HTML files, reacting to events, performing calculations, and more! Javascript is not the same as Java."
-          ]
-        }
-      ],
-      "quiz":[
-        {
-          "question":"True or False. I can use Javascript to insert dynamic text into HTML.",
-          "options":[
-            "True",
-            "False"
-          ],
-          "correct":"0"
-        }
-      ],
-      "owner":"admin@foo.com"
-    }
+    { "_id" : "dPHFwkT4xF8yQrEnY", "sessionID" : "JoQGPHQsZ8yfi8W2C", "title" : "The Basics and Intro to HTML", "summary" : "Here we will introduce the basic languages for web development and explore the first language, HTML.", "lessonText" : [ { "header" : "Building a Website", "body" : [ "A website is a collection of web pages and resources. The content of a page can consist of words, images, videos, and more! Coding allows us to give instructions to the computer to build our website. Computers don't understand regular English, we code websites by using the programming languages Hypertext Markup (HTML), Cascading Stylesheet (CSS), Javascript (JS)." ] }, { "header" : "Hypertext Markup Language (HTML)", "body" : [ "HTML stands for Hypertext Markup Language. HTML describes the content and structure of information on a web page." ] } ], "quiz" : [ { "question" : "What does HTML stand for?", "options" : [ "Cascading Stylesheet", "Javascript", "Hypertext Markup Language", "Word Document" ], "correct" : "2", "feedback" : "Please refer back to the lesson." }, { "question" : "You developed a website but there were some spelling errors in the text. Now you have to fix the content of the paragraph. Which file should you change?", "options" : [ "index.html", "style.css", "app.js", "website.docx" ], "correct" : "0" } ], "owner" : "admin@foo.com" },
+    { "_id" : "zntSp2Mbvu67kAEap", "sessionID" : "JoQGPHQsZ8yfi8W2C", "title" : "Intro to CSS", "summary" : "Learn how to edit and change the style of a webpage.", "lessonText" : [ { "header" : "Cascading Style Sheets (CSS)", "body" : [ "CSS describes the appearance and layout of information on a web page (as opposed to HTML, which describes the content). CSS files (ending with .css) can be linked to HTML files." ] } ], "quiz" : [ { "question" : "What is the purpose of CSS files?", "options" : [ "Control the behavior of content on the webpage", "Add content to the webpage", "Change the appearance and layout of a webpage", "Communicate with the user how to use the webpage" ], "correct" : "2", "feedback" : "Please refer back to the lesson" } ], "owner" : "admin@foo.com" },
+    { "_id" : "3q4oLBNw2vi7Yd6wK", "sessionID" : "JoQGPHQsZ8yfi8W2C", "title" : "Intro to JS", "summary" : "Now that we know how to add content and styles to a web page, lets explore how to add behavior.", "lessonText" : [ { "header" : "Javascript", "body" : [ "Javascript (JS) adds functionality and behavior to websites. This could mean inserting dynamic text into HTML files, reacting to events, performing calculations, and more! Javascript is not the same as Java." ] } ], "quiz" : [ { "question" : "True or False. I can use Javascript to insert dynamic text into HTML.", "options" : [ "True", "False" ], "correct" : "0" } ], "owner" : "admin@foo.com" },
+    { "_id" : "ZmEEmN6a96Ttuxnsc", "sessionID" : "h2MwW4EEk6qsbSWuN", "title" : "Overview of the plumbing trade", "summary" : "Plumbing is an essential aspect of modern life, as it provides the means for clean water delivery, sanitation, and waste removal. The plumbing industry encompasses a wide range of services and products, including the installation, repair, and maintenance of pipes, fixtures, and appliances related to water supply and drainage systems.", "lessonText" : [ { "header" : "Condo Piping System", "body" : [ "In a condo, the piping system typically consists of two main parts: the supply plumbing and the drain plumbing. The supply plumbing is responsible for delivering clean water to the various fixtures and appliances throughout the condo, such as sinks, showers, and toilets. This system usually consists of a main supply line that runs from the building's water source, such as a city water main, to a water heater or distribution manifold that serves the individual units. From there, smaller supply lines branch off to each fixture or appliance, delivering water as needed. " ] }, { "header" : "Drain Plumbing", "body" : [ "The drain plumbing is responsible for carrying wastewater and sewage away from the condo and into the building's sewer or septic system. This system typically consists of a main drain line that runs from each unit to the building's main drain stack, which then connects to the sewer or septic system. Drain pipes are designed to slope downward to ensure that waste water flows away from the condo and into the sewer or septic system without any obstructions. Essentially you could imagine a tree with branches, the main supply line is the trunk of the tree that feeds the various branches (units) with clean fresh water, likewise, the order is revered for drain plumbing." ] } ], "quiz" : [ ], "owner" : "admin@foo.com" },
+    { "_id" : "YNrbHEkTENYrHtW9S", "sessionID" : "h2MwW4EEk6qsbSWuN", "title" : "Basic plumbing principles and terminology", "summary" : "List of basic terminology used in the plumbing industry.", "lessonText" : [ { "header" : "Water Supply", "body" : [ "Plumbing system that brings water into a building." ] }, { "header" : "Drainage", "body" : [ "Plumbing system that removes wastewater from a building and transports it to the sewer or septic system." ] }, { "header" : "Fixture", "body" : [ "This is a device that is connected to the plumbing system and is used to dispense or drain water. Examples of fixtures include sinks, toilets, and showers.\n" ] }, { "header" : "Pipe", "body" : [ "This is a tube used to transport water. Pipes can be made of different materials, including copper, PVC, and cast iron.\n" ] }, { "header" : "Valve", "body" : [ "This is a device used to control the flow of water in a plumbing system. Examples of valves include shut-off valves and pressure-reducing valves.\n" ] }, { "header" : "Drain", "body" : [ "This is a pipe that removes wastewater from a fixture and transports it to the main drainage system for example the drain in your sink or bathtub.\n" ] }, { "header" : "Trap", "body" : [ "This is a U-shaped pipe that prevents sewer gasses from entering a building. Traps are typically located underneath sinks and toilets." ] }, { "header" : "Vent", "body" : [ "This is a pipe that allows air to enter the plumbing system and prevents the buildup of negative pressure. Vents are typically located on the roof of a building." ] } ], "quiz" : [ ], "owner" : "admin@foo.com" }
   ],
 
   "defaultSurveys": [
